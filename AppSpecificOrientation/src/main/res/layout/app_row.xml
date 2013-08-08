@@ -5,27 +5,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+    <ImageView
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:id="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"/>
+
+    <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+
+            android:id="@+id/list_item_check"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            >
+
+    </CheckBox>
 
     <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:text="temp"
-            android:layout_alignParentLeft="true"
+
+
+
+
+            android:textSize="16sp"
+            android:id="@+id/list_item_view"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_toRightOf="@id/imageView"
+            android:layout_toLeftOf="@id/list_item_check"
+
             >
 
     </TextView>
 
-    <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
 
-            >
 
-    </CheckBox>
 
 </RelativeLayout>
