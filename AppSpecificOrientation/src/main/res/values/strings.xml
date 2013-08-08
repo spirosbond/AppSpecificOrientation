@@ -4,5 +4,7 @@
     <string name="app_name">App Specific Orientation</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="serviceOn">Service Running</string>
+    <string name="serviceOff">Start Service</string>
 
 </resources>
