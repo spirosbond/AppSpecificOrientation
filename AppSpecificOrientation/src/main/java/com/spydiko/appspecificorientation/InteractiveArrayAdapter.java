@@ -1,6 +1,7 @@
 package com.spydiko.appspecificorientation;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -36,6 +38,7 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.text = (TextView) view.findViewById(R.id.list_item_view);
             viewHolder.checkbox = (CheckBox) view.findViewById(R.id.list_item_check);
+            viewHolder.label = (ImageView) view.findViewById(R.id.imageView);
             viewHolder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                 @Override
@@ -56,12 +59,14 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.text.setText(list.get(position).getName());
         holder.checkbox.setChecked(list.get(position).isSelected());
+        holder.label.setImageDrawable(list.get(position).getLabel());
         return view;
     }
 
     static class ViewHolder {
         protected TextView text;
         protected CheckBox checkbox;
+        protected ImageView label;
     }
 }
 

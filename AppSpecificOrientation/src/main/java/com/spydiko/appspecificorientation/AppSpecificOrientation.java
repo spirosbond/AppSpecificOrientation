@@ -8,6 +8,7 @@ import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Created by PuR3v1L on 7/8/2013.
@@ -18,6 +19,15 @@ public class AppSpecificOrientation extends Application {
     ArrayList<HashMap<String, String>> saved;
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
+    private static boolean serviceRunning=false;
+
+    public static boolean isServiceRunning() {
+        return serviceRunning;
+    }
+
+    public static void setServiceRunning(boolean serviceRunning) {
+        AppSpecificOrientation.serviceRunning = serviceRunning;
+    }
 
     public void createAdapter() {
         //this.adapter = new SimpleAdapter(getApplicationContext(), saved, R.layout.app_row, )
@@ -27,10 +37,11 @@ public class AppSpecificOrientation extends Application {
     public void onCreate() {
         super.onCreate();
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
     }
 
-    public void loadPreferences(String app) {
-        prefs.getBoolean(app, false);
+    public boolean loadPreferences(String app) {
+        return prefs.getBoolean(app, false);
     }
 
     public void savePreferences(String app, Boolean check) {

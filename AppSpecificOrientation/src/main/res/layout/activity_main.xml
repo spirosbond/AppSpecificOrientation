@@ -2,26 +2,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+
+
+    <ToggleButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textSize="16sp"
+            android:textOn="@string/rotation"
+            android:textOff="@string/no_rotation"
+            android:disabledAlpha="0.4"
+            android:id="@+id/rotation"
+            android:layout_gravity="center"/>
 
     <ListView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/appList"
-            android:layout_weight="8"
-            android:layout_gravity="center_horizontal|top"/>
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal|top"
+            android:visibility="gone"/>
+
+    <LinearLayout
+            android:id="@+id/channelsProgress"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+        <ProgressBar
+                android:id="@+id/pbChannelsProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+        </ProgressBar>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/picture"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <ImageView
+                android:layout_width="fill_parent"
+                android:src="@drawable/refresh"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageView"
+                android:layout_gravity="center"/>
+    </LinearLayout>
 
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/buttonUpdate"
             android:id="@+id/button"
             android:layout_gravity="center"/>
+
+
 
 </LinearLayout>
