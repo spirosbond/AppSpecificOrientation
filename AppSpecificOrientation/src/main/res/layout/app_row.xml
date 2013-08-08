@@ -10,9 +10,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:text="temp"
+            android:id="@+id/list_item_view"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             >
 
     </TextView>
@@ -20,6 +19,7 @@
     <CheckBox
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:id="@+id/list_item_check"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             >
