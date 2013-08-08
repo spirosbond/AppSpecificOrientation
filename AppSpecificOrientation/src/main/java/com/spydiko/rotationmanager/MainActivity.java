@@ -1,4 +1,4 @@
-package com.spydiko.appspecificorientation;
+package com.spydiko.rotationmanager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -33,7 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     private List<Model> activities;
     private AppSpecificOrientation myapp;
     private ListView lv;
-    private Button button;
+    private Button buttonUpdate, buttonClearAll;
     private Boolean test;
     private ToggleButton rotation;
     private ContentObserver rotationObserver = new ContentObserver(new Handler()) {
@@ -54,9 +55,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
         setContentView(R.layout.activity_main);
         myapp = (AppSpecificOrientation) getApplication();
         test = false;
-        button = (Button) findViewById(R.id.button);
+        buttonUpdate = (Button) findViewById(R.id.button);
+        buttonClearAll = (Button) findViewById(R.id.button2);
         rotation = (ToggleButton) findViewById(R.id.rotation);
-        if (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
+        if (Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
             rotation.setChecked(true);
         } else {
             rotation.setChecked(false);
@@ -64,7 +66,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
         getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
                 rotationObserver);
         rotation.setOnCheckedChangeListener(this);
-        button.setOnClickListener(this);
+        buttonUpdate.setOnClickListener(this);
+        buttonClearAll.setOnClickListener(this);
         activities = new ArrayList<Model>();
         names = new ArrayList<String>();
         lv = (ListView) findViewById(R.id.appList);
@@ -125,6 +128,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
             activities.add(temp);
             Log.d(TAG, "Launch Activity :" + packageManager.getLaunchIntentForPackage(packageInfo.packageName));
         }
+        Collections.sort(activities, new SortByString());
 
     }
 
@@ -132,7 +136,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        Log.d(TAG,"createOptions");
+        Log.d(TAG, "createOptions");
         itemToggle = menu.findItem(R.id.itemToggleService);
         if (AppSpecificOrientation.isServiceRunning()) {
             menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
@@ -149,8 +153,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                if(AppSpecificOrientation.isServiceRunning()){
-                    stopService(new Intent(this,OrientationService.class));
+                if (AppSpecificOrientation.isServiceRunning()) {
+                    stopService(new Intent(this, OrientationService.class));
                     itemToggle.setTitle(R.string.titleServiceStop);
                     itemToggle.setIcon(android.R.drawable.ic_media_play);
                 }
@@ -182,12 +186,21 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
 
     @Override
     public void onClick(View view) {
-
-        for (Model mdl : activities) {
-            Log.d(TAG, mdl.getPackageName() + " is " + mdl.isSelected());
-            myapp.savePreferences(mdl.getPackageName(), mdl.isSelected());
+        Button temp = (Button) view;
+        switch (temp.getId()) {
+            case (R.id.button):
+                for (Model mdl : activities) {
+                    Log.d(TAG, mdl.getPackageName() + " is " + mdl.isSelected());
+                    myapp.savePreferences(mdl.getPackageName(), mdl.isSelected());
+                }
+                adapter.notifyDataSetChanged();
+                break;
+            case (R.id.button2):
+                for (Model mdl : activities) {
+                    mdl.setSelected(false);
+                }
+                adapter.notifyDataSetChanged();
         }
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -198,10 +211,12 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     public class UpdateData extends AsyncTask<String, Integer, String> {
         LinearLayout progBar;
         LinearLayout pic;
+        LinearLayout buttonsLayout;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            buttonsLayout = (LinearLayout) findViewById(R.id.twoButtons);
             progBar = (LinearLayout) findViewById(R.id.channelsProgress);
             pic = (LinearLayout) findViewById(R.id.picture);
             lv.setVisibility(View.GONE);
@@ -220,6 +235,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
             super.onPostExecute(s);
             progBar.setVisibility(View.GONE);
             lv.setVisibility(View.VISIBLE);
+            buttonsLayout.setVisibility(View.VISIBLE);
             adapter.notifyDataSetChanged();
         }
     }

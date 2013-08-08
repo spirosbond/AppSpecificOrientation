@@ -1,4 +1,4 @@
-package com.spydiko.appspecificorientation;
+package com.spydiko.rotationmanager;
 
 import android.graphics.drawable.Drawable;
 

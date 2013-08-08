@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">App Specific Orientation</string>
+    <string name="app_name">Rotation Manager</string>
     <string name="action_settings">Refresh</string>
     <string name="hello_world">Hello world!</string>
 
@@ -13,6 +13,7 @@
     <string name="no_rotation">Rotation Disabled</string>
     <string name="titleServiceStart">Stop Service</string>
     <string name="titleServiceStop">Start Service</string>
+    <string name="buttonClearAll">Clear All!</string>
 
 
 </resources>
