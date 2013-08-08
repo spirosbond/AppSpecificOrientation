@@ -1,11 +1,7 @@
 package com.spydiko.appspecificorientation;
 
 import android.app.Activity;
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -18,7 +14,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -41,7 +36,17 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     private Button button;
     private Boolean test;
     private ToggleButton rotation;
-    private BroadcastReceiver mReceiver;
+    private ContentObserver rotationObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            if (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
+                rotation.setChecked(true);
+            } else {
+                rotation.setChecked(false);
+            }
+        }
+    };
+    private MenuItem itemToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +61,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
         } else {
             rotation.setChecked(false);
         }
-        getContentResolver().registerContentObserver(Settings.System.getUriFor
-                (Settings.System.ACCELEROMETER_ROTATION),
-                true,rotationObserver );
+        getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
+                rotationObserver);
         rotation.setOnCheckedChangeListener(this);
         button.setOnClickListener(this);
         activities = new ArrayList<Model>();
@@ -71,28 +75,21 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
 
     protected void onResume() {
         super.onResume();
-        IntentFilter intentFilter = new IntentFilter(
-                "android.intent.action.MAIN");
-        mReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                //extract our message from intent
-                String msg_for_me = intent.getStringExtra("some_msg");
-                MenuItem temp = (MenuItem) findViewById(R.id.itemToggleService);
-                temp.setTitle(R.string.titleServiceStart);
-                temp.setIcon(android.R.drawable.ic_media_pause);
-                //log our message value
-                Log.i("InchooTutorial", msg_for_me);
-            }
-        };
+        //        MenuItem temp = (MenuItem) findViewById(R.id.itemToggleService);
+        //        if (AppSpecificOrientation.isServiceRunning()) {
+        //            temp.setTitle(R.string.titleServiceStart);
+        //            temp.setIcon(android.R.drawable.ic_media_pause);
+        //        } else {
+        //            temp.setTitle(R.string.titleServiceStop);
+        //            temp.setIcon(android.R.drawable.ic_media_play);
+        //        }
         //registering our receiver
-        this.registerReceiver(mReceiver, intentFilter);
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         //unregister our receiver
-        this.unregisterReceiver(this.mReceiver);
     }
 
     public void updateApps() {
@@ -135,6 +132,16 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        Log.d(TAG,"createOptions");
+        itemToggle = menu.findItem(R.id.itemToggleService);
+        if (AppSpecificOrientation.isServiceRunning()) {
+            menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
+            menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
+        } else {
+            menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
+            menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
+        }
+
         return true;
     }
 
@@ -142,24 +149,31 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
+                if(AppSpecificOrientation.isServiceRunning()){
+                    stopService(new Intent(this,OrientationService.class));
+                    itemToggle.setTitle(R.string.titleServiceStop);
+                    itemToggle.setIcon(android.R.drawable.ic_media_play);
+                }
+
                 UpdateData exec = new UpdateData();
                 exec.execute();
-                adapter.notifyDataSetChanged();
+
                 break;
             case R.id.itemToggleService:
-//                if (yamba.isServiceRunning()) {
-//                    stopService(new Intent(this, UpdaterService.class));
-//                } else {
-//                    startService(new Intent(this, UpdaterService.class));
-//                }
-                Log.d(TAG,"entered");
-                if (myapp.isServiceRunning()) {
+                //                if (yamba.isServiceRunning()) {
+                //                    stopService(new Intent(this, UpdaterService.class));
+                //                } else {
+                //                    startService(new Intent(this, UpdaterService.class));
+                //                }
+                Log.d(TAG, "entered");
+                if (AppSpecificOrientation.isServiceRunning()) {
                     item.setTitle(R.string.titleServiceStop);
                     item.setIcon(android.R.drawable.ic_media_play);
-                }
-                else {
+                    stopService(new Intent(this, OrientationService.class));
+                } else {
                     item.setTitle(R.string.titleServiceStart);
                     item.setIcon(android.R.drawable.ic_media_pause);
+                    startService(new Intent(this, OrientationService.class));
                 }
                 break;
         }
@@ -180,17 +194,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, b ? 1 : 0);
     }
-
-    private ContentObserver rotationObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            if (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
-                rotation.setChecked(true);
-            } else {
-                rotation.setChecked(false);
-            }
-        }
-    };
 
     public class UpdateData extends AsyncTask<String, Integer, String> {
         LinearLayout progBar;
@@ -217,6 +220,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
             super.onPostExecute(s);
             progBar.setVisibility(View.GONE);
             lv.setVisibility(View.VISIBLE);
+            adapter.notifyDataSetChanged();
         }
     }
 

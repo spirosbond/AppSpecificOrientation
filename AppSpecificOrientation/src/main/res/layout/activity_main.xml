@@ -6,16 +6,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-    <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/serviceButton"
-            android:textOn="@string/serviceOn"
-            android:textOff="@string/serviceOff"/>
-
-
     <ToggleButton
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

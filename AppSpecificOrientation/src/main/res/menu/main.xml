@@ -7,7 +7,7 @@
             android:showAsAction="ifRoom"/>
     <item
             android:id="@+id/itemToggleService"
-            android:title="@string/titleServiceStart"
+            android:title="@string/titleServiceStop"
             android:icon="@android:drawable/ic_media_play"
             android:showAsAction="ifRoom"/>
 </menu>
