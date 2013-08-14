@@ -92,8 +92,9 @@ public class OrientationService extends Service {
         //		orientationEventListener.enable();
     }
 
-    @Override
-    public void onDestroy() {
+
+	@Override
+	public void onDestroy() {
         super.onDestroy();
         appSpecificOrientation.setServiceRunning(false);
         getContentResolver().unregisterContentObserver(rotationObserver);

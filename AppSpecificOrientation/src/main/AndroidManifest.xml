@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
 
     <application
@@ -36,8 +37,14 @@
                 android:name=".OrientationService"
                 android:enabled="true"
                 android:permission="SAIL_SERVICE_PERMISSION"/>
-    </application>
 
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"></uses-permission>
+        <receiver
+                android:name=".BootReceiver"
+                android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+    </application>
 
 </manifest>
