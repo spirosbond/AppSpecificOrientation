@@ -13,8 +13,9 @@
     <string name="no_rotation">Rotation Disabled</string>
     <string name="titleServiceStart">Stop Service</string>
     <string name="titleServiceStop">Start Service</string>
-    <string name="buttonClearAll">Clear All!</string>
+    <string name="buttonClearAll">Clear All</string>
     <string name="loadingApps">Loading Apps...</string>
+    <string name="setOnBoot">Enable on boot</string>
 
 
 </resources>

@@ -3,11 +3,6 @@ package com.spydiko.rotationmanager;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by PuR3v1L on 7/8/2013.
@@ -33,7 +28,36 @@ public class AppSpecificOrientation extends Application {
         editor = prefs.edit();
     }
 
-    public boolean loadPreferences(String app) {
+	public static void setBoot(boolean state) {
+		editor.putBoolean("boot", state);
+		editor.commit();
+	}
+
+	public static boolean getBoot() {
+		return prefs.getBoolean("boot", false);
+	}
+
+	public void setDefaultState(int ds) {
+		editor.putInt("default", ds);
+		editor.commit();
+
+	}
+
+	public int getDefaultState() {
+		return prefs.getInt("default", -1);
+
+	}
+
+	public void setNewState(int ns) {
+		editor.putInt("newstate", ns);
+		editor.commit();
+	}
+
+	public int getNewState() {
+		return prefs.getInt("newstate", -1);
+	}
+
+	public boolean loadPreferences(String app) {
         return prefs.getBoolean(app, false);
     }
 

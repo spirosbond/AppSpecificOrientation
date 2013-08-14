@@ -10,4 +10,8 @@
             android:title="@string/titleServiceStop"
             android:icon="@android:drawable/ic_media_play"
             android:showAsAction="ifRoom"/>
+    <item
+            android:id="@+id/setOnBoot"
+            android:title="@string/setOnBoot"
+            android:checkable="true"/>
 </menu>
