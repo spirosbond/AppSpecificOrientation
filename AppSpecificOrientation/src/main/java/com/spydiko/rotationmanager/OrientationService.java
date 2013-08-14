@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -60,7 +61,10 @@ public class OrientationService extends Service {
 
         getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
                 rotationObserver);
-        new AppMonitoring().execute();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            new AppMonitoring().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void[])null);
+        else
+            new AppMonitoring().execute((Void[])null);
         //		orientationEventListener = new OrientationEventListener(getApplicationContext()) {
         //			@Override
         //			public void onOrientationChanged(int i) {
@@ -100,8 +104,11 @@ public class OrientationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
-
+        super.onStartCommand(intent, flags, startId);
+        Log.d(TAG,"onStartCommand");
+        getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
+                rotationObserver);
+        return START_STICKY;
     }
 
     @Override
@@ -109,11 +116,10 @@ public class OrientationService extends Service {
         return null;
     }
 
-    public class AppMonitoring extends AsyncTask<String, Integer, String> {
-
+    public class AppMonitoring extends AsyncTask<Void, Void, Void> {
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected Void doInBackground(Void... voids) {
             while (appSpecificOrientation.isServiceRunning()) {
                 activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
                 // get the info from the currently running task
@@ -153,8 +159,9 @@ public class OrientationService extends Service {
                 }
 
             }
-            return "end";
+            return null;
         }
+
     }
 
 

@@ -20,12 +20,13 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
 
     private final List<Model> list;
     private final Activity context;
-    AppSpecificOrientation myapp ;
+    AppSpecificOrientation myapp;
 
-    public InteractiveArrayAdapter(Activity context, List<Model> list) {
+    public InteractiveArrayAdapter(Activity context, List<Model> list,AppSpecificOrientation myapp) {
         super(context, R.layout.app_row, list);
         this.context = context;
         this.list = list;
+        this.myapp = myapp;
     }
 
     @Override
@@ -46,7 +47,7 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
                     Log.d("Adapter", "enter");
                     Log.d("Adapter", element.getName()+ " " + element.isSelected());
                     element.setSelected(buttonView.isChecked());
-
+                    myapp.savePreferences(element.getPackageName(),element.isSelected());
                 }
             });
             view.setTag(viewHolder);

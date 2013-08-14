@@ -13,23 +13,17 @@ import java.util.HashMap;
  * Created by PuR3v1L on 7/8/2013.
  */
 public class AppSpecificOrientation extends Application {
-    private static boolean serviceRunning = false;
-    SimpleAdapter adapter;
-    ListView lv;
-    ArrayList<HashMap<String, String>> saved;
-    private SharedPreferences prefs;
-    private SharedPreferences.Editor editor;
+
+    private static SharedPreferences prefs;
+    private static SharedPreferences.Editor editor;
 
     public static boolean isServiceRunning() {
-        return serviceRunning;
+        return prefs.getBoolean("service", false);
     }
 
     public static void setServiceRunning(boolean serviceRunning) {
-        AppSpecificOrientation.serviceRunning = serviceRunning;
-    }
-
-    public void createAdapter() {
-        //this.adapter = new SimpleAdapter(getApplicationContext(), saved, R.layout.app_row, )
+        editor.putBoolean("service",serviceRunning);
+        editor.commit();
     }
 
     @Override

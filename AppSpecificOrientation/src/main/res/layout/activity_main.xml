@@ -16,7 +16,8 @@
             android:textOff="@string/no_rotation"
             android:disabledAlpha="0.4"
             android:id="@+id/rotation"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:visibility="invisible"/>
 
     <ListView
             android:layout_width="fill_parent"
@@ -40,6 +41,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
         </ProgressBar>
+
+        <TextView
+            android:id="@+id/loadingApps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loadingApps"
+            />
+
     </LinearLayout>
 
     <LinearLayout
@@ -65,12 +74,6 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:visibility="invisible">
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/buttonUpdate"
-            android:id="@+id/button"
-            android:layout_gravity="center"/>
 
     <Button
             android:layout_width="wrap_content"

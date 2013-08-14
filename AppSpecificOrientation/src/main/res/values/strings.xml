@@ -14,6 +14,7 @@
     <string name="titleServiceStart">Stop Service</string>
     <string name="titleServiceStop">Start Service</string>
     <string name="buttonClearAll">Clear All!</string>
+    <string name="loadingApps">Loading Apps...</string>
 
 
 </resources>
