@@ -15,9 +15,17 @@
     <CheckBox
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-
-            android:id="@+id/list_item_check"
+            android:id="@+id/list_item_landscape"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            >
+    </CheckBox>
+
+    <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_toLeftOf="@id/list_item_landscape"
+            android:id="@+id/list_item_check"
             android:layout_centerVertical="true"
             >
 
@@ -27,10 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-
-
-
-
             android:textSize="16sp"
             android:id="@+id/list_item_view"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -41,6 +45,8 @@
             >
 
     </TextView>
+
+
 
 
 

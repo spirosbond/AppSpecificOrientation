@@ -141,7 +141,7 @@ public class OrientationService extends Service {
 					beforeApp = foregroundApp;
 					observe = false;
 
-					if (appSpecificOrientation.isChecked(foregroundApp)) {
+					if (appSpecificOrientation.isCheckedPortrait(foregroundApp)) {
 
 						//getContentResolver().unregisterContentObserver(rotationObserver);
 						Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, newState);

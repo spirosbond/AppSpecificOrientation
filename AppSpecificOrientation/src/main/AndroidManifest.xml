@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
             android:allowBackup="true"
@@ -22,9 +22,9 @@
             android:name=".AppSpecificOrientation">
         <activity
 
-            android:name="com.spydiko.rotationmanager.MainActivity"
-            android:label="@string/app_name"
-            android:configChanges="orientation">
+                android:name="com.spydiko.rotationmanager.MainActivity"
+                android:label="@string/app_name"
+                android:configChanges="orientation">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -34,7 +34,7 @@
         </activity>
 
         <service
-                android:name=".OrientationService"
+                android:name=".NewOrieService"
                 android:enabled="true"
                 android:permission="SAIL_SERVICE_PERMISSION"/>
 

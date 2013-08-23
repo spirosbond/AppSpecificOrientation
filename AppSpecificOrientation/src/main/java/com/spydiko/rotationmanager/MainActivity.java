@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
+import android.net.http.X509TrustManagerExtensions;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -126,7 +127,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
 		}
 		Model temp;
 		for (ApplicationInfo packageInfo : packages) {
-			Log.d(TAG, "Installed package :" + packageInfo.packageName);
+//			Log.d(TAG, "Installed package :" + packageInfo.packageName);
 			if (names.contains(packageInfo.packageName)) {
 				continue;
 			}
@@ -135,11 +136,12 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
 			temp.setPackageName(packageInfo.packageName);
 			Drawable pic = packageInfo.loadIcon(packageManager);
 			temp.setLabel(pic);
-			Log.d(TAG, "Installed package :" + temp.getName());
+//			Log.d(TAG, "Installed package :" + temp.getName());
 			//temp.put(IS_CHECKED, true);
-			if (myapp.loadPreferences(packageInfo.packageName)) temp.setSelected(true);
+			if (myapp.loadPreferences(packageInfo.packageName,true)) temp.setSelectedPortrait(true);
+            if (myapp.loadPreferences(packageInfo.packageName,false)) temp.setSelectedLandscape(true);
 			activities.add(temp);
-			Log.d(TAG, "Launch Activity :" + packageManager.getLaunchIntentForPackage(packageInfo.packageName));
+//			Log.d(TAG, "Launch Activity :" + packageManager.getLaunchIntentForPackage(packageInfo.packageName));
 		}
 		Collections.sort(activities, new SortByString());
 		Log.d(TAG, "END");
@@ -185,27 +187,15 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
 				if (AppSpecificOrientation.isServiceRunning()) {
 					item.setTitle(R.string.titleServiceStop);
 					item.setIcon(android.R.drawable.ic_media_play);
-					stopService(new Intent(this, OrientationService.class));
+					stopService(new Intent(this, NewOrieService.class));
 					AppSpecificOrientation.setServiceRunning(false);
 					Log.d(TAG, "if");
 				} else {
 					item.setTitle(R.string.titleServiceStart);
 					item.setIcon(android.R.drawable.ic_media_pause);
-
-					try {
-						int defaultState = Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION);
-						int newState;
-						if (defaultState == 1) newState = 0;
-						else newState = 1;
-						myapp.setDefaultState(defaultState);
-						myapp.setNewState(newState);
-					} catch (Settings.SettingNotFoundException e) {
-						Log.d(TAG, "Couldn't find ACCELEROMETER_ROTATION settings");
-					}
-
-					startService(new Intent(this, OrientationService.class));
+					startService(new Intent(this, NewOrieService.class));
 					Log.d(TAG, "else");
-				}
+                }
 				break;
 
 			case R.id.setOnBoot:
@@ -230,7 +220,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
 		switch (temp.getId()) {
 			case (R.id.button2):
 				for (Model mdl : activities) {
-					mdl.setSelected(false);
+					mdl.setSelectedPortrait(false);
+                    mdl.setSelectedLandscape(false);
 				}
 				adapter.notifyDataSetChanged();
 		}

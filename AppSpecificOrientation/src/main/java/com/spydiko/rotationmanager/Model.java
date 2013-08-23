@@ -8,13 +8,15 @@ import android.graphics.drawable.Drawable;
 public class Model {
 
     private String name;
-    private boolean selected;
+    private boolean selectedPortrait;
+    private boolean selectedLandscape;
     private Drawable label;
     private String packageName;
 
     public Model(String name) {
         this.name = name;
-        selected = false;
+        selectedPortrait = false;
+        selectedLandscape = false;
     }
 
     public String getName() {
@@ -25,12 +27,20 @@ public class Model {
         this.name = name;
     }
 
-    public boolean isSelected() {
-        return selected;
+    public boolean isSelectedPortrait() {
+        return selectedPortrait;
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public void setSelectedPortrait(boolean selected) {
+        this.selectedPortrait = selected;
+    }
+
+    public boolean isSelectedLandscape() {
+        return selectedLandscape;
+    }
+
+    public void setSelectedLandscape(boolean selected) {
+        this.selectedLandscape = selected;
     }
 
     public Drawable getLabel() {
