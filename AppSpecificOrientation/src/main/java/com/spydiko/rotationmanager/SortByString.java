@@ -11,8 +11,8 @@ public class SortByString implements Comparator {
         Model p1 = (Model) o1;
         Model p2 = (Model) o2;
         int i = p1.getName().compareToIgnoreCase(p2.getName());
-        if (i<0) return -1;
-        else if (i==0) return 0;
-        else  return 1;
+        if (i < 0) return -1;
+        else if (i == 0) return 0;
+        else return 1;
     }
 }
