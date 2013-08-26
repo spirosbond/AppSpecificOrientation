@@ -97,7 +97,7 @@ public class NewOrieService extends Service {
                     }
                 }
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -134,7 +134,7 @@ public class NewOrieService extends Service {
                 //                Log.d(TAG,"3 MPIKA");
                 orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
                 wm.updateViewLayout(orientationChanger, orientationLayout);
-                orientationChanger.setVisibility(View.VISIBLE);
+                orientationChanger.setVisibility(View.GONE);
                 //                Log.d(TAG,"3 VGIKA");
             }
         }

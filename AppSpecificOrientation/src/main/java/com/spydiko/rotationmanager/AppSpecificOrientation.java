@@ -37,26 +37,6 @@ public class AppSpecificOrientation extends Application {
         editor = prefs.edit();
     }
 
-    public int getDefaultState() {
-        return prefs.getInt("default", -1);
-
-    }
-
-    public void setDefaultState(int ds) {
-        editor.putInt("default", ds);
-        editor.commit();
-
-    }
-
-    public int getNewState() {
-        return prefs.getInt("newstate", -1);
-    }
-
-    public void setNewState(int ns) {
-        editor.putInt("newstate", ns);
-        editor.commit();
-    }
-
     public boolean loadPreferences(String app, Boolean type) {
         if (type) {
             return prefs.getBoolean(app.concat("portrait"), false);
