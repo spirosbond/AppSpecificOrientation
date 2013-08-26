@@ -6,18 +6,33 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ToggleButton
-            android:layout_width="fill_parent"
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/rotation"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="@string/orientation"
+            android:layout_weight="1"
+            android:id="@+id/textView"
+            android:gravity="center"
+            android:layout_gravity="top"/>
+
+    <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:textSize="16sp"
-            android:textOn="@string/rotation"
-            android:textOff="@string/no_rotation"
-            android:disabledAlpha="0.4"
-            android:id="@+id/rotation"
-            android:layout_gravity="center"
-            android:visibility="invisible"/>
+            android:id="@+id/imageView"
+            android:src="@drawable/tb_off"
+            android:layout_weight="1"
+            android:layout_gravity="top"/>
+
+
+</LinearLayout>
 
     <ListView
             android:layout_width="fill_parent"

@@ -18,9 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +33,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     LinearLayout buttonsLayout;
     //    boolean mExternalStorageAvailable;
     //    boolean mExternalStorageWriteable;
+    private boolean test;
     private PackageManager packageManager;
     private InteractiveArrayAdapter adapter;
     private List<String> names;
@@ -40,14 +41,14 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     private AppSpecificOrientation myapp;
     private ListView lv;
     private Button buttonClearAll;
-    private ToggleButton rotation;
+    private ImageView rotation;
     private ContentObserver rotationObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange) {
             if (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
-                rotation.setChecked(true);
+                rotation.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
             } else {
-                rotation.setChecked(false);
+                rotation.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
             }
         }
     };
@@ -72,15 +73,17 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
         setContentView(R.layout.activity_main);
         myapp = (AppSpecificOrientation) getApplication();
         buttonClearAll = (Button) findViewById(R.id.button2);
-        rotation = (ToggleButton) findViewById(R.id.rotation);
+        rotation = (ImageView) findViewById(R.id.imageView);
         if (Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
-            rotation.setChecked(true);
+            rotation.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
+            test = true;
         } else {
-            rotation.setChecked(false);
+            rotation.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
+            test = false;
         }
         getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
                 rotationObserver);
-        rotation.setOnCheckedChangeListener(this);
+        rotation.setOnClickListener(this);
         buttonClearAll.setOnClickListener(this);
         //Chech external storage
         /*mExternalStorageAvailable = false;
@@ -260,14 +263,26 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
 
     @Override
     public void onClick(View view) {
-        Button temp = (Button) view;
-        switch (temp.getId()) {
+        //        Button temp = (Button) view;
+        ImageView tmp;
+        switch (view.getId()) {
             case (R.id.button2):
                 for (Model mdl : activities) {
                     mdl.setSelectedPortrait(false);
                     mdl.setSelectedLandscape(false);
                 }
                 adapter.notifyDataSetChanged();
+                break;
+            case (R.id.imageView):
+                tmp = (ImageView) findViewById(view.getId());
+                if (test) {
+                    tmp.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
+                    test = false;
+                } else {
+                    tmp.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
+                    test = true;
+                }
+                break;
         }
     }
 

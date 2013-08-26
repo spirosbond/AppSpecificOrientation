@@ -16,6 +16,7 @@
     <string name="buttonClearAll">Clear All</string>
     <string name="loadingApps">Loading Apps...</string>
     <string name="setOnBoot">Enable on boot</string>
+    <string name="orientation">Global Orientation</string>
 
 
 </resources>
