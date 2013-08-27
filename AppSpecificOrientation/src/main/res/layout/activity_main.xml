@@ -10,26 +10,31 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:id="@+id/rotation"
+        android:id="@+id/globalOrientation"
         android:orientation="horizontal"
-        android:visibility="visible" >
+        android:background="@drawable/border"
+        android:paddingBottom="2dp"
+        android:visibility="gone" >
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="@string/orientation"
-            android:layout_weight="1"
-            android:id="@+id/textView"
+            android:layout_weight="3"
+            android:textStyle="italic"
+            android:textSize="18sp"
+            android:textColor="#dd558855"
+            android:id="@+id/orientationText"
             android:gravity="center"
             android:layout_gravity="top"/>
 
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:src="@drawable/tb_off"
-            android:layout_weight="1"
-            android:layout_gravity="top"/>
+            android:id="@+id/orientationButton"
+            android:src="@drawable/transition"
+            android:background="@drawable/title_logo"
+            android:layout_gravity="center"/>
 
 
 </LinearLayout>
@@ -40,6 +45,8 @@
             android:id="@+id/appList"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/border"
+            android:paddingBottom="2dp"
             android:visibility="gone"/>
 
     <LinearLayout
@@ -67,18 +74,33 @@
 
     <LinearLayout
             android:id="@+id/twoButtons"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal"
             android:visibility="invisible">
 
-    <Button
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="1"
+                android:textStyle="italic"
+                android:paddingLeft="10dp"
+                android:text="@string/createdby"
+                android:layout_gravity="center_vertical"
+                android:gravity="left"
+                android:id="@+id/textView"/>
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#000"
             android:text="@string/buttonClearAll"
             android:id="@+id/button2"
-            android:layout_gravity="center"/>
+            android:background="@drawable/my_button"
+            android:layout_gravity="right"/>
     </LinearLayout>
 
 

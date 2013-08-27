@@ -14,4 +14,10 @@
             android:id="@+id/setOnBoot"
             android:title="@string/setOnBoot"
             android:checkable="true"/>
+    <item
+            android:id="@+id/howTo"
+            android:title="@string/howTo"/>
+    <item
+            android:id="@+id/about"
+            android:title="@string/about"/>
 </menu>

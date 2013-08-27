@@ -17,6 +17,32 @@
     <string name="loadingApps">Loading Apps...</string>
     <string name="setOnBoot">Enable on boot</string>
     <string name="orientation">Global Orientation</string>
+    <string name="createdby">Created by SpyDiKo\n2013 \u00a9 S.D.K.</string>
+    <string name="howTo">Instructions</string>
+    <string name="howToTitle">Instructions</string>
+    <string name="how_to_main">How To Make It Work</string>
+    <string name="how_to_inst1">The main button on top of the screen is the global orientation for all the apps. This is just a shortcut to
+        the setting\'s option to change global orientation.
+    </string>
+    <string name="how_to_inst2">Then you can select from the list for every app your desired orientation. Your selection will override the
+        default global orientation.
+    </string>
+    <string name="how_to_inst3">If you want only two apps to rotate and all the others to stay at their default, just disable global
+        orientation and then select both Portrait and Landscape for the specific app in the list.
+    </string>
+    <string name="how_to_inst4">After you have selected your desired apps, just click on play and your settings will be in effect.</string>
+    <string name="how_to_inst5">Also, there is an option in the settings tab where you can set the app to start on boot. If you select it,
+        then every time your phone boots it will remember your configurations and the app will run automatically.
+    </string>
+    <string name="logo">rotation logo</string>
+    <string name="aboutText">Rotation Manager lets you decide which app rotates and which one doesn\'t. You can even set it so that an app
+        is forced to portrait or landscape view. See instructions for more information.\n\nIt is an open source project created by SpyDiKo team, aiming to keep things simple and functional.\nContact
+        us\nspirosbond@hotmail.com\nflojim4@gmail.com
+    </string>
+    <string name="aboutFooter">Rotation Manager \u00a9 SpyDiKo. All Rights Reserved.
+    </string>
+    <string name="AboutTitle">About</string>
+    <string name="about">About</string>
 
 
 </resources>

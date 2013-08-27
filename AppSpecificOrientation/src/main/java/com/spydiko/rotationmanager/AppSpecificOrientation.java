@@ -11,6 +11,7 @@ public class AppSpecificOrientation extends Application {
 
     private static SharedPreferences prefs;
     private static SharedPreferences.Editor editor;
+    private static boolean check_button;
 
     public static boolean isServiceRunning() {
         return prefs.getBoolean("service", false);
@@ -28,6 +29,14 @@ public class AppSpecificOrientation extends Application {
     public static void setBoot(boolean state) {
         editor.putBoolean("boot", state);
         editor.commit();
+    }
+
+    public static boolean isCheck_button() {
+        return check_button;
+    }
+
+    public static void setCheck_button(boolean check_button) {
+        AppSpecificOrientation.check_button = check_button;
     }
 
     @Override

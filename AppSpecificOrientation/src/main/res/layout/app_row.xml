@@ -21,15 +21,55 @@
             >
     </CheckBox>
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_l"
+            android:text="L"
+            android:layout_toLeftOf="@id/list_item_landscape"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            >
+    </TextView>
+    <View
+            android:layout_width="1dp"
+            android:id="@+id/vertLine"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignBottom="@id/imageView"
+            android:layout_alignTop="@id/imageView"
+            android:layout_toLeftOf="@id/text_l"
+            android:background="#66eeeeee"/>
     <CheckBox
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_toLeftOf="@id/list_item_landscape"
+            android:layout_toLeftOf="@id/vertLine"
             android:id="@+id/list_item_check"
             android:layout_centerVertical="true"
             >
 
     </CheckBox>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_p"
+            android:text="P"
+            android:layout_toLeftOf="@id/list_item_check"
+            android:layout_marginLeft="4dp"
+            android:layout_centerVertical="true"
+            >
+    </TextView>
+
+    <View
+            android:layout_width="1dp"
+            android:id="@+id/vertLine2"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignBottom="@id/imageView"
+            android:layout_alignTop="@id/imageView"
+            android:layout_toLeftOf="@id/text_p"
+            android:background="#66eeeeee"/>
 
     <TextView
             android:layout_height="wrap_content"
@@ -40,13 +80,10 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_toRightOf="@id/imageView"
-            android:layout_toLeftOf="@id/list_item_check"
-
+            android:layout_toLeftOf="@id/vertLine2"
             >
 
     </TextView>
-
-
 
 
 

@@ -1,16 +1,19 @@
 package com.spydiko.rotationmanager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
@@ -26,11 +29,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends Activity implements View.OnClickListener{
 
     private final static String TAG = MainActivity.class.getSimpleName();
     LinearLayout progBar;
     LinearLayout buttonsLayout;
+    LinearLayout globalOrientation;
     //    boolean mExternalStorageAvailable;
     //    boolean mExternalStorageWriteable;
     private boolean test;
@@ -39,16 +43,19 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
     private List<String> names;
     private ArrayList<Model> activities;
     private AppSpecificOrientation myapp;
+    private Vibrator vibe;
     private ListView lv;
     private Button buttonClearAll;
-    private ImageView rotation;
+    private ImageView orientationButton;
     private ContentObserver rotationObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange) {
             if (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
-                rotation.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
+                orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
+                AppSpecificOrientation.setCheck_button(true);
             } else {
-                rotation.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
+                orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
+                AppSpecificOrientation.setCheck_button(false);
             }
         }
     };
@@ -73,17 +80,19 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
         setContentView(R.layout.activity_main);
         myapp = (AppSpecificOrientation) getApplication();
         buttonClearAll = (Button) findViewById(R.id.button2);
-        rotation = (ImageView) findViewById(R.id.imageView);
+        vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        orientationButton = (ImageView) findViewById(R.id.orientationButton);
+        globalOrientation = (LinearLayout) findViewById(R.id.globalOrientation);
         if (Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
-            rotation.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
-            test = true;
+            orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
+            AppSpecificOrientation.setCheck_button(true);
         } else {
-            rotation.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
-            test = false;
+            orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
+            AppSpecificOrientation.setCheck_button(false);
         }
         getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
                 rotationObserver);
-        rotation.setOnClickListener(this);
+        orientationButton.setOnClickListener(this);
         buttonClearAll.setOnClickListener(this);
         //Chech external storage
         /*mExternalStorageAvailable = false;
@@ -128,7 +137,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
             progBar.setVisibility(View.GONE);
             lv.setVisibility(View.VISIBLE);
             buttonsLayout.setVisibility(View.VISIBLE);
-            rotation.setVisibility(View.VISIBLE);
+            globalOrientation.setVisibility(View.VISIBLE);
             adapter.notifyDataSetChanged();
         }
 
@@ -257,14 +266,26 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
                 }
 
                 break;
+            case R.id.howTo:
+                startActivityForResult((new Intent(this, HowToActivity.class)),1);
+                break;
+            case R.id.about:
+                startActivityForResult((new Intent(this, AboutActivity.class)),1);
+                break;
         }
         return true;
+    }
+
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+        // Collect data from the intent and use it
+
     }
 
     @Override
     public void onClick(View view) {
         //        Button temp = (Button) view;
         ImageView tmp;
+        vibe.vibrate(50);
         switch (view.getId()) {
             case (R.id.button2):
                 for (Model mdl : activities) {
@@ -273,24 +294,19 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
                 }
                 adapter.notifyDataSetChanged();
                 break;
-            case (R.id.imageView):
+            case (R.id.orientationButton):
                 tmp = (ImageView) findViewById(view.getId());
-                if (test) {
+                if (AppSpecificOrientation.isCheck_button()) {
                     tmp.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
-                    test = false;
+                    AppSpecificOrientation.setCheck_button(false);
                 } else {
                     tmp.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
-                    test = true;
+                    AppSpecificOrientation.setCheck_button(true);
                 }
+                Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, AppSpecificOrientation.isCheck_button() ? 1 : 0);
                 break;
         }
     }
-
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, b ? 1 : 0);
-    }
-
     public class UpdateData extends AsyncTask<Void, Void, Void> {
         LinearLayout progBar;
         LinearLayout buttonsLayout;
@@ -311,7 +327,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
             progBar = (LinearLayout) findViewById(R.id.channelsProgress);
             //            Log.d(TAG, "onPreExecute3");
             lv.setVisibility(View.GONE);
-            rotation.setVisibility(View.INVISIBLE);
+            globalOrientation.setVisibility(View.INVISIBLE);
             buttonsLayout.setVisibility(View.INVISIBLE);
             progBar.setVisibility(View.VISIBLE);
             //            Log.d(TAG, "onPreExecute3");
@@ -323,7 +339,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Comp
             progBar.setVisibility(View.GONE);
             lv.setVisibility(View.VISIBLE);
             buttonsLayout.setVisibility(View.VISIBLE);
-            rotation.setVisibility(View.VISIBLE);
+            globalOrientation.setVisibility(View.VISIBLE);
             adapter.notifyDataSetChanged();
         }
     }
