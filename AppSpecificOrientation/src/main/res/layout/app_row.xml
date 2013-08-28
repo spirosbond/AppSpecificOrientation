@@ -2,6 +2,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -12,64 +13,41 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"/>
 
-    <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+    <ImageView
+            android:layout_height="20dp"
+            android:layout_width="50dp"
+            android:layout_alignBottom="@id/imageView"
+            android:layout_alignTop="@id/imageView"
             android:id="@+id/list_item_landscape"
+            android:src="@drawable/land_off"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginRight="5dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             >
-    </CheckBox>
+    </ImageView>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_l"
-            android:text="L"
+    <ImageView
+            android:layout_height="40dp"
+            android:layout_alignBottom="@id/imageView"
+            android:layout_alignTop="@id/imageView"
+            android:paddingTop="3dp"
+            android:focusable="true"
+            android:paddingRight="5dp"
+            android:paddingBottom="3dp"
+            android:layout_width="25dp"
+            android:layout_marginRight="3dp"
             android:layout_toLeftOf="@id/list_item_landscape"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="4dp"
-            >
-    </TextView>
-    <View
-            android:layout_width="1dp"
-            android:id="@+id/vertLine"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_alignBottom="@id/imageView"
-            android:layout_alignTop="@id/imageView"
-            android:layout_toLeftOf="@id/text_l"
-            android:background="#66eeeeee"/>
-    <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_toLeftOf="@id/vertLine"
+            android:clickable="true"
             android:id="@+id/list_item_check"
+            android:src="@drawable/port_off"
             android:layout_centerVertical="true"
             >
+    </ImageView>
 
-    </CheckBox>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_p"
-            android:text="P"
-            android:layout_toLeftOf="@id/list_item_check"
-            android:layout_marginLeft="4dp"
-            android:layout_centerVertical="true"
-            >
-    </TextView>
-
-    <View
-            android:layout_width="1dp"
-            android:id="@+id/vertLine2"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_alignBottom="@id/imageView"
-            android:layout_alignTop="@id/imageView"
-            android:layout_toLeftOf="@id/text_p"
-            android:background="#66eeeeee"/>
 
     <TextView
             android:layout_height="wrap_content"
@@ -78,9 +56,9 @@
             android:textSize="16sp"
             android:id="@+id/list_item_view"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="4dp"
             android:layout_toRightOf="@id/imageView"
-            android:layout_toLeftOf="@id/vertLine2"
+            android:layout_toLeftOf="@id/list_item_check"
             >
 
     </TextView>

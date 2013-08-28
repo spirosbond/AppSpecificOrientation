@@ -6,27 +6,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by PuR3v1L on 7/8/2013.
  */
 public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
 
-    private final List<Model> list;
+    private final ArrayList<Model> list;
     private final Activity context;
     AppSpecificOrientation myapp;
 
-    public InteractiveArrayAdapter(Activity context, List<Model> list, AppSpecificOrientation myapp) {
+    public InteractiveArrayAdapter(Activity context, ArrayList<Model> list, AppSpecificOrientation myapp) {
         super(context, R.layout.app_row, list);
         this.context = context;
         this.list = list;
         this.myapp = myapp;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return false;
     }
 
     @Override
@@ -37,29 +40,44 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
             view = inflator.inflate(R.layout.app_row, null);
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.text = (TextView) view.findViewById(R.id.list_item_view);
-            viewHolder.checkbox = (CheckBox) view.findViewById(R.id.list_item_check);
-            viewHolder.landscape = (CheckBox) view.findViewById(R.id.list_item_landscape);
+            viewHolder.checkbox = (ImageView) view.findViewById(R.id.list_item_check);
+            viewHolder.landscape = (ImageView) view.findViewById(R.id.list_item_landscape);
             viewHolder.label = (ImageView) view.findViewById(R.id.imageView);
-            viewHolder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
+            viewHolder.checkbox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                public void onClick(View view) {
+                    ImageView tmp = (ImageView) view;
+                    Log.d("adapter", "mpika checkbox");
                     Model element = (Model) viewHolder.checkbox.getTag();
-                    Log.d("Adapter", "enter");
-                    element.setSelectedPortrait(buttonView.isChecked());
-                    myapp.savePreferences(element.getPackageName(), element.isSelectedPortrait(), true);
-                    Log.d("Adapter", element.getName() + " " + element.isSelectedPortrait());
+                    Log.d("adapter",""+myapp.loadPreferences(element.getPackageName(), element.isSelectedPortrait()));
+                    if (myapp.loadPreferences(element.getPackageName(), true)) {
+                        myapp.savePreferences(element.getPackageName(), false, true);
+                        element.setSelectedPortrait(false);
+                        tmp.setImageDrawable(myapp.getResources().getDrawable(R.drawable.port_off));
+                    } else {
+                        myapp.savePreferences(element.getPackageName(), true, true);
+                        element.setSelectedPortrait(true);
+                        tmp.setImageDrawable(myapp.getResources().getDrawable(R.drawable.port_on));
+                    }
+                    Log.d("adapter", element.getPackageName()+" "+element.isSelectedPortrait());
                 }
             });
-            viewHolder.landscape.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
+            viewHolder.landscape.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                public void onClick(View view) {
+                    ImageView tmp = (ImageView) view;
+                    Log.d("adapter", "mpika landscape");
                     Model element = (Model) viewHolder.landscape.getTag();
-                    Log.d("Adapter", "enter");
-                    element.setSelectedLandscape(buttonView.isChecked());
-                    myapp.savePreferences(element.getPackageName(), element.isSelectedLandscape(), false);
-                    Log.d("Adapter", element.getName() + " " + element.isSelectedLandscape());
+                    if (myapp.loadPreferences(element.getPackageName(), false)) {
+                        myapp.savePreferences(element.getPackageName(), false, false);
+                        element.setSelectedLandscape(false);
+                        tmp.setImageDrawable(myapp.getResources().getDrawable(R.drawable.land_off));
+                    } else {
+                        myapp.savePreferences(element.getPackageName(), true, false);
+                        element.setSelectedLandscape(true);
+                        tmp.setImageDrawable(myapp.getResources().getDrawable(R.drawable.land_on));
+                    }
+                    Log.d("adapter", element.getPackageName()+" "+element.isSelectedLandscape());
                 }
             });
             view.setTag(viewHolder);
@@ -72,16 +90,20 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
         }
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.text.setText(list.get(position).getName());
-        holder.checkbox.setChecked(list.get(position).isSelectedPortrait());
-        holder.landscape.setChecked(list.get(position).isSelectedLandscape());
+        if (list.get(position).isSelectedPortrait()) holder.checkbox.setImageDrawable(myapp.getResources().getDrawable(R.drawable.port_on));
+        else holder.checkbox.setImageDrawable(myapp.getResources().getDrawable(R.drawable.port_off));
+
+        if (list.get(position).isSelectedLandscape())
+            holder.landscape.setImageDrawable(myapp.getResources().getDrawable(R.drawable.land_on));
+        else holder.landscape.setImageDrawable(myapp.getResources().getDrawable(R.drawable.land_off));
         holder.label.setImageDrawable(list.get(position).getLabel());
         return view;
     }
 
     static class ViewHolder {
         protected TextView text;
-        protected CheckBox checkbox;
-        protected CheckBox landscape;
+        protected ImageView checkbox;
+        protected ImageView landscape;
         protected ImageView label;
     }
 }

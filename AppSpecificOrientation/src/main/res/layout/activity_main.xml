@@ -19,7 +19,7 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="@string/orientation"
+            android:text="@string/orientationOn"
             android:layout_weight="3"
             android:textStyle="italic"
             android:textSize="18sp"
@@ -31,6 +31,8 @@
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
             android:id="@+id/orientationButton"
             android:src="@drawable/transition"
             android:background="@drawable/title_logo"
@@ -44,6 +46,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/appList"
             android:layout_weight="1"
+            android:focusable="false"
             android:layout_gravity="center_horizontal|top"
             android:background="@drawable/border"
             android:paddingBottom="2dp"
@@ -102,6 +105,7 @@
             android:background="@drawable/my_button"
             android:layout_gravity="right"/>
     </LinearLayout>
+
 
 
 </LinearLayout>
