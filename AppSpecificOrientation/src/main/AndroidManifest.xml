@@ -20,7 +20,7 @@
             android:allowBackup="true"
             android:icon="@drawable/launch"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppBaseTheme"
             android:name=".AppSpecificOrientation">
         <activity
 

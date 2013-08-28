@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".MainActivity">
 
 <LinearLayout
@@ -79,10 +80,11 @@
             android:id="@+id/twoButtons"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:orientation="horizontal"
-            android:visibility="invisible">
+            android:visibility="visible"
+            android:background="#88000000">
 
         <TextView
                 android:layout_width="0dp"

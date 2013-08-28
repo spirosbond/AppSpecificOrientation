@@ -1,5 +1,6 @@
 package com.spydiko.rotationmanager;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -79,6 +81,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Initialize everything
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            ActionBar actionBar = getActionBar();
+            ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00FEBB31"));
+            actionBar.setBackgroundDrawable(colorDrawable);
+        }*/
+        names = new ArrayList<String>();
         myapp = (AppSpecificOrientation) getApplication();
         buttonClearAll = (Button) findViewById(R.id.button2);
         vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
@@ -86,7 +94,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         globalOrientation = (LinearLayout) findViewById(R.id.globalOrientation);
         autoRotate = (TextView) findViewById(R.id.orientationText);
         activities = new ArrayList<Model>();
-        names = new ArrayList<String>();
         lv = (ListView) findViewById(R.id.appList);
         final ArrayList<Model> data = (ArrayList<Model>) getLastNonConfigurationInstance();
         // Set Listeners
@@ -124,7 +131,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             this.adapter = new InteractiveArrayAdapter(this, activities, (AppSpecificOrientation) getApplication());
             lv.setAdapter(adapter);
             for (Model mdl : activities) {
-                 names.add(mdl.getPackageName());
+                names.add(mdl.getPackageName());
             }
             progBar.setVisibility(View.GONE);
             lv.setVisibility(View.VISIBLE);
@@ -325,7 +332,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             //            Log.d(TAG, "onPreExecute3");
             lv.setVisibility(View.GONE);
             globalOrientation.setVisibility(View.INVISIBLE);
-            buttonsLayout.setVisibility(View.INVISIBLE);
             progBar.setVisibility(View.VISIBLE);
             //            Log.d(TAG, "onPreExecute3");
         }
