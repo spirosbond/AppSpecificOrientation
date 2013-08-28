@@ -16,7 +16,8 @@
     <string name="buttonClearAll">Clear All</string>
     <string name="loadingApps">Loading Apps...</string>
     <string name="setOnBoot">Enable on boot</string>
-    <string name="orientation">Global Orientation</string>
+    <string name="orientationOn">Auto-Rotate On</string>
+    <string name="orientationOff">Auto-Rotate Off</string>
     <string name="createdby">Created by SpyDiKo\n2013 \u00a9 S.D.K.</string>
     <string name="howTo">Instructions</string>
     <string name="howToTitle">Instructions</string>
