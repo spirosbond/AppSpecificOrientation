@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.startapp.android.publish.StartAppAd;
+
 /**
  * Created by PuR3v1L on 7/8/2013.
  */
@@ -12,6 +14,7 @@ public class AppSpecificOrientation extends Application {
     private static SharedPreferences prefs;
     private static SharedPreferences.Editor editor;
     private static boolean check_button;
+
 
     public static boolean isServiceRunning() {
         return prefs.getBoolean("service", false);
@@ -37,6 +40,10 @@ public class AppSpecificOrientation extends Application {
 
     public static void setCheck_button(boolean check_button) {
         AppSpecificOrientation.check_button = check_button;
+    }
+
+    public boolean loadDonate (String type) {
+        return prefs.getBoolean(type,false);
     }
 
     @Override
@@ -69,5 +76,13 @@ public class AppSpecificOrientation extends Application {
 
     public boolean isCheckedPortrait(String temp) {
         return prefs.getBoolean(temp.concat("portrait"), false);
+    }
+
+    public void registerShared(DonateActivity donateActivity) {
+        prefs.registerOnSharedPreferenceChangeListener(donateActivity);
+    }
+
+    public void unregisterShared(DonateActivity donateActivity) {
+        prefs.unregisterOnSharedPreferenceChangeListener(donateActivity);
     }
 }

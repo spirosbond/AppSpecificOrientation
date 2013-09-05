@@ -1,4 +1,7 @@
 package com.spydiko.rotationmanager;
+import com.appflood.AppFlood;
+import com.appflood.AppFlood.AFEventDelegate;
+import com.appflood.AppFlood.AFRequestDelegate;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -21,6 +24,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,8 +91,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00FEBB31"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }*/
+
+        AppFlood.initialize(this, "1lfdyfOzKDcLPRPu", "th4j61EB18bdL522870c8", AppFlood.AD_ALL);
         names = new ArrayList<String>();
         myapp = (AppSpecificOrientation) getApplication();
+        if (myapp.loadDonate("appflood2")) AppFlood.showFullScreen(this);
         buttonClearAll = (Button) findViewById(R.id.button2);
         vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         orientationButton = (ImageView) findViewById(R.id.orientationButton);
@@ -269,12 +277,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.about: // Open About Activity
                 startActivityForResult((new Intent(this, AboutActivity.class)), 1);
                 break;
+            case R.id.donate:
+                startActivityForResult((new Intent(this, DonateActivity.class)), 1);
         }
         return true;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Collect data from the intent and use it
+
+            if (myapp.loadDonate("appflood")){
+                AppFlood.showPanel(this,AppFlood.PANEL_TOP);
+            }
+
     }
 
     @Override

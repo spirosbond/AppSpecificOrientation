@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/donateTitle">
+        <SwitchPreference android:title="@string/donate1"
+            android:summary="@string/summaryDonate1" android:key="appflood"></SwitchPreference>
+        <SwitchPreference android:title="@string/donate2"
+            android:summary="@string/summaryDonate2" android:key="appflood2"></SwitchPreference>
+        <Preference android:title="@string/appoftheday" android:summary="@string/appofthedaysum" android:key="appoftheday"/>
+        <Preference android:title="@string/startapp" android:summary="@string/startappsum" android:key="startapp"/>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
