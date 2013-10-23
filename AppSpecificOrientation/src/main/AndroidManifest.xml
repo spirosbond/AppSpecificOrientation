@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.spydiko.rotationmanager"
           android:versionCode="1"
-          android:versionName="0.7-BETA">
+          android:versionName="0.8-BETA">
 
     <uses-sdk
             android:minSdkVersion="7"

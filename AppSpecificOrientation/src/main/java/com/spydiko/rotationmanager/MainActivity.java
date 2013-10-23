@@ -5,8 +5,10 @@ import com.appflood.AppFlood.AFRequestDelegate;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -207,7 +209,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
             activities.add(temp);
             //			Log.d(TAG, "Launch Activity :" + packageManager.getLaunchIntentForPackage(packageInfo.packageName));
         }
-        Collections.sort(activities, new SortByString());
+	      // Search and show launchers
+	      final Intent intent = new Intent(Intent.ACTION_MAIN);
+	      intent.addCategory(Intent.CATEGORY_HOME);
+	      final ResolveInfo res = packageManager.resolveActivity(intent, 0);
+	      if (res.activityInfo == null) {
+		        // should not happen. A home is always installed, isn't it?
+	      } else if (!names.contains(res.activityInfo.applicationInfo.packageName)) {
+		        Model launcher = new Model ((String) packageManager.getApplicationLabel(res.activityInfo.applicationInfo));
+		        launcher.setPackageName(res.activityInfo.applicationInfo.packageName);
+		        Drawable launcher_pic = res.activityInfo.applicationInfo.loadIcon(packageManager);
+		        launcher.setLabel(launcher_pic);
+		        if (myapp.loadPreferences(res.activityInfo.applicationInfo.packageName, true)) launcher.setSelectedPortrait(true);
+		        if (myapp.loadPreferences(res.activityInfo.applicationInfo.packageName, false)) launcher.setSelectedLandscape(true);
+		        activities.add(launcher);
+	      }
+
+	      Collections.sort(activities, new SortByString());
         Collections.sort(activities, new SortByCheck());
         //		Log.d(TAG, "END");
     }
