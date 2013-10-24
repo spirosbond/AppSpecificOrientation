@@ -59,6 +59,9 @@
     <string name="adColonysum">App of the day by adColony…</string>
     <string name="adMob">Free Apps!</string>
     <string name="adMobsum">Free apps of the day by AdMob…</string>
+    <string name="paypal_donate">Paypal</string>
+    <string name="paypal_donate_sum">Donate through Paypal…</string>
+    <string name="donateTitleCard">Donate via credit card</string>
 
 
 </resources>
