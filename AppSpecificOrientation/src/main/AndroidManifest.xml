@@ -28,14 +28,27 @@
             android:name=".AppSpecificOrientation">
         <activity
 
-                android:name="com.spydiko.rotationmanager.MainActivity"
+                android:name="com.spydiko.rotationmanager.SplashActivity"
                 android:label="@string/app_name"
+                android:theme="@android:style/Theme.NoTitleBar"
                 android:configChanges="orientation">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+
+            android:name="com.spydiko.rotationmanager.MainActivity"
+            android:label="@string/app_name"
+            android:configChanges="orientation">
+
+            <intent-filter>
+                <action android:name="com.spydiko.CLEARSCREEN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
