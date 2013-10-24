@@ -89,6 +89,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		names = new ArrayList<String>();
 		myapp = (AppSpecificOrientation) getApplication();
 		//		if (myapp.loadDonate("appflood2")) AppFlood.showFullScreen(this);
+		myapp.configureAdColony(this);
 		buttonClearAll = (Button) findViewById(R.id.button2);
 		vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
 		orientationButton = (ImageView) findViewById(R.id.orientationButton);
