@@ -59,12 +59,23 @@
                     android:value="com.spydiko.rotationmanager.MainActivity"/>
         </activity>
 
-        <activity android:name="com.startapp.android.publish.list3d.List3DActivity"
-            android:taskAffinity="com.spydiko.rotationmanager.AppWall"
-        android:theme="@android:style/Theme" />
-        <activity android:name="com.startapp.android.publish.AppWallActivity"
-            android:theme="@android:style/Theme.Translucent" android:taskAffinity="com.spydiko.rotationmanager.AppWall"
-        android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.spydiko.rotationmanager.DonateActivity"
+            android:label="@string/titleDonate"
+            android:parentActivityName="com.spydiko.rotationmanager.MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.spydiko.rotationmanager.MainActivity"/>
+
+        </activity>
+
+        <!--<activity android:name="com.startapp.android.publish.list3d.List3DActivity"-->
+        <!--android:taskAffinity="com.spydiko.rotationmanager.AppWall"-->
+        <!--android:theme="@android:style/Theme" />-->
+        <!--<activity android:name="com.startapp.android.publish.AppWallActivity"-->
+        <!--android:theme="@android:style/Theme.Translucent" android:taskAffinity="com.spydiko.rotationmanager.AppWall"-->
+        <!--android:configChanges="orientation|keyboardHidden" />-->
 
 
         <service
@@ -81,35 +92,60 @@
         </receiver>
 
         <activity
-            android:name="com.appflood.AFPanelActivity"
-            android:configChanges="keyboardHidden">
-        </activity>
+            android:name="com.jirbo.adcolony.AdColonyOverlay"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+
         <activity
-            android:name="com.appflood.AFFullScreenActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:theme="@android:style/Theme.Translucent"
-            android:launchMode="singleTask">
-        </activity>
+            android:name="com.jirbo.adcolony.AdColonyFullscreen"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+
         <activity
-            android:name="com.appflood.AFListActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent" >
-            <intent-filter>
-                <action android:name="" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.spydiko.rotationmanager.DonateActivity"
-            android:label="@string/titleDonate" />
+            android:name="com.jirbo.adcolony.AdColonyBrowser"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+
         <activity
-            android:name="com.appflood.AFInterstitialActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent" >
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|screenLayout|uiMode|smallestScreenSize|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+
+            <meta-data
+                android:name="ADMOB_PUBLISHER_ID"
+                android:value="pub-4450409123751393"/>
         </activity>
-        <meta-data android:name="com.startapp.android.DEV_ID" android:value="108632531 "/>
-        <meta-data android:name="com.startapp.android.APP_ID" android:value="209134043"/>
+
+
+        <!--<activity-->
+        <!--android:name="com.appflood.AFPanelActivity"-->
+        <!--android:configChanges="keyboardHidden">-->
+        <!--</activity>-->
+        <!--<activity-->
+        <!--android:name="com.appflood.AFFullScreenActivity"-->
+        <!--android:configChanges="keyboardHidden|orientation"-->
+        <!--android:theme="@android:style/Theme.Translucent"-->
+        <!--android:launchMode="singleTask">-->
+        <!--</activity>-->
+        <!--<activity-->
+        <!--android:name="com.appflood.AFListActivity"-->
+        <!--android:configChanges="keyboardHidden|orientation"-->
+        <!--android:launchMode="singleTask"-->
+        <!--android:theme="@android:style/Theme.Translucent" >-->
+        <!--<intent-filter>-->
+        <!--<action android:name="" />-->
+        <!--</intent-filter>-->
+        <!--</activity>-->
+
+        <!--<activity-->
+        <!--android:name="com.appflood.AFInterstitialActivity"-->
+        <!--android:configChanges="keyboardHidden|orientation"-->
+        <!--android:launchMode="singleTask"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@android:style/Theme.Translucent" >-->
+        <!--</activity>-->
+        <!--<meta-data android:name="com.startapp.android.DEV_ID" android:value="108632531 "/>-->
+        <!--<meta-data android:name="com.startapp.android.APP_ID" android:value="209134043"/>-->
 
     </application>
 
