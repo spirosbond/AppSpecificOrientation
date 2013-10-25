@@ -1,8 +1,13 @@
 package com.spydiko.rotationmanager;
 
+import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -12,39 +17,36 @@ import android.widget.ImageView;
  */
 
 
-public class SplashActivity extends Activity implements Animation.AnimationListener {
+public class SplashActivity extends Activity {
 	/**
 	 * Called when the activity is first created.
 	 */
 	private ImageView spydikologo;
-	private Animation myFadeInAnimation;
-//	private long check;
+//	private Animation myFadeInAnimation;
+	private long check;
+	private AppSpecificOrientation appSpecificOrientation;
 //	private boolean end;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash_screen);
-//		end = false;
+		Resources res = getApplicationContext().getResources();
 		spydikologo = (ImageView) findViewById(R.id.spydikologo);
-		myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
-		if (myFadeInAnimation != null) {
-			myFadeInAnimation.setAnimationListener(this);
-		}
-		spydikologo.startAnimation(myFadeInAnimation);
-//		check = System.currentTimeMillis();
-/*		Thread logoTimer = new Thread() {
+		TransitionDrawable transition = (TransitionDrawable)
+				res.getDrawable(R.drawable.logoon);
+		spydikologo.setImageDrawable(transition);
+//		end = false;
+		transition.startTransition(2000);
+		check = System.currentTimeMillis();
+		Thread logoTimer = new Thread() {
 			public void run() {
 				boolean showed = false;
 				try{
-					while(System.currentTimeMillis() -check < 2000){
+					while(System.currentTimeMillis() -check < 2500){
 						sleep(100);
-						if (System.currentTimeMillis() -check > 400 && !showed){
-							spydikologo.startAnimation(myFadeInAnimation);
-							showed = true;
-						}
 					}
-					startActivity(new Intent("com.spydiko.CLEARSCREEN"));
+					startActivity(new Intent("com.spydiko.FIRSTHOWTO"));
 				}
 
 				catch (InterruptedException e) {
@@ -58,21 +60,24 @@ public class SplashActivity extends Activity implements Animation.AnimationListe
 			}
 		};
 
-		logoTimer.start();*/
+		logoTimer.start();
 	}
 
-	@Override
+
+/*	@Override
 	public void onAnimationStart(Animation animation) {
 
 	}
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		startActivity(new Intent("com.spydiko.CLEARSCREEN"));
+
+
+
 	}
 
 	@Override
 	public void onAnimationRepeat(Animation animation) {
 
-	}
+	}*/
 }

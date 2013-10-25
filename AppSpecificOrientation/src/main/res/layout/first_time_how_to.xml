@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".HowTo">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/how_to_main"
+            android:textStyle="bold"
+            android:id="@+id/howToMain"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/orientationButton"
+            android:src="@drawable/transition"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/title_logo"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:text="@string/how_to_inst1"
+            android:id="@+id/howToInst1"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_to_inst2"
+            android:id="@+id/howToInst2"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="bottom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_to_inst3"
+            android:id="@+id/howToInst3"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="bottom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_to_inst4"
+            android:id="@+id/howToInst4"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="bottom"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_to_inst5"
+            android:id="@+id/howToInst5"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="bottom"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="@string/got_it"
+            android:id="@+id/got_it_button"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</ScrollView>

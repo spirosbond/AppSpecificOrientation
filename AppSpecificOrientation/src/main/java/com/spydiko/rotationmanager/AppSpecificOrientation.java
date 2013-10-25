@@ -51,6 +51,15 @@ public class AppSpecificOrientation extends Application {
 		return prefs.getBoolean(type, false);
 	}
 
+	public boolean checkIfFirstTime() {
+		return prefs.getBoolean("notfirsttime",false);
+	}
+
+	public void setNotFirstTime() {
+		editor.putBoolean("notfirsttime",true);
+		editor.commit();
+	}
+
 	@Override
 	public void onCreate() {
 		super.onCreate();

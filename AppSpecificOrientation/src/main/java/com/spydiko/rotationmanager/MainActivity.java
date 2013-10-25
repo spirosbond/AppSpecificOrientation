@@ -77,6 +77,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		myapp = (AppSpecificOrientation) getApplication();
 		setContentView(R.layout.activity_main);
 		// Initialize everything
 		   /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -87,7 +88,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		//		AppFlood.initialize(this, "1lfdyfOzKDcLPRPu", "th4j61EB18bdL522870c8", AppFlood.AD_ALL);
 		names = new ArrayList<String>();
-		myapp = (AppSpecificOrientation) getApplication();
 		//		if (myapp.loadDonate("appflood2")) AppFlood.showFullScreen(this);
 		myapp.configureAdColony(this);
 		buttonClearAll = (Button) findViewById(R.id.button2);

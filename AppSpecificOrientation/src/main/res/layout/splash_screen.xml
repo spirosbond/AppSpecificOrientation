@@ -7,9 +7,10 @@
     android:layout_height="fill_parent">
 
     <ImageView
-        android:src="@drawable/spydiko"
+        android:src="@drawable/spydikoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/spydikologo"/>
+
 </LinearLayout>

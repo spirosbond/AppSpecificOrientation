@@ -62,6 +62,7 @@
     <string name="paypal_donate">Paypal</string>
     <string name="paypal_donate_sum">Donate through Paypal…</string>
     <string name="donateTitleCard">Donate via credit card</string>
+    <string name="got_it">Ok, I understand</string>
 
 
 </resources>

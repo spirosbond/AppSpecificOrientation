@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.spydiko.rotationmanager"
-          android:versionCode="1"
-          android:versionName="0.9-BETA">
+          android:versionCode="2"
+          android:versionName="1.0">
 
     <uses-sdk
-            android:minSdkVersion="7"
-            android:targetSdkVersion="18"/>
+        android:minSdkVersion="7"
+        android:targetSdkVersion="18"/>
 
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
@@ -21,24 +21,48 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
-            android:allowBackup="true"
-            android:icon="@drawable/launch"
-            android:label="@string/app_name"
-            android:theme="@style/AppBaseTheme"
-            android:name=".AppSpecificOrientation">
+        android:allowBackup="true"
+        android:icon="@drawable/launch"
+        android:label="@string/app_name"
+        android:theme="@style/AppBaseTheme"
+        android:name=".AppSpecificOrientation">
         <activity
-
-                android:name="com.spydiko.rotationmanager.SplashActivity"
-                android:label="@string/app_name"
-                android:theme="@android:style/Theme.NoTitleBar"
-                android:noHistory="true"
-                android:configChanges="orientation">
-
+            android:name=".HelperActivity"
+            android:noHistory="true"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".FirstTimeInstruction"
+            android:noHistory="true"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="com.spydiko.FIRSTHOWTO"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
+        <activity
+
+            android:name="com.spydiko.rotationmanager.SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:noHistory="true"
+            android:configChanges="orientation">
+
+            <intent-filter>
+                <action android:name="com.spydiko.SPLASHSCREEN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
         </activity>
 
         <activity
@@ -51,26 +75,27 @@
                 <action android:name="com.spydiko.CLEARSCREEN"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+
         </activity>
 
         <activity
-                android:name="com.spydiko.rotationmanager.HowToActivity"
-                android:label="@string/howToTitle"
-                android:parentActivityName="com.spydiko.rotationmanager.MainActivity">
+            android:name="com.spydiko.rotationmanager.HowToActivity"
+            android:label="@string/howToTitle"
+            android:parentActivityName="com.spydiko.rotationmanager.MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.spydiko.rotationmanager.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.spydiko.rotationmanager.MainActivity"/>
         </activity>
 
         <activity
-                android:name="com.spydiko.rotationmanager.AboutActivity"
-                android:label="@string/AboutTitle"
-                android:parentActivityName="com.spydiko.rotationmanager.MainActivity">
+            android:name="com.spydiko.rotationmanager.AboutActivity"
+            android:label="@string/AboutTitle"
+            android:parentActivityName="com.spydiko.rotationmanager.MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.spydiko.rotationmanager.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.spydiko.rotationmanager.MainActivity"/>
         </activity>
 
         <activity
@@ -93,13 +118,13 @@
 
 
         <service
-                android:name=".NewOrieService"
-                android:enabled="true"
-                android:permission="SAIL_SERVICE_PERMISSION"/>
+            android:name=".NewOrieService"
+            android:enabled="true"
+            android:permission="SAIL_SERVICE_PERMISSION"/>
 
         <receiver
-                android:name=".BootReceiver"
-                android:enabled="true">
+            android:name=".BootReceiver"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
