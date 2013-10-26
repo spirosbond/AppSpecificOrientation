@@ -6,7 +6,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:weightSum="2"
+        android:weightSum="2.4"
         tools:context=".About">
 
     <ImageView
@@ -19,23 +19,33 @@
 
     <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/aboutText"
             android:id="@+id/aboutTextView"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_weight="0.6"
+            android:layout_weight="1.6"
             android:autoLink="web"
             />
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:id="@+id/facebook_click"
+        android:layout_gravity="center"
+        android:layout_weight="0.4"
+        android:clickable="true"
+        android:src="@drawable/social_facebook_button_blue"
+        android:contentDescription="@string/logo"/>
+
     <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/aboutFooter"
             android:layout_gravity="bottom"
             android:gravity="center"
-            android:layout_weight="1.4"
+            android:layout_weight="0.4"
             android:id="@+id/aboutFooterTextView"/>
 </LinearLayout>
