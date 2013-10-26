@@ -132,6 +132,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			progBar = (LinearLayout) findViewById(R.id.channelsProgress);
 			this.adapter = new InteractiveArrayAdapter(this, activities, (AppSpecificOrientation) getApplication());
 			lv.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
 			for (Model mdl : activities) {
 				names.add(mdl.getPackageName());
 			}
@@ -139,7 +140,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			lv.setVisibility(View.VISIBLE);
 			buttonsLayout.setVisibility(View.VISIBLE);
 			globalOrientation.setVisibility(View.VISIBLE);
-			adapter.notifyDataSetChanged();
 		}
 	}
 
@@ -173,7 +173,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		Intent localIntent = new Intent("android.intent.action.MAIN", null);
 		localIntent.addCategory("android.intent.category.LAUNCHER");
 		//		Log.d(TAG, "1");
-		this.adapter = new InteractiveArrayAdapter(this, activities, (AppSpecificOrientation) getApplication());
 		packageManager = getPackageManager();
 		//		Log.d(TAG, "2");
 		List<ResolveInfo> rInfo = packageManager.queryIntentActivities(localIntent, 1);
@@ -199,6 +198,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			if (myapp.loadPreferences(packageInfo.packageName, true)) temp.setSelectedPortrait(true);
 			if (myapp.loadPreferences(packageInfo.packageName, false)) temp.setSelectedLandscape(true);
 			activities.add(temp);
+
 			//			Log.d(TAG, "Launch Activity :" + packageManager.getLaunchIntentForPackage(packageInfo.packageName));
 		}
 		// Search and show launchers
@@ -215,10 +215,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			if (myapp.loadPreferences(res.activityInfo.applicationInfo.packageName, true)) launcher.setSelectedPortrait(true);
 			if (myapp.loadPreferences(res.activityInfo.applicationInfo.packageName, false)) launcher.setSelectedLandscape(true);
 			activities.add(launcher);
+
 		}
 
 		Collections.sort(activities, new SortByString());
+
 		Collections.sort(activities, new SortByCheck());
+
 		//		Log.d(TAG, "END");
 	}
 
@@ -247,6 +250,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				//				Log.d(TAG, "action_settings");
 				packageManager = getPackageManager();
 				UpdateData updateData = new UpdateData();
+				this.adapter = new InteractiveArrayAdapter(this, activities, (AppSpecificOrientation) getApplication());
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
 					updateData.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
 				else updateData.execute((Void[]) null);

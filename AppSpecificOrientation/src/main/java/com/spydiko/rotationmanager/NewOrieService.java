@@ -8,6 +8,7 @@ import android.graphics.PixelFormat;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -22,7 +23,7 @@ public class NewOrieService extends Service {
 	private ActivityManager activityManager;
 	private LinearLayout orientationChanger;
 	private WindowManager.LayoutParams orientationLayout;
-	private String foregroundApp, beforeApp = "";
+	private String foregroundApp, beforeApp;
 	private WindowManager wm;
 
 	@Override
@@ -43,7 +44,7 @@ public class NewOrieService extends Service {
 		super.onCreate();
 		//        Log.d(TAG, "Created");
 		appSpecificOrientation = (AppSpecificOrientation) getApplication();
-		appSpecificOrientation.setServiceRunning(true);
+		AppSpecificOrientation.setServiceRunning(true);
 		wm = (WindowManager) this.getSystemService(Service.WINDOW_SERVICE);
 		// Using TYPE_SYSTEM_OVERLAY is crucial to make your window appear on top
 		// You'll need the permission android.permission.SYSTEM_ALERT_WINDOW
@@ -70,40 +71,62 @@ public class NewOrieService extends Service {
 
 		@Override
 		protected Void doInBackground(Void... voids) {
-			while (appSpecificOrientation.isServiceRunning()) {
+			while (AppSpecificOrientation.isServiceRunning()) {
 				activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 				// get the info from the currently running task
 				try {
-					foregroundApp = activityManager.getRunningTasks(1).get(0).topActivity.getPackageName();
-					//                    Log.d(TAG, "Foreground app: " + foregroundApp);
-				} catch (NullPointerException e) {
-					//                    Log.d(TAG, "No foreground app??? Da Fuck???");
-				}
-				if (!foregroundApp.equals(beforeApp)) {
-					beforeApp = foregroundApp;
 
-					if (appSpecificOrientation.isCheckedPortrait(foregroundApp) && appSpecificOrientation.isCheckedLandscape
-							(foregroundApp)) {
-						publishProgress(2);
-						//                        Log.d(TAG,"1st IF");
-					} else if (appSpecificOrientation.isCheckedPortrait(foregroundApp)) {
-						publishProgress(3);
-						//                        Log.d(TAG,"2nd IF");
-					} else if (appSpecificOrientation.isCheckedLandscape(foregroundApp)) {
-						publishProgress(1);
-						//                        Log.d(TAG,"3rd IF");
+					ActivityManager.RunningTaskInfo runningTaskInfo = activityManager.getRunningTasks(1).get(0);
+					if (runningTaskInfo.topActivity != null) {
+						foregroundApp = runningTaskInfo.topActivity.getPackageName();
 					} else {
-						publishProgress(4);
+						foregroundApp = beforeApp;
 					}
-				}
-				try {
+					//                    Log.d(TAG, "Foreground app: " + foregroundApp);
+					if (!foregroundApp.equals(beforeApp)) {
+						beforeApp = foregroundApp;
+
+						if (appSpecificOrientation.isCheckedPortrait(foregroundApp) && appSpecificOrientation.isCheckedLandscape
+								(foregroundApp)) {
+							publishProgress(2);
+							//                        Log.d(TAG,"1st IF");
+						} else if (appSpecificOrientation.isCheckedPortrait(foregroundApp)) {
+							publishProgress(3);
+							//                        Log.d(TAG,"2nd IF");
+						} else if (appSpecificOrientation.isCheckedLandscape(foregroundApp)) {
+							publishProgress(1);
+							//                        Log.d(TAG,"3rd IF");
+						} else {
+							publishProgress(4);
+						}
+					}
 					Thread.sleep(500);
+				} catch (NullPointerException e) {
+					Log.d(TAG, "No foreground app??? Da Fuck???");
+					e.printStackTrace();
 				} catch (InterruptedException e) {
+					Log.d(TAG, "InterruptedException");
+					e.printStackTrace();
+				} catch (Exception e) {
+					Log.d(TAG, "Exception");
 					e.printStackTrace();
 				}
 
+
 			}
 			return null;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			beforeApp = "";
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			super.onPostExecute(aVoid);
+			beforeApp = "";
 		}
 
 		@Override
