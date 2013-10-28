@@ -47,9 +47,9 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
 				@Override
 				public void onClick(View view) {
 					ImageView tmp = (ImageView) view;
-					Log.d("adapter", "mpika checkbox");
+					if (AppSpecificOrientation.LOG) Log.d("adapter", "mpika checkbox");
 					Model element = (Model) viewHolder.checkbox.getTag();
-					Log.d("adapter", "" + myapp.loadPreferences(element.getPackageName(), element.isSelectedPortrait()));
+					if (AppSpecificOrientation.LOG) Log.d("adapter", "" + myapp.loadPreferences(element.getPackageName(), element.isSelectedPortrait()));
 					if (myapp.loadPreferences(element.getPackageName(), true)) {
 						myapp.savePreferences(element.getPackageName(), false, true);
 						element.setSelectedPortrait(false);
@@ -59,14 +59,14 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
 						element.setSelectedPortrait(true);
 						tmp.setImageDrawable(myapp.getResources().getDrawable(R.drawable.port_on));
 					}
-					Log.d("adapter", element.getPackageName() + " " + element.isSelectedPortrait());
+					if (AppSpecificOrientation.LOG) Log.d("adapter", element.getPackageName() + " " + element.isSelectedPortrait());
 				}
 			});
 			viewHolder.landscape.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					ImageView tmp = (ImageView) view;
-					Log.d("adapter", "mpika landscape");
+					if (AppSpecificOrientation.LOG) Log.d("adapter", "mpika landscape");
 					Model element = (Model) viewHolder.landscape.getTag();
 					if (myapp.loadPreferences(element.getPackageName(), false)) {
 						myapp.savePreferences(element.getPackageName(), false, false);
@@ -77,7 +77,7 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
 						element.setSelectedLandscape(true);
 						tmp.setImageDrawable(myapp.getResources().getDrawable(R.drawable.land_on));
 					}
-					Log.d("adapter", element.getPackageName() + " " + element.isSelectedLandscape());
+					if (AppSpecificOrientation.LOG) Log.d("adapter", element.getPackageName() + " " + element.isSelectedLandscape());
 				}
 			});
 			view.setTag(viewHolder);

@@ -65,13 +65,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		Log.d(TAG, "destroyed");
+		if (AppSpecificOrientation.LOG) Log.d(TAG, "destroyed");
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		Log.d(TAG, "stopped");
+		if (AppSpecificOrientation.LOG) Log.d(TAG, "stopped");
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				rotationObserver);
 		// Fill the list
 		if (data == null) { // List not stored
-			Log.d(TAG, "null");
+			if (AppSpecificOrientation.LOG) Log.d(TAG, "null");
 			packageManager = getPackageManager();
 			this.adapter = new InteractiveArrayAdapter(this, activities, (AppSpecificOrientation) getApplication());
 			lv.setAdapter(adapter);
@@ -126,7 +126,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				updateData.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
 			else updateData.execute((Void[]) null);
 		} else { // List stored
-			Log.d(TAG, "ok");
+			if (AppSpecificOrientation.LOG) Log.d(TAG, "ok");
 			activities = data;
 			buttonsLayout = (LinearLayout) findViewById(R.id.twoButtons);
 			progBar = (LinearLayout) findViewById(R.id.channelsProgress);
@@ -144,7 +144,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 
 	public Object onRetainNonConfigurationInstance() {
-		Log.d(TAG, "onRetain");
+		if (AppSpecificOrientation.LOG) Log.d(TAG, "onRetain");
 		final ArrayList<Model> data = activities;
 		return data;
 	}
@@ -169,22 +169,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 
 	public void updateApps() {
-		//		Log.d(TAG, "0");
+		//		if(AppSpecificOrientation.LOG) Log.d(TAG, "0");
 		Intent localIntent = new Intent("android.intent.action.MAIN", null);
 		localIntent.addCategory("android.intent.category.LAUNCHER");
-		//		Log.d(TAG, "1");
+		//		if(AppSpecificOrientation.LOG) Log.d(TAG, "1");
 		packageManager = getPackageManager();
-		//		Log.d(TAG, "2");
+		//		if(AppSpecificOrientation.LOG) Log.d(TAG, "2");
 		List<ResolveInfo> rInfo = packageManager.queryIntentActivities(localIntent, 1);
-		//		Log.d(TAG, "3");
+		//		if(AppSpecificOrientation.LOG) Log.d(TAG, "3");
 		List<ApplicationInfo> packages = new ArrayList<ApplicationInfo>();
-		//		Log.d(TAG, "4");
+		//		if(AppSpecificOrientation.LOG) Log.d(TAG, "4");
 		for (ResolveInfo info : rInfo) {
 			packages.add(info.activityInfo.applicationInfo);
 		}
 		Model temp;
 		for (ApplicationInfo packageInfo : packages) {
-			//			Log.d(TAG, "Installed package :" + packageInfo.packageName);
+			//			if(AppSpecificOrientation.LOG) Log.d(TAG, "Installed package :" + packageInfo.packageName);
 			if (names.contains(packageInfo.packageName)) {
 				continue;
 			}
@@ -193,13 +193,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			temp.setPackageName(packageInfo.packageName);
 			Drawable pic = packageInfo.loadIcon(packageManager);
 			temp.setLabel(pic);
-			//			Log.d(TAG, "Installed package :" + temp.getName());
+			//			if(AppSpecificOrientation.LOG) Log.d(TAG, "Installed package :" + temp.getName());
 			//temp.put(IS_CHECKED, true);
 			if (myapp.loadPreferences(packageInfo.packageName, true)) temp.setSelectedPortrait(true);
 			if (myapp.loadPreferences(packageInfo.packageName, false)) temp.setSelectedLandscape(true);
 			activities.add(temp);
 
-			//			Log.d(TAG, "Launch Activity :" + packageManager.getLaunchIntentForPackage(packageInfo.packageName));
+			//			if(AppSpecificOrientation.LOG) Log.d(TAG, "Launch Activity :" + packageManager.getLaunchIntentForPackage(packageInfo.packageName));
 		}
 		// Search and show launchers
 		final Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -222,14 +222,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		Collections.sort(activities, new SortByCheck());
 
-		//		Log.d(TAG, "END");
+		//		if(AppSpecificOrientation.LOG) Log.d(TAG, "END");
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		//		Log.d(TAG, "createOptions");
+		//		if(AppSpecificOrientation.LOG) Log.d(TAG, "createOptions");
 		if (AppSpecificOrientation.isServiceRunning()) {
 			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
 			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
@@ -237,8 +237,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
 			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
 		}
-		if (AppSpecificOrientation.getBoot()) menu.findItem(R.id.setOnBoot).setChecked(true);
-		else menu.findItem(R.id.setOnBoot).setChecked(false);
+		if (AppSpecificOrientation.getBoot()) {
+			menu.findItem(R.id.setOnBoot).setChecked(true);
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+				menu.findItem(R.id.setOnBoot).setIcon(android.R.drawable.button_onoff_indicator_on);
+		} else {
+			menu.findItem(R.id.setOnBoot).setChecked(false);
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+				menu.findItem(R.id.setOnBoot).setIcon(android.R.drawable.button_onoff_indicator_off);
+		}
 
 		return true;
 	}
@@ -247,29 +254,29 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.action_settings: // Refresh button
-				//				Log.d(TAG, "action_settings");
+				//				if(AppSpecificOrientation.LOG) Log.d(TAG, "action_settings");
 				packageManager = getPackageManager();
 				UpdateData updateData = new UpdateData();
 				this.adapter = new InteractiveArrayAdapter(this, activities, (AppSpecificOrientation) getApplication());
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
 					updateData.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
 				else updateData.execute((Void[]) null);
-				//				Log.d(TAG, "execute");
+				//				if(AppSpecificOrientation.LOG) Log.d(TAG, "execute");
 				lv.setAdapter(adapter);
 				break;
 			case R.id.itemToggleService: // Play - Stop Service
-				//                Log.d(TAG, "entered");
+				//                if(AppSpecificOrientation.LOG) Log.d(TAG, "entered");
 				if (AppSpecificOrientation.isServiceRunning()) {
 					item.setTitle(R.string.titleServiceStop);
 					item.setIcon(android.R.drawable.ic_media_play);
 					stopService(new Intent(this, NewOrieService.class));
 					AppSpecificOrientation.setServiceRunning(false);
-					//                    Log.d(TAG, "if");
+					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "if");
 				} else {
 					item.setTitle(R.string.titleServiceStart);
 					item.setIcon(android.R.drawable.ic_media_pause);
 					startService(new Intent(this, NewOrieService.class));
-					//                    Log.d(TAG, "else");
+					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "else");
 				}
 				break;
 
@@ -277,11 +284,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				if (AppSpecificOrientation.getBoot()) {
 					item.setChecked(false);
 					AppSpecificOrientation.setBoot(false);
-					//                    Log.d(TAG, "onBoot set to false");
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+						item.setIcon(android.R.drawable.button_onoff_indicator_off);
+					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "onBoot set to false");
 				} else {
 					item.setChecked(true);
 					AppSpecificOrientation.setBoot(true);
-					//                    Log.d(TAG, "onBoot set to true");
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+						item.setIcon(android.R.drawable.button_onoff_indicator_on);
+					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "onBoot set to true");
 				}
 
 				break;
@@ -346,23 +357,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		@Override
 		protected Void doInBackground(Void... voids) {
-			//            Log.d(TAG, "doInBackground");
+			//            if(AppSpecificOrientation.LOG) Log.d(TAG, "doInBackground");
 			updateApps();
 			return null;
 		}
 
 		@Override
 		protected void onPreExecute() {
-			//            Log.d(TAG, "onPreExecute1");
+			//            if(AppSpecificOrientation.LOG) Log.d(TAG, "onPreExecute1");
 			super.onPreExecute();
-			//            Log.d(TAG, "onPreExecute2");
+			//            if(AppSpecificOrientation.LOG) Log.d(TAG, "onPreExecute2");
 			buttonsLayout = (LinearLayout) findViewById(R.id.twoButtons);
 			progBar = (LinearLayout) findViewById(R.id.channelsProgress);
-			//            Log.d(TAG, "onPreExecute3");
+			//            if(AppSpecificOrientation.LOG) Log.d(TAG, "onPreExecute3");
 			lv.setVisibility(View.GONE);
 			globalOrientation.setVisibility(View.INVISIBLE);
 			progBar.setVisibility(View.VISIBLE);
-			//            Log.d(TAG, "onPreExecute3");
+			//            if(AppSpecificOrientation.LOG) Log.d(TAG, "onPreExecute3");
 		}
 
 		@Override

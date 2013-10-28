@@ -31,7 +31,7 @@ public class NewOrieService extends Service {
 		super.onDestroy();
 		appSpecificOrientation.setServiceRunning(false);
 		orientationChanger.setVisibility(View.GONE);
-		//        Log.d(TAG, "stopped");
+		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "stopped");
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class NewOrieService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		//        Log.d(TAG, "Created");
+		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "Created");
 		appSpecificOrientation = (AppSpecificOrientation) getApplication();
 		AppSpecificOrientation.setServiceRunning(true);
 		wm = (WindowManager) this.getSystemService(Service.WINDOW_SERVICE);
@@ -52,7 +52,7 @@ public class NewOrieService extends Service {
 		orientationLayout = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY, 0, PixelFormat.RGBA_8888);
 		orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
 		wm.addView(orientationChanger, orientationLayout);
-		//        Log.d(TAG,"Trexw");
+		//        if(AppSpecificOrientation.LOG) Log.d(TAG,"Trexw");
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
 			new AppMonitoring().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
 		else new AppMonitoring().execute((Void[]) null);
@@ -61,7 +61,7 @@ public class NewOrieService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		//        Log.d(TAG, "MPIKA");
+		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "MPIKA");
 		// Use whatever constant you need for your desired rotation
 		return START_STICKY;
 	}
@@ -82,33 +82,33 @@ public class NewOrieService extends Service {
 					} else {
 						foregroundApp = beforeApp;
 					}
-					//                    Log.d(TAG, "Foreground app: " + foregroundApp);
+					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
 					if (!foregroundApp.equals(beforeApp)) {
 						beforeApp = foregroundApp;
 
 						if (appSpecificOrientation.isCheckedPortrait(foregroundApp) && appSpecificOrientation.isCheckedLandscape
 								(foregroundApp)) {
 							publishProgress(2);
-							//                        Log.d(TAG,"1st IF");
+							//                        if(AppSpecificOrientation.LOG) Log.d(TAG,"1st IF");
 						} else if (appSpecificOrientation.isCheckedPortrait(foregroundApp)) {
 							publishProgress(3);
-							//                        Log.d(TAG,"2nd IF");
+							//                        if(AppSpecificOrientation.LOG) Log.d(TAG,"2nd IF");
 						} else if (appSpecificOrientation.isCheckedLandscape(foregroundApp)) {
 							publishProgress(1);
-							//                        Log.d(TAG,"3rd IF");
+							//                        if(AppSpecificOrientation.LOG) Log.d(TAG,"3rd IF");
 						} else {
 							publishProgress(4);
 						}
 					}
 					Thread.sleep(500);
 				} catch (NullPointerException e) {
-					Log.d(TAG, "No foreground app??? Da Fuck???");
+					if (AppSpecificOrientation.LOG) Log.d(TAG, "No foreground app??? Da Fuck???");
 					e.printStackTrace();
 				} catch (InterruptedException e) {
-					Log.d(TAG, "InterruptedException");
+					if (AppSpecificOrientation.LOG) Log.d(TAG, "InterruptedException");
 					e.printStackTrace();
 				} catch (Exception e) {
-					Log.d(TAG, "Exception");
+					if (AppSpecificOrientation.LOG) Log.d(TAG, "Exception");
 					e.printStackTrace();
 				}
 
@@ -133,32 +133,32 @@ public class NewOrieService extends Service {
 		protected void onProgressUpdate(Integer... values) {
 			super.onProgressUpdate(values);
 			if (values[0] == 1) {
-				//                Log.d(TAG,"1 MPIKA");
+				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"1 MPIKA");
 				orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 				wm.updateViewLayout(orientationChanger, orientationLayout);
 				orientationChanger.setVisibility(View.VISIBLE);
-				//                Log.d(TAG,"1 VGIKA");
+				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"1 VGIKA");
 			}
 			if (values[0] == 2) {
-				//                Log.d(TAG,"2 MPIKA");
+				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"2 MPIKA");
 				orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
 				wm.updateViewLayout(orientationChanger, orientationLayout);
 				orientationChanger.setVisibility(View.VISIBLE);
-				//                Log.d(TAG,"2 VGIKA");
+				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"2 VGIKA");
 			}
 			if (values[0] == 3) {
-				//                Log.d(TAG,"3 MPIKA");
+				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 MPIKA");
 				orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 				wm.updateViewLayout(orientationChanger, orientationLayout);
 				orientationChanger.setVisibility(View.VISIBLE);
-				//                Log.d(TAG,"3 VGIKA");
+				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 VGIKA");
 			}
 			if (values[0] == 4) {
-				//                Log.d(TAG,"3 MPIKA");
+				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 MPIKA");
 				orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
 				wm.updateViewLayout(orientationChanger, orientationLayout);
 				orientationChanger.setVisibility(View.GONE);
-				//                Log.d(TAG,"3 VGIKA");
+				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 VGIKA");
 			}
 		}
 	}

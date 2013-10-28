@@ -15,11 +15,11 @@ public class BootReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
-		Log.d(TAG, "onReceived");
+		if (AppSpecificOrientation.LOG) Log.d(TAG, "onReceived");
 		appSpecificOrientation = (AppSpecificOrientation) context.getApplicationContext();
 		if (AppSpecificOrientation.getBoot()) {
 			if (appSpecificOrientation.isServiceRunning()) {
-				Log.d(TAG, "Restarting Service");
+				if (AppSpecificOrientation.LOG) Log.d(TAG, "Restarting Service");
 				context.startService(new Intent(context, NewOrieService.class));
 			}
 		}

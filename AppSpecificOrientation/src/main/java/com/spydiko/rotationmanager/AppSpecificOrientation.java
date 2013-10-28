@@ -17,7 +17,7 @@ import com.jirbo.adcolony.AdColony;
  */
 public class AppSpecificOrientation extends Application {
 
-	public static final boolean LOG = true;
+	public static final boolean LOG = false;
 	private static final String TAG = AppSpecificOrientation.class.getSimpleName();
 	private static SharedPreferences prefs;
 	private static SharedPreferences.Editor editor;
