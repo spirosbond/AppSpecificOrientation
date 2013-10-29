@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         android:background="@drawable/border"
         android:paddingBottom="2dp"
-        android:visibility="gone" >
+        android:visibility="visible" >
 
     <TextView
             android:layout_width="0dp"
@@ -27,7 +27,7 @@
             android:textColor="#dd558855"
             android:id="@+id/orientationText"
             android:gravity="center"
-            android:layout_gravity="top"/>
+            android:layout_gravity="center"/>
 
     <ImageView
             android:layout_width="wrap_content"
