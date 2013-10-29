@@ -3,18 +3,10 @@
 
     <string name="app_name">Rotation Manager</string>
     <string name="action_settings">Refresh</string>
-    <string name="hello_world">Hello world!</string>
-
-    <string name="serviceOn">Service Running</string>
-    <string name="serviceOff">Start Service</string>
-
-    <string name="buttonUpdate">Update</string>
-    <string name="rotation">Rotation Enabled</string>
-    <string name="no_rotation">Rotation Disabled</string>
     <string name="titleServiceStart">Stop Service</string>
     <string name="titleServiceStop">Start Service</string>
     <string name="buttonClearAll">Clear All</string>
-    <string name="loadingApps">Loading Apps...</string>
+    <string name="loadingApps">Loading Apps…</string>
     <string name="setOnBoot">Enable on boot</string>
     <string name="orientationOn">Auto-Rotate On</string>
     <string name="orientationOff">Auto-Rotate Off</string>
@@ -42,15 +34,6 @@
     <string name="summaryDonate1">Enable AppFlood Ads</string>
     <string name="titleDonate">Donate</string>
     <string name="donateTitle">Donate using Ads</string>
-    <string name="donateSummary">Install any app and donate without spending a dime!</string>
-    <string name="summaryDontDonate1">Disable AppFlood Ads</string>
-    <string name="donate2">AppFlood</string>
-    <string name="summaryDonate2">Enable start-up Ads</string>
-    <string name="summaryDontDonate2">Disable start-up Ad</string>
-    <string name="appoftheday">App Of The Day!</string>
-    <string name="appofthedaysum">Click to see the app of the day</string>
-    <string name="startapp">Start App</string>
-    <string name="startappsum">Show the apps of the day</string>
     <string name="donate_dialog_title">Thank you for donating!</string>
     <string name="donate_dialog_ok">Got it!</string>
     <string name="donateDialog">"1. Choose to see the apps of the day\n2. Download any app you like\n3. You donated!\n…without spending a dime!"</string>
@@ -62,7 +45,7 @@
     <string name="paypal_donate">Paypal</string>
     <string name="paypal_donate_sum">Donate through Paypal…</string>
     <string name="donateTitleCard">Donate via credit card</string>
-    <string name="got_it">Ok, I understand</string>
+    <string name="got_it">OK, I understand</string>
 
 
 </resources>
