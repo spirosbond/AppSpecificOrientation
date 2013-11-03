@@ -1,7 +1,9 @@
 package com.spydiko.rotationmanager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -9,6 +11,7 @@ import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -83,7 +86,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		myapp.chechForUpdate(this);
 		// Initialize everything
 		   /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-	          ActionBar actionBar = getActionBar();
+		        ActionBar actionBar = getActionBar();
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00FEBB31"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }*/
@@ -316,7 +319,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		//		if (myapp.loadDonate("appflood")) {
 		////			AppFlood.showPanel(this, AppFlood.PANEL_TOP);
 		//		}
+		if (AppSpecificOrientation.RETURN_FROM_ABOUT && !AppSpecificOrientation.ALREADY_SHOWED) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			// Add the buttons
+			builder.setTitle("Spydiko");
+			builder.setMessage("Check out this awesome app!");
+			builder.setIcon(R.drawable.icon);
+			builder.setPositiveButton(R.string.playStore, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					// User clicked OK button
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse("market://details?id=com.spirosbond.callerflashlight"));
+					startActivity(intent);
+				}
+			});
+			builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					// User cancelled the dialog
+				}
+			});
+			// Set other dialog properties
 
+			// Create the AlertDialog
+			AlertDialog dialog = builder.create();
+			AppSpecificOrientation.ALREADY_SHOWED = true;
+			AppSpecificOrientation.RETURN_FROM_ABOUT = false;
+			dialog.show();
+		}
 	}
 
 	@Override

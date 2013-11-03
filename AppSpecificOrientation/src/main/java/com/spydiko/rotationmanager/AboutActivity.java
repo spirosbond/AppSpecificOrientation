@@ -29,6 +29,7 @@ public class AboutActivity extends Activity {
 				startActivity(openFacebook);
 			}
 		});
+		AppSpecificOrientation.RETURN_FROM_ABOUT = true;
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {

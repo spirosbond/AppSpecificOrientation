@@ -46,6 +46,8 @@
     <string name="paypal_donate_sum">Donate through Paypal…</string>
     <string name="donateTitleCard">Donate via credit card</string>
     <string name="got_it">OK, I understand</string>
+    <string name="playStore">Play Store</string>
+    <string name="cancel">Cancel</string>
     <string name="update_now_label">Update</string>
     <string name="remind_me_later">Later</string>
     <string name="ignore">Ignore</string>

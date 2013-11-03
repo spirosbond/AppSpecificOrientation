@@ -23,6 +23,8 @@ public class AppSpecificOrientation extends Application {
 	private static SharedPreferences prefs;
 	private static SharedPreferences.Editor editor;
 	private static boolean check_button;
+	public static boolean ALREADY_SHOWED;
+	public static boolean RETURN_FROM_ABOUT;
 
 
 	public static boolean isServiceRunning() {
@@ -67,6 +69,8 @@ public class AppSpecificOrientation extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		ALREADY_SHOWED = false;
+		RETURN_FROM_ABOUT = false;
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		editor = prefs.edit();
 	}
