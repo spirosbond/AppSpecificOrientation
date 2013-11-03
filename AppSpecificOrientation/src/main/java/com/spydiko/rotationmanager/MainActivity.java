@@ -25,6 +25,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.winsontan520.wversionmanager.library.WVersionManager;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -79,6 +81,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		myapp = (AppSpecificOrientation) getApplication();
 		setContentView(R.layout.activity_main);
+		WVersionManager versionManager = new WVersionManager(this);
+		versionManager.setVersionContentUrl("https://dl.dropboxusercontent.com/u/88721380/RotationManager"); // your update content url, see the response format below
+		versionManager.setUpdateNowLabel("Custom update now label");
+		versionManager.setRemindMeLaterLabel("Custom remind me later label");
+		versionManager.setIgnoreThisVersionLabel("Custom ignore this version");
+		versionManager.checkVersion();
 		// Initialize everything
 		   /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 	          ActionBar actionBar = getActionBar();
