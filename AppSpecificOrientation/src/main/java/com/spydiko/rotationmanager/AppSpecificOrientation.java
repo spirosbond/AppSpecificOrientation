@@ -127,7 +127,7 @@ public class AppSpecificOrientation extends Application {
 
 	public void chechForUpdate(Activity activity) {
 		WVersionManager versionManager = new WVersionManager(activity);
-		versionManager.setVersionContentUrl("https://dl.dropboxusercontent.com/u/88721380/RotationManager"); // your update content url, see the response format below
+		versionManager.setVersionContentUrl("https://dl.dropbox.com/s/v3qzyxgrmkr1nh3/RotationManager_update"); // your update content url, see the response format below
 		versionManager.setUpdateNowLabel(getResources().getString(R.string.update_now_label));
 		versionManager.setRemindMeLaterLabel(getResources().getString(R.string.remind_me_later));
 		versionManager.setIgnoreThisVersionLabel(getResources().getString(R.string.ignore));
