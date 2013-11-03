@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.jirbo.adcolony.AdColony;
+import com.winsontan520.wversionmanager.library.WVersionManager;
 
 /**
  * Created by PuR3v1L on 7/8/2013.
@@ -118,5 +119,15 @@ public class AppSpecificOrientation extends Application {
 		} catch (Exception e) {
 			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/rotationmanager"));
 		}
+	}
+
+	public void chechForUpdate(Activity activity) {
+		WVersionManager versionManager = new WVersionManager(activity);
+		versionManager.setVersionContentUrl("https://dl.dropboxusercontent.com/u/88721380/RotationManager"); // your update content url, see the response format below
+		versionManager.setUpdateNowLabel(getResources().getString(R.string.update_now_label));
+		versionManager.setRemindMeLaterLabel(getResources().getString(R.string.remind_me_later));
+		versionManager.setIgnoreThisVersionLabel(getResources().getString(R.string.ignore));
+		versionManager.setReminderTimer(10); // this mean checkVersion() will not take effect within 10 minutes
+		versionManager.checkVersion();
 	}
 }

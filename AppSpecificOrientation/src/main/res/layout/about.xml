@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/aboutImageView"
             android:layout_gravity="center"
-            android:src="@drawable/launch"
+            android:src="@drawable/about_logo"
             android:contentDescription="@string/logo"/>
 
     <TextView
