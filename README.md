@@ -3,6 +3,10 @@ AppSpecificOrientation
 
 Android app controlling the orientation of each app
 
-todo
+Version 1.4
 
-- On reboot change service
+----
+TODO
+----
+
+- ~On reboot change service~

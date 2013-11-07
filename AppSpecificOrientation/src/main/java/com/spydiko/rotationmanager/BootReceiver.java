@@ -10,18 +10,20 @@ import android.util.Log;
  */
 public class BootReceiver extends BroadcastReceiver {
 	private static final String TAG = BootReceiver.class.getSimpleName();
-	AppSpecificOrientation appSpecificOrientation;
+//	AppSpecificOrientation appSpecificOrientation;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
 		if (AppSpecificOrientation.LOG) Log.d(TAG, "onReceived");
-		appSpecificOrientation = (AppSpecificOrientation) context.getApplicationContext();
+//		appSpecificOrientation = (AppSpecificOrientation) context.getApplicationContext();
 		if (AppSpecificOrientation.getBoot()) {
-			if (appSpecificOrientation.isServiceRunning()) {
+			if (AppSpecificOrientation.isServiceRunning()) {
 				if (AppSpecificOrientation.LOG) Log.d(TAG, "Restarting Service");
 				context.startService(new Intent(context, NewOrieService.class));
 			}
+		}else {
+			AppSpecificOrientation.setServiceRunning(false);
 		}
 	}
 }
