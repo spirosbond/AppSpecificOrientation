@@ -82,7 +82,7 @@ public class NewOrieService extends Service {
 					} else {
 						foregroundApp = beforeApp;
 					}
-					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
+					                    if(AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
 					if (!foregroundApp.equals(beforeApp)) {
 						beforeApp = foregroundApp;
 

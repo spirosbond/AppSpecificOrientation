@@ -82,7 +82,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		myapp = (AppSpecificOrientation) getApplication();
 		setContentView(R.layout.activity_main);
-
 		myapp.chechForUpdate(this);
 		// Initialize everything
 		   /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -213,6 +212,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		if (res.activityInfo == null) {
 			// should not happen. A home is always installed, isn't it?
 		} else if (!names.contains(res.activityInfo.applicationInfo.packageName)) {
+			names.add(res.activityInfo.applicationInfo.packageName);
 			Model launcher = new Model((String) packageManager.getApplicationLabel(res.activityInfo.applicationInfo));
 			launcher.setPackageName(res.activityInfo.applicationInfo.packageName);
 			Drawable launcher_pic = res.activityInfo.applicationInfo.loadIcon(packageManager);
@@ -220,7 +220,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			if (myapp.loadPreferences(res.activityInfo.applicationInfo.packageName, true)) launcher.setSelectedPortrait(true);
 			if (myapp.loadPreferences(res.activityInfo.applicationInfo.packageName, false)) launcher.setSelectedLandscape(true);
 			activities.add(launcher);
-
+		}
+		if (!names.contains("com.android.phone")) {
+			names.add("com.android.phone");
+			Model phone = new Model("Phone During Call");
+			phone.setPackageName("com.android.phone");
+			Drawable ic_phone = getResources().getDrawable(R.drawable.ic_phone);
+			phone.setLabel(ic_phone);
+			if (myapp.loadPreferences("com.android.phone", true)) phone.setSelectedPortrait(true);
+			if (myapp.loadPreferences("com.android.phone", false)) phone.setSelectedLandscape(true);
+			activities.add(phone);
 		}
 
 		Collections.sort(activities, new SortByString());
