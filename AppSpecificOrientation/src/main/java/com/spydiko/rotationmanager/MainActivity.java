@@ -261,9 +261,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}
 		}
 		else {
-			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
-			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
-			AppSpecificOrientation.setServiceRunning(false);
+			if (AppSpecificOrientation.isServiceRunning()) {
+				menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
+				menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
+				startService(new Intent(this, NewOrieService.class));
+			} else {
+				menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
+				menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
+			}
 			myapp.saveCodeVersion(versionCode);
 		}
 		if (AppSpecificOrientation.getBoot()) {
