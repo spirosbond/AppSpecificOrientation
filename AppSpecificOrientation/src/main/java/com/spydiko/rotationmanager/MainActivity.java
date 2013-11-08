@@ -244,32 +244,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		//		if(AppSpecificOrientation.LOG) Log.d(TAG, "createOptions");
-		int versionCode = -1;
-		try {
-			versionCode = getApplicationContext().getPackageManager()
-					.getPackageInfo(getApplicationContext().getPackageName(), 0).versionCode;
-		} catch (PackageManager.NameNotFoundException e) {
-			e.printStackTrace();
-		}
-		if (myapp.loadCodeVersion()==versionCode) {
-			if (AppSpecificOrientation.isServiceRunning()) {
-				menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
-				menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
-			} else {
-				menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
-				menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
-			}
-		}
-		else {
-			if (AppSpecificOrientation.isServiceRunning()) {
-				menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
-				menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
-				startService(new Intent(this, NewOrieService.class));
-			} else {
-				menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
-				menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
-			}
-			myapp.saveCodeVersion(versionCode);
+		if (AppSpecificOrientation.isServiceRunning()) {
+			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
+			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
+		} else {
+			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
+			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
 		}
 		if (AppSpecificOrientation.getBoot()) {
 			menu.findItem(R.id.setOnBoot).setChecked(true);

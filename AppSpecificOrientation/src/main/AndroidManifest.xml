@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.spydiko.rotationmanager"
-          android:versionCode="8"
+          android:versionCode="9"
           android:versionName="1.6">
 
     <uses-sdk
@@ -128,6 +128,15 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name=".UpdateReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" android:path="com.spydiko.rotationmanager" />
+            </intent-filter>
+        </receiver>
+
 
         <activity
             android:name="com.jirbo.adcolony.AdColonyOverlay"

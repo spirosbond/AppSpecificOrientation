@@ -134,13 +134,4 @@ public class AppSpecificOrientation extends Application {
 		versionManager.setReminderTimer(10); // this mean checkVersion() will not take effect within 10 minutes
 		versionManager.checkVersion();
 	}
-
-	public int loadCodeVersion() {
-		return prefs.getInt("versionCode", 0);
-	}
-
-	public void saveCodeVersion(int version){
-		editor.putInt("versionCode",version);
-		editor.commit();
-	}
 }
