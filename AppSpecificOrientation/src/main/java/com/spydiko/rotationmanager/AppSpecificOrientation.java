@@ -18,7 +18,7 @@ import com.winsontan520.wversionmanager.library.WVersionManager;
  */
 public class AppSpecificOrientation extends Application {
 
-	public static final boolean LOG = true;
+	public static final boolean LOG = false;
 	private static final String TAG = AppSpecificOrientation.class.getSimpleName();
 	private static SharedPreferences prefs;
 	private static SharedPreferences.Editor editor;
@@ -133,5 +133,14 @@ public class AppSpecificOrientation extends Application {
 		versionManager.setIgnoreThisVersionLabel(getResources().getString(R.string.ignore));
 		versionManager.setReminderTimer(10); // this mean checkVersion() will not take effect within 10 minutes
 		versionManager.checkVersion();
+	}
+
+	public int loadCodeVersion() {
+		return prefs.getInt("versionCode", 0);
+	}
+
+	public void saveCodeVersion(int version){
+		editor.putInt("versionCode",version);
+		editor.commit();
 	}
 }
