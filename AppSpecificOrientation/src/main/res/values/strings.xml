@@ -54,6 +54,10 @@
     <string name="please_rate">Please rate this app</string>
     <string name="rate_message">Help us improve this app by rating it and leaving a comment!</string>
     <string name="rate_button">Rate</string>
+    <string name="notification_text">Rotation Manager started</string>
+    <string name="notification_title">Rotation Manager Active</string>
+    <string name="notification_context_text">Click to open</string>
+    <string name="permNotification">Chuck Norris mode</string>
 
 
 </resources>

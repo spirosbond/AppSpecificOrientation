@@ -1,13 +1,18 @@
 package com.spydiko.rotationmanager;
 
 import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,6 +30,7 @@ public class NewOrieService extends Service {
 	private WindowManager.LayoutParams orientationLayout;
 	private String foregroundApp, beforeApp;
 	private WindowManager wm;
+	private boolean isNotification;
 
 	@Override
 	public void onDestroy() {
@@ -57,12 +63,29 @@ public class NewOrieService extends Service {
 			new AppMonitoring().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
 		else new AppMonitoring().execute((Void[]) null);
 
+		isNotification = AppSpecificOrientation.isPermNotification();
+		if (isNotification) {
+			createAndStartNotification();
+		}
+
+
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "MPIKA");
 		// Use whatever constant you need for your desired rotation
+
+		if (isNotification != AppSpecificOrientation.isPermNotification()) {
+			Log.d(TAG, "Notification Changed");
+			if (AppSpecificOrientation.isPermNotification()) {
+				createAndStartNotification();
+			} else {
+				stopForeground(true);
+			}
+			isNotification = AppSpecificOrientation.isPermNotification();
+		}
+
 		return START_STICKY;
 	}
 
@@ -100,7 +123,7 @@ public class NewOrieService extends Service {
 							publishProgress(4);
 						}
 					}
-					Thread.sleep(500);
+					Thread.sleep(100);
 				} catch (NullPointerException e) {
 					if (AppSpecificOrientation.LOG) Log.d(TAG, "No foreground app??? Da Fuck???");
 					e.printStackTrace();
@@ -158,6 +181,20 @@ public class NewOrieService extends Service {
 				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 VGIKA");
 			}
 		}
+	}
+
+	public void createAndStartNotification() {
+		Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.nothing).setTicker(getResources().getString(R.string.notification_text))
+				.setContentTitle(getResources().getString(R.string.notification_title)).setContentText(getResources().getString(R.string.notification_context_text))
+				.setWhen(0).setPriority(NotificationCompat.PRIORITY_MIN).setLargeIcon(image);
+		Intent resultIntent = new Intent(this, MainActivity.class);
+		// Because clicking the notification opens a new ("special") activity, there's
+		// no need to create an artificial back stack.
+		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		mBuilder.setContentIntent(resultPendingIntent);
+		Notification notification = mBuilder.build();
+		startForeground(1337, notification);
 	}
 
 }

@@ -260,6 +260,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
 				menu.findItem(R.id.setOnBoot).setIcon(android.R.drawable.button_onoff_indicator_off);
 		}
+		if (AppSpecificOrientation.isPermNotification()) {
+			menu.findItem(R.id.permNotification).setChecked(true);
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+				menu.findItem(R.id.permNotification).setIcon(android.R.drawable.button_onoff_indicator_on);
+		} else {
+			menu.findItem(R.id.permNotification).setChecked(false);
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+				menu.findItem(R.id.permNotification).setIcon(android.R.drawable.button_onoff_indicator_off);
+		}
 
 		return true;
 	}
@@ -318,6 +327,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				break;
 			case R.id.donate:
 				startActivity(new Intent(this, DonateActivity.class));
+				break;
+			case R.id.permNotification:
+				if (AppSpecificOrientation.isPermNotification()) {
+					item.setChecked(false);
+					AppSpecificOrientation.setPermNotification(false);
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+						item.setIcon(android.R.drawable.button_onoff_indicator_off);
+					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "onBoot set to false");
+					if (AppSpecificOrientation.isServiceRunning()) startService(new Intent(this, NewOrieService.class));
+				} else {
+					item.setChecked(true);
+					AppSpecificOrientation.setPermNotification(true);
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+						item.setIcon(android.R.drawable.button_onoff_indicator_on);
+					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "onBoot set to true");
+					if (AppSpecificOrientation.isServiceRunning()) startService(new Intent(this, NewOrieService.class));
+				}
+
+				break;
 		}
 		return true;
 	}

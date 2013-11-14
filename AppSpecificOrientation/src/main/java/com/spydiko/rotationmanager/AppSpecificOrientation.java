@@ -134,4 +134,14 @@ public class AppSpecificOrientation extends Application {
 		versionManager.setReminderTimer(10); // this mean checkVersion() will not take effect within 10 minutes
 		versionManager.checkVersion();
 	}
+
+	public static boolean isPermNotification() {
+		return prefs.getBoolean("perm_notification", false);
+
+	}
+
+	public static void setPermNotification(boolean permNotification) {
+		editor.putBoolean("perm_notification", permNotification);
+		editor.commit();
+	}
 }
