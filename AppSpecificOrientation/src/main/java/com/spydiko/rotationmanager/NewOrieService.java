@@ -123,7 +123,7 @@ public class NewOrieService extends Service {
 							publishProgress(4);
 						}
 					}
-					Thread.sleep(100);
+					//					Thread.sleep(100);
 				} catch (NullPointerException e) {
 					if (AppSpecificOrientation.LOG) Log.d(TAG, "No foreground app??? Da Fuck???");
 					e.printStackTrace();
