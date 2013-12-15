@@ -4,9 +4,9 @@
           android:versionCode="14"
           android:versionName="1.8_151213">
 
-<uses-sdk
+    <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="18"/>
+        android:targetSdkVersion="19"/>
 
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
@@ -132,8 +132,10 @@
         <receiver
             android:name=".UpdateReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" android:path="com.spydiko.rotationmanager" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                <data
+                    android:scheme="package"
+                    android:path="com.spydiko.rotationmanager"/>
             </intent-filter>
         </receiver>
 
