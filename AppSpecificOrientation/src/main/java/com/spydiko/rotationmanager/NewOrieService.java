@@ -25,17 +25,16 @@ public class NewOrieService extends Service {
 
 	private static final String TAG = "New Service";
 	private AppSpecificOrientation appSpecificOrientation;
-	private ActivityManager activityManager;
 	private LinearLayout orientationChanger;
 	private WindowManager.LayoutParams orientationLayout;
-	private String foregroundApp, beforeApp;
+	private String beforeApp;
 	private WindowManager wm;
 	private boolean isNotification;
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		appSpecificOrientation.setServiceRunning(false);
+		AppSpecificOrientation.setServiceRunning(false);
 		orientationChanger.setVisibility(View.GONE);
 		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "stopped");
 	}
@@ -89,13 +88,28 @@ public class NewOrieService extends Service {
 		return START_STICKY;
 	}
 
+	public void createAndStartNotification() {
+		Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.nothing).setTicker(getResources().getString(R.string.notification_text))
+				.setContentTitle(getResources().getString(R.string.notification_title)).setContentText(getResources().getString(R.string.notification_context_text))
+				.setWhen(0).setPriority(NotificationCompat.PRIORITY_MIN).setLargeIcon(image);
+		Intent resultIntent = new Intent(this, MainActivity.class);
+		// Because clicking the notification opens a new ("special") activity, there's
+		// no need to create an artificial back stack.
+		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		mBuilder.setContentIntent(resultPendingIntent);
+		Notification notification = mBuilder.build();
+		startForeground(1337, notification);
+	}
+
 	public class AppMonitoring extends AsyncTask<Void, Integer, Void> {
 
 
 		@Override
 		protected Void doInBackground(Void... voids) {
+			String foregroundApp;
 			while (AppSpecificOrientation.isServiceRunning()) {
-				activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+				ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 				// get the info from the currently running task
 				try {
 
@@ -105,7 +119,7 @@ public class NewOrieService extends Service {
 					} else {
 						foregroundApp = beforeApp;
 					}
-					                    if(AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
+					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
 					if (!foregroundApp.equals(beforeApp)) {
 						beforeApp = foregroundApp;
 
@@ -123,11 +137,11 @@ public class NewOrieService extends Service {
 							publishProgress(4);
 						}
 					}
-					//					Thread.sleep(100);
+					Thread.sleep(300);
 				} catch (NullPointerException e) {
 					if (AppSpecificOrientation.LOG) Log.d(TAG, "No foreground app??? Da Fuck???");
 					e.printStackTrace();
-				}  catch (Exception e) {
+				} catch (Exception e) {
 					if (AppSpecificOrientation.LOG) Log.d(TAG, "Exception");
 					e.printStackTrace();
 				}
@@ -181,20 +195,6 @@ public class NewOrieService extends Service {
 				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 VGIKA");
 			}
 		}
-	}
-
-	public void createAndStartNotification() {
-		Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.nothing).setTicker(getResources().getString(R.string.notification_text))
-				.setContentTitle(getResources().getString(R.string.notification_title)).setContentText(getResources().getString(R.string.notification_context_text))
-				.setWhen(0).setPriority(NotificationCompat.PRIORITY_MIN).setLargeIcon(image);
-		Intent resultIntent = new Intent(this, MainActivity.class);
-		// Because clicking the notification opens a new ("special") activity, there's
-		// no need to create an artificial back stack.
-		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-		mBuilder.setContentIntent(resultPendingIntent);
-		Notification notification = mBuilder.build();
-		startForeground(1337, notification);
 	}
 
 }
