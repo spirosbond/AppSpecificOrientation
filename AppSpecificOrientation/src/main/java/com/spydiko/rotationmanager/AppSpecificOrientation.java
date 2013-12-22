@@ -20,12 +20,11 @@ public class AppSpecificOrientation extends Application {
 
 	public static final boolean LOG = false;
 	private static final String TAG = AppSpecificOrientation.class.getSimpleName();
+	public static boolean ALREADY_SHOWED;
+	public static boolean RETURN_FROM_ABOUT;
 	private static SharedPreferences prefs;
 	private static SharedPreferences.Editor editor;
 	private static boolean check_button;
-	public static boolean ALREADY_SHOWED;
-	public static boolean RETURN_FROM_ABOUT;
-
 
 	public static boolean isServiceRunning() {
 		return prefs.getBoolean("service", false);
@@ -51,6 +50,25 @@ public class AppSpecificOrientation extends Application {
 
 	public static void setCheck_button(boolean check_button) {
 		AppSpecificOrientation.check_button = check_button;
+	}
+
+	public static Intent getOpenFacebookIntent(Context context) {
+		try {
+			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/657088267656391"));
+		} catch (Exception e) {
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/rotationmanager"));
+		}
+	}
+
+	public static boolean isPermNotification() {
+		return prefs.getBoolean("perm_notification", false);
+
+	}
+
+	public static void setPermNotification(boolean permNotification) {
+		editor.putBoolean("perm_notification", permNotification);
+		editor.commit();
 	}
 
 	public boolean loadDonate(String type) {
@@ -91,6 +109,13 @@ public class AppSpecificOrientation extends Application {
 		}
 		editor.commit();
 	}
+	//	public void registerShared(DonateActivity donateActivity) {
+	//		prefs.registerOnSharedPreferenceChangeListener(donateActivity);
+	//	}
+	//
+	//	public void unregisterShared(DonateActivity donateActivity) {
+	//		prefs.unregisterOnSharedPreferenceChangeListener(donateActivity);
+	//	}
 
 	public boolean isCheckedLandscape(String temp) {
 		return prefs.getBoolean(temp.concat("landscape"), false);
@@ -108,22 +133,6 @@ public class AppSpecificOrientation extends Application {
 			e.printStackTrace();
 		}
 	}
-	//	public void registerShared(DonateActivity donateActivity) {
-	//		prefs.registerOnSharedPreferenceChangeListener(donateActivity);
-	//	}
-	//
-	//	public void unregisterShared(DonateActivity donateActivity) {
-	//		prefs.unregisterOnSharedPreferenceChangeListener(donateActivity);
-	//	}
-
-	public static Intent getOpenFacebookIntent(Context context) {
-		try {
-			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/657088267656391"));
-		} catch (Exception e) {
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/rotationmanager"));
-		}
-	}
 
 	public void chechForUpdate(Activity activity) {
 		WVersionManager versionManager = new WVersionManager(activity);
@@ -133,15 +142,5 @@ public class AppSpecificOrientation extends Application {
 		versionManager.setIgnoreThisVersionLabel(getResources().getString(R.string.ignore));
 		versionManager.setReminderTimer(10); // this mean checkVersion() will not take effect within 10 minutes
 		versionManager.checkVersion();
-	}
-
-	public static boolean isPermNotification() {
-		return prefs.getBoolean("perm_notification", false);
-
-	}
-
-	public static void setPermNotification(boolean permNotification) {
-		editor.putBoolean("perm_notification", permNotification);
-		editor.commit();
 	}
 }
