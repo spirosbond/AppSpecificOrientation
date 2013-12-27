@@ -24,7 +24,7 @@ public class AppSpecificOrientation extends Application {
 	public static boolean RETURN_FROM_ABOUT;
 	private static SharedPreferences prefs;
 	private static SharedPreferences.Editor editor;
-	private static boolean check_button;
+	private static int check_button;
 
 	public static boolean isServiceRunning() {
 		return prefs.getBoolean("service", false);
@@ -43,13 +43,28 @@ public class AppSpecificOrientation extends Application {
 		editor.putBoolean("boot", state);
 		editor.commit();
 	}
-
-	public static boolean isCheck_button() {
+	/**
+	 * 0: Auto-rotate On
+	 * 1: Auto-rotate Off
+	 * 2: Force Portrait
+	 * 3: Force Landscape
+	 *
+	 */
+	public static int getCheck_button() {
 		return check_button;
 	}
 
-	public static void setCheck_button(boolean check_button) {
-		AppSpecificOrientation.check_button = check_button;
+	public static void setCheck_button(int check_button) {
+		AppSpecificOrientation.check_button = check_button%4;
+	}
+
+	public static void saveState(){
+		editor.putInt("4state",check_button);
+		editor.commit();
+	}
+
+	public static void loadState(){
+		check_button = prefs.getInt("4state",0);
 	}
 
 	public static Intent getOpenFacebookIntent(Context context) {
@@ -91,6 +106,7 @@ public class AppSpecificOrientation extends Application {
 		RETURN_FROM_ABOUT = false;
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		editor = prefs.edit();
+		loadState();
 	}
 
 	public boolean loadPreferences(String app, Boolean type) {

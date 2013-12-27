@@ -119,7 +119,7 @@ public class NewOrieService extends Service {
 					} else {
 						foregroundApp = beforeApp;
 					}
-					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
+//					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
 					if (!foregroundApp.equals(beforeApp)) {
 						beforeApp = foregroundApp;
 
@@ -137,7 +137,7 @@ public class NewOrieService extends Service {
 							publishProgress(4);
 						}
 					}
-					Thread.sleep(300);
+					Thread.sleep(250);
 				} catch (NullPointerException e) {
 					if (AppSpecificOrientation.LOG) Log.d(TAG, "No foreground app??? Da Fuck???");
 					e.printStackTrace();
@@ -167,32 +167,46 @@ public class NewOrieService extends Service {
 		protected void onProgressUpdate(Integer... values) {
 			super.onProgressUpdate(values);
 			if (values[0] == 1) {
-				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"1 MPIKA");
-				orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-				wm.updateViewLayout(orientationChanger, orientationLayout);
-				orientationChanger.setVisibility(View.VISIBLE);
-				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"1 VGIKA");
+				if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+					orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+					wm.updateViewLayout(orientationChanger, orientationLayout);
+					if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
+				}
 			}
 			if (values[0] == 2) {
-				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"2 MPIKA");
-				orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
-				wm.updateViewLayout(orientationChanger, orientationLayout);
-				orientationChanger.setVisibility(View.VISIBLE);
-				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"2 VGIKA");
+				if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_SENSOR) {
+					orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
+					wm.updateViewLayout(orientationChanger, orientationLayout);
+					if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
+				}
 			}
 			if (values[0] == 3) {
-				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 MPIKA");
-				orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-				wm.updateViewLayout(orientationChanger, orientationLayout);
-				orientationChanger.setVisibility(View.VISIBLE);
-				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 VGIKA");
+				if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+					orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+					wm.updateViewLayout(orientationChanger, orientationLayout);
+					if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
+				}
 			}
 			if (values[0] == 4) {
-				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 MPIKA");
-				orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
-				wm.updateViewLayout(orientationChanger, orientationLayout);
-				orientationChanger.setVisibility(View.GONE);
-				//                if(AppSpecificOrientation.LOG) Log.d(TAG,"3 VGIKA");
+				if (AppSpecificOrientation.getCheck_button() == 2) {
+					if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+						orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+						wm.updateViewLayout(orientationChanger, orientationLayout);
+						if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
+					}
+				} else if (AppSpecificOrientation.getCheck_button() == 3) {
+					if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+						orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+						wm.updateViewLayout(orientationChanger, orientationLayout);
+						if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
+					}
+				} else {
+					if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_USER) {
+						orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
+						wm.updateViewLayout(orientationChanger, orientationLayout);
+						orientationChanger.setVisibility(View.GONE);
+					}
+				}
 			}
 		}
 	}

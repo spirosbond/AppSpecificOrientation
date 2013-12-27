@@ -2,12 +2,14 @@ package com.spydiko.rotationmanager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Created by PuR3v1L on 27/8/2013.
@@ -20,6 +22,12 @@ public class AboutActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);
+		TextView version = (TextView) findViewById(R.id.aboutFooterTextView);
+		try {
+			version.setText(version.getText()+" "+getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) getActionBar().setDisplayHomeAsUpEnabled(true);
 		ImageView facebook = (ImageView) findViewById(R.id.facebook_click);
 		openFacebook = AppSpecificOrientation.getOpenFacebookIntent(this);

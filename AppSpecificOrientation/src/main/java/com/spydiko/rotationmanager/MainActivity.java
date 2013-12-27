@@ -51,16 +51,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private ContentObserver rotationObserver = new ContentObserver(new Handler()) {
 		@Override
 		public void onChange(boolean selfChange) {
-			if (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
-				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
-				autoRotate.setTextColor(Color.GREEN);
-				autoRotate.setText(getResources().getText(R.string.orientationOn));
-				AppSpecificOrientation.setCheck_button(true);
-			} else {
-				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
-				autoRotate.setTextColor(Color.RED);
-				autoRotate.setText(getResources().getText(R.string.orientationOff));
-				AppSpecificOrientation.setCheck_button(false);
+			if (AppSpecificOrientation.getCheck_button() == 0 || AppSpecificOrientation.getCheck_button() == 1) {
+				if (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
+					orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.auto_rotate_on));
+					autoRotate.setTextColor(Color.GREEN);
+					autoRotate.setText(getResources().getText(R.string.orientationOn));
+					AppSpecificOrientation.setCheck_button(0);
+				} else {
+					orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.auto_rotate_off));
+					autoRotate.setTextColor(Color.RED);
+					autoRotate.setText(getResources().getText(R.string.orientationOff));
+					AppSpecificOrientation.setCheck_button(1);
+				}
 			}
 		}
 	};
@@ -105,16 +107,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		// Set Listeners
 		orientationButton.setOnClickListener(this);
 		buttonClearAll.setOnClickListener(this);
-		if (Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
-			orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
-			autoRotate.setTextColor(Color.GREEN);
-			autoRotate.setText(getResources().getText(R.string.orientationOn));
-			AppSpecificOrientation.setCheck_button(true);
+		if (AppSpecificOrientation.getCheck_button() == 0 || AppSpecificOrientation.getCheck_button() == 1) {
+			if (Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
+				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.auto_rotate_on));
+				autoRotate.setTextColor(Color.GREEN);
+				autoRotate.setText(getResources().getText(R.string.orientationOn));
+				AppSpecificOrientation.setCheck_button(0);
+			} else {
+				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.auto_rotate_off));
+				autoRotate.setTextColor(Color.RED);
+				autoRotate.setText(getResources().getText(R.string.orientationOff));
+				AppSpecificOrientation.setCheck_button(1);
+			}
 		} else {
-			orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
-			autoRotate.setTextColor(Color.RED);
-			autoRotate.setText(getResources().getText(R.string.orientationOff));
-			AppSpecificOrientation.setCheck_button(false);
+			if (AppSpecificOrientation.getCheck_button() == 2){
+				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.forced_portrait));
+				autoRotate.setTextColor(Color.CYAN);
+				autoRotate.setText(getResources().getText(R.string.forced_portrait));
+			} else if (AppSpecificOrientation.getCheck_button() == 3){
+				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.forced_landscape));
+				autoRotate.setTextColor(Color.CYAN);
+				autoRotate.setText(getResources().getText(R.string.forced_landscape));
+			}
 		}
 		// Register Content Observer
 		getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
@@ -169,6 +183,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		AppSpecificOrientation.saveState();
 		//unregister our receiver
 	}
 
@@ -360,13 +375,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			// Add the buttons
 			builder.setTitle("Spydiko");
-			builder.setMessage("Check out this awesome app!");
+			builder.setMessage(R.string.landing_msg);
 			builder.setIcon(R.drawable.icon);
 			builder.setPositiveButton(R.string.playStore, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					// User clicked OK button
 					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse("market://details?id=com.spirosbond.callerflashlight"));
+					intent.setData(Uri.parse("market://search?q=pub:Spydiko"));
 					startActivity(intent);
 				}
 			});
@@ -402,19 +417,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				break;
 			case (R.id.orientationButton):// Auto-Rotation button
 				tmp = (ImageView) findViewById(view.getId());
-				if (AppSpecificOrientation.isCheck_button()) {
-					tmp.setImageDrawable(getResources().getDrawable(R.drawable.tb_on));
-					autoRotate.setTextColor(Color.GREEN);
-					autoRotate.setText(getResources().getText(R.string.orientationOn));
-					AppSpecificOrientation.setCheck_button(false);
-				} else {
-					tmp.setImageDrawable(getResources().getDrawable(R.drawable.tb_off));
-					autoRotate.setTextColor(Color.RED);
-					autoRotate.setText(getResources().getText(R.string.orientationOff));
-					AppSpecificOrientation.setCheck_button(true);
+				//******************
+				//-----4state-------
+				int state = AppSpecificOrientation.getCheck_button();
+				state = (state+1)%4;
+				switch (state){
+					case 0:
+						tmp.setImageDrawable(getResources().getDrawable(R.drawable.auto_rotate_on));
+						autoRotate.setTextColor(Color.GREEN);
+						autoRotate.setText(getResources().getText(R.string.orientationOn));
+						AppSpecificOrientation.setCheck_button(0);
+						Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION,1);
+						break;
+					case 1:
+						tmp.setImageDrawable(getResources().getDrawable(R.drawable.auto_rotate_off));
+						autoRotate.setTextColor(Color.RED);
+						autoRotate.setText(getResources().getText(R.string.orientationOff));
+						AppSpecificOrientation.setCheck_button(1);
+						Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION,0);
+						break;
+					case 2:
+						tmp.setImageDrawable(getResources().getDrawable(R.drawable.forced_portrait));
+						autoRotate.setTextColor(Color.CYAN);
+						autoRotate.setText(getResources().getText(R.string.forced_portrait));
+						AppSpecificOrientation.setCheck_button(2);
+						break;
+					case 3:
+						tmp.setImageDrawable(getResources().getDrawable(R.drawable.forced_landscape));
+						autoRotate.setTextColor(Color.CYAN);
+						autoRotate.setText(getResources().getText(R.string.forced_landscape));
+						AppSpecificOrientation.setCheck_button(3);
+						break;
+					default:
+						break;
 				}
-				Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION,
-						AppSpecificOrientation.isCheck_button() ? 1 : 0);
 				break;
 		}
 	}

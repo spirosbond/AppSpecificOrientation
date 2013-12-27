@@ -30,12 +30,13 @@
             android:layout_gravity="center"/>
 
     <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
+            android:layout_marginRight="8dp"
             android:id="@+id/orientationButton"
-            android:src="@drawable/transition"
+            android:src="@drawable/auto_rotate_on"
             android:background="@drawable/title_logo"
             android:layout_gravity="center"/>
 
