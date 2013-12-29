@@ -26,7 +26,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:name=".AppSpecificOrientation"
-        android:debuggable="false">
+        android:debuggable="true">
         <activity
             android:name=".HelperActivity"
             android:noHistory="true"
@@ -163,7 +163,7 @@
 
             <meta-data
                 android:name="ADMOB_PUBLISHER_ID"
-                android:value="pub-4450409123751393"/>
+                android:value="pub-7765188398405132"/>
         </activity>
 
 

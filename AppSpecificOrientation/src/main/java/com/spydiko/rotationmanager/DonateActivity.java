@@ -68,7 +68,7 @@ public class DonateActivity extends PreferenceActivity implements Preference.OnP
 		connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		adColonyVideoAd = new AdColonyVideoAd();
 
-		interstitialAdMob = new InterstitialAd(this, "ca-app-pub-4450409123751393/1956296862");
+		interstitialAdMob = new InterstitialAd(this, "ca-app-pub-7765188398405132/5219484408");
 
 		//                appoftheday = findPreference("appoftheday");
 		//                startapp = findPreference("startapp");

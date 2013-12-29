@@ -18,7 +18,7 @@ import com.winsontan520.wversionmanager.library.WVersionManager;
  */
 public class AppSpecificOrientation extends Application {
 
-	public static final boolean LOG = false;
+	public static final boolean LOG = true;
 	private static final String TAG = AppSpecificOrientation.class.getSimpleName();
 	public static boolean ALREADY_SHOWED;
 	public static boolean RETURN_FROM_ABOUT;

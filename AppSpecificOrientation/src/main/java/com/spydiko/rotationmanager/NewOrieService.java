@@ -36,7 +36,13 @@ public class NewOrieService extends Service {
 		super.onDestroy();
 		AppSpecificOrientation.setServiceRunning(false);
 		orientationChanger.setVisibility(View.GONE);
-		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "stopped");
+		if (AppSpecificOrientation.LOG) Log.d(TAG, "onDestroy");
+	}
+
+	@Override
+	public void onLowMemory() {
+		super.onLowMemory();
+		if (AppSpecificOrientation.LOG) Log.d(TAG, "onLowMemory");
 	}
 
 	@Override
@@ -47,7 +53,7 @@ public class NewOrieService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "Created");
+		if (AppSpecificOrientation.LOG) Log.d(TAG, "Created");
 		appSpecificOrientation = (AppSpecificOrientation) getApplication();
 		AppSpecificOrientation.setServiceRunning(true);
 		wm = (WindowManager) this.getSystemService(Service.WINDOW_SERVICE);
@@ -72,11 +78,12 @@ public class NewOrieService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "MPIKA");
+		super.onStartCommand(intent, flags, startId);
+		if (AppSpecificOrientation.LOG) Log.d(TAG, "onStartCommand");
 		// Use whatever constant you need for your desired rotation
 
 		if (isNotification != AppSpecificOrientation.isPermNotification()) {
-			Log.d(TAG, "Notification Changed");
+			if (AppSpecificOrientation.LOG) Log.d(TAG, "Notification Changed");
 			if (AppSpecificOrientation.isPermNotification()) {
 				createAndStartNotification();
 			} else {
@@ -119,7 +126,7 @@ public class NewOrieService extends Service {
 					} else {
 						foregroundApp = beforeApp;
 					}
-//					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
+					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
 					if (!foregroundApp.equals(beforeApp)) {
 						beforeApp = foregroundApp;
 
