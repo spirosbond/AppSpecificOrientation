@@ -144,7 +144,7 @@ public class AppSpecificOrientation extends Application {
 	public void configureAdColony(Activity act) {
 		try {
 			if (AppSpecificOrientation.LOG) Log.d(TAG, "version Code: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionCode);
-			AdColony.configure(act, "version=" + getPackageManager().getPackageInfo(getPackageName(), 0).versionCode + ",store:google", "appc0bebfc9f4a3489fb82153", "vz9bf8a5eb30ef477798b82b"/*, "vz81c21390fa4e4b25aaa8ed", "vzf738e644f1394a9abcf4cf", "vz6494ace59eb4446db403f4"*/);
+			AdColony.configure(act, "version=" + getPackageManager().getPackageInfo(getPackageName(), 0).versionCode + ",store:google", "app1c15be97b56b4999a0b229", "vzc6c1a8b3be7b49dbb94a03"/*, "vz81c21390fa4e4b25aaa8ed", "vzf738e644f1394a9abcf4cf", "vz6494ace59eb4446db403f4"*/);
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
