@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.spydiko.rotationmanager"
           android:versionCode="15"
-          android:versionName="2.0_271213">
+          android:versionName="2.0_070114">
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -26,8 +26,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:name=".AppSpecificOrientation"
-        android:debuggable="true">
-        <activity
+        android:debuggable="false">
+    <activity
             android:name=".HelperActivity"
             android:noHistory="true"
             android:label="@string/app_name"

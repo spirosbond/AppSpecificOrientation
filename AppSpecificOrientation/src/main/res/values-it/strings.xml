@@ -10,18 +10,22 @@
     <string name="setOnBoot">Attiv. all\'avvio</string>
     <string name="orientationOn">Rotazione automatica On</string>
     <string name="orientationOff">Rotazione automatica Off</string>
+    <string name="forced_portrait">Forced Portrait</string>
+    <string name="forced_landscape">Forced Landscape</string>
     <string name="createdby">Creato da SpyDiKo\n2013 \u00a9 S.D.K.</string>
     <string name="howTo">Istruzioni</string>
     <string name="howToTitle">Istruzioni</string>
     <string name="how_to_main">Come farlo funzionare</string>
-    <string name="how_to_inst1">Il pulsante principale sulla parte superiore dello schermo è l\'orientamento globale per tutte le applicazioni. Questo pulsante è solo una scorciatoia per cambiare l\'orientamento globale.</string>
+  <string name="how_to_inst1">The main button on top of the screen is the global orientation for all the apps. It is a 4-state button and gives you all the orientation possibilities.
+    </string>
     <string name="how_to_inst2">Quindi è possibile selezionare dalla lista per ogni applicazione l\'orientamento desiderato. La selezione verrà ignorare l\'orientamento globale predefinito.</string>
     <string name="how_to_inst3">Se si desidera di ruotare solo due applicazioni  e tutti gli altri di rimanere al loro valore predefinito , basta disabilitare l\'orientamento globale e quindi selezionare sia verticale e orizzontale per l\'applicazione specifica nella lista.</string>
     <string name="how_to_inst4">Dopo aver selezionato le applicazioni desiderate, basta cliccare su play e le impostazioni saranno in vigore.</string>
-    <string name="how_to_inst5">Inoltre, c\'è un\'opzione nella scheda Impostazioni che vi permette di impostare l\'applicazione per avviare al boot. Se lo si seleziona, quindi ogni volta che si avvierà il telefono si ricorderà le vostre regolazioni e l\'applicazione corrono automaticamente.\n\"Modalità di Chuck Norris\" consente una notifica permanente invisibile che garantisce che il servizio non sarà ucciso dal sistema operativo.Abilita se avete problemi basse RAM e le fermate dei servizi di orientamento.</string>
+    <string name="how_to_inst5">Also, there is an option in the settings tab where you can set the app to start on boot. If you select it, then every time your phone boots it will remember your configurations and the app will run automatically.\n\nΒy enabling \"Chuck Norris mode\" from \"Preferences\" an invisible permanent notification starts which ensures that the service will not be killed by the OS. Enable it if you have low RAM problems and the orientation service stops.</string>
     <string name="logo">Rotazione logo</string>
     <string name="aboutText">Rotation Manager consente di decidere quali applicazioni si ruoterrano e quali no. È anche possibile impostare in modo che alcuni applicazioni sono sempre verticale o orizzontale. Vedere le istruzioni per maggiori informazioni\n\nÈ è un progetto open source creato dal team SpyDiKo, al fine di mantenere le cose semplici e funzionali\nContatta noi :\nspydiko.dev@gmail.com\n\nCommenti e Aggiornamenti\nhttp://forum.xda-developers.com/showthread.php?t=2405849</string>
-    <string name="aboutFooter">Rotation Manager\u00a9 SpyDiKo. Tutti i diritti riservati.</string>
+  <string name="aboutFooter">Rotation Manager \u00a9 SpyDiKo. All Rights Reserved.\nVersion:
+    </string>
     <string name="AboutTitle">Chi siamo</string>
     <string name="about">Chi siamo</string>
     <string name="donate">Donate !</string>
@@ -49,4 +53,9 @@
     <string name="please_rate">Si prega di votare questa app</string>
     <string name="rate_message">Aiutaci a migliorare questa applicazione valutatela e lasciate un commento!</string>
     <string name="rate_button">Votare</string>
+    <string name="notification_text">Rotation Manager started</string>
+    <string name="notification_title">Rotation Manager Active</string>
+    <string name="notification_context_text">Click to open</string>
+    <string name="permNotification">Chuck Norris mode</string>
+    <string name="landing_msg">Check out our awesome apps!</string>
 </resources>

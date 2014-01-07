@@ -18,7 +18,7 @@ import com.winsontan520.wversionmanager.library.WVersionManager;
  */
 public class AppSpecificOrientation extends Application {
 
-	public static final boolean LOG = true;
+	public static final boolean LOG = false;
 	private static final String TAG = AppSpecificOrientation.class.getSimpleName();
 	public static boolean ALREADY_SHOWED;
 	public static boolean RETURN_FROM_ABOUT;
@@ -43,28 +43,28 @@ public class AppSpecificOrientation extends Application {
 		editor.putBoolean("boot", state);
 		editor.commit();
 	}
+
 	/**
 	 * 0: Auto-rotate On
 	 * 1: Auto-rotate Off
 	 * 2: Force Portrait
 	 * 3: Force Landscape
-	 *
 	 */
 	public static int getCheck_button() {
 		return check_button;
 	}
 
 	public static void setCheck_button(int check_button) {
-		AppSpecificOrientation.check_button = check_button%4;
+		AppSpecificOrientation.check_button = check_button % 4;
 	}
 
-	public static void saveState(){
-		editor.putInt("4state",check_button);
+	public static void saveState() {
+		editor.putInt("4state", check_button);
 		editor.commit();
 	}
 
-	public static void loadState(){
-		check_button = prefs.getInt("4state",0);
+	public static void loadState() {
+		check_button = prefs.getInt("4state", 0);
 	}
 
 	public static Intent getOpenFacebookIntent(Context context) {

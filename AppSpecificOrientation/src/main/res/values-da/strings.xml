@@ -10,22 +10,23 @@
     <string name="setOnBoot">Enable on boot</string>
     <string name="orientationOn">Auto-Rotate On</string>
     <string name="orientationOff">Auto-Rotate Off</string>
+    <string name="forced_portrait">Forced Portrait</string>
+    <string name="forced_landscape">Forced Landscape</string>
     <string name="createdby">Created by SpyDiKo\n2013 \u00a9 S.D.K.</string>
     <string name="howTo">Instructions</string>
     <string name="howToTitle">Instructions</string>
     <string name="how_to_main">How To Make It Work</string>
-  <string name="how_to_inst1">The main button on top of the screen is the global orientation for all the apps. This is just a shortcut to the setting\'s option to change global orientation.
+  <string name="how_to_inst1">The main button on top of the screen is the global orientation for all the apps. It is a 4-state button and gives you all the orientation possibilities.
     </string>
   <string name="how_to_inst2">Then you can select from the list for every app your desired orientation. Your selection will override the default global orientation.
     </string>
   <string name="how_to_inst3">If you want only two apps to rotate and all the others to stay at their default, just disable global orientation and then select both Portrait and Landscape for the specific app in the list.
     </string>
     <string name="how_to_inst4">After you have selected your desired apps, just click on play and your settings will be in effect.</string>
-  <string name="how_to_inst5">Also, there is an option in the settings tab where you can set the app to start on boot. If you select it, then every time your phone boots it will remember your configurations and the app will run automatically.
-    </string>
+    <string name="how_to_inst5">Also, there is an option in the settings tab where you can set the app to start on boot. If you select it, then every time your phone boots it will remember your configurations and the app will run automatically.\n\nΒy enabling \"Chuck Norris mode\" from \"Preferences\" an invisible permanent notification starts which ensures that the service will not be killed by the OS. Enable it if you have low RAM problems and the orientation service stops.</string>
     <string name="logo">rotation logo</string>
     <string name="aboutText">Rotation Manager lets you decide which app rotates and which one doesn\'t. You can even set it so that an app is forced to portrait or landscape view. See instructions for more information.\n\nIt is an open source project created by SpyDiKo team, aiming to keep things simple and functional.\nContact us:\nspydiko.dev@gmail.com\n\nComments and Updates\nhttp://forum.xda-developers.com/showthread.php?t=2405849</string>
-  <string name="aboutFooter">Rotation Manager \u00a9 SpyDiKo. All Rights Reserved.
+  <string name="aboutFooter">Rotation Manager \u00a9 SpyDiKo. All Rights Reserved.\nVersion:
     </string>
     <string name="AboutTitle">About</string>
     <string name="about">About</string>
@@ -54,4 +55,9 @@
     <string name="please_rate">Please rate this app</string>
     <string name="rate_message">Help us improve this app by rating it and leaving a comment!</string>
     <string name="rate_button">Rate</string>
+    <string name="notification_text">Rotation Manager started</string>
+    <string name="notification_title">Rotation Manager Active</string>
+    <string name="notification_context_text">Click to open</string>
+    <string name="permNotification">Chuck Norris mode</string>
+    <string name="landing_msg">Check out our awesome apps!</string>
 </resources>

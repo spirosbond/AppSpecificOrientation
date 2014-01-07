@@ -10,18 +10,22 @@
     <string name="setOnBoot">Ενεργ. στην εκκίνηση</string>
     <string name="orientationOn">Αυτόματη Περιστροφή Ενεργή</string>
     <string name="orientationOff">Αυτόματη Περιστροφή Ανενεργή</string>
+    <string name="forced_portrait">Forced Portrait</string>
+    <string name="forced_landscape">Forced Landscape</string>
     <string name="createdby">Από SpyDiKo\n2013 \u00a9 S.D.K.</string>
     <string name="howTo">Οδηγίες</string>
     <string name="howToTitle">Οδηγίες</string>
     <string name="how_to_main">Πώς να το κάνετε να δουλέψει</string>
-    <string name="how_to_inst1">Το βασικό κουμπί στο πάνω μέρος της οθόνης είναι ο προσανατολισμός της οθόνης για όλες τις εφαρμογές. Αυτό το κουμπί είναι απλά μία συντόμευση για την αντίστοιχη επιλογή στις ρυθμίσεις του κινητού.</string>
+  <string name="how_to_inst1">The main button on top of the screen is the global orientation for all the apps. It is a 4-state button and gives you all the orientation possibilities.
+    </string>
     <string name="how_to_inst2">Στη συνέχεια, μπορείτε να επιλέξετε από την λίστα για κάθε εφαρμογή τον επιθυμητό προσανατολισμό. Η επιλογή σας θα παρακάμπτει τον προεπιλεγμένο προσανατολισμό.</string>
     <string name="how_to_inst3">Εάν επιθυμείτε μόνο δύο εφαρμογές να περιστρέφονται και όλες οι άλλες να παραμένουν στην προεπιλογή, απλά απενεργοποιήστε το κουμπί του βασικού προεπιλεγμένου προσανατολισμού και, στη συνέχεια, επιλέξτε τόσο τον κάθετο όσο και τον οριζόντιο προσανατολισμό για τις αντίστοιχες εφαρμογές της λίστας.</string>
     <string name="how_to_inst4">Αφού επιλέξατε τις επιθυμητές εφαρμογές, απλά κάντε κλικ στο play και οι επιλογές σας θα είναι σε ισχύ.</string>
-    <string name="how_to_inst5">Επιπλέον, υπάρχει μία επιλογή στις ρυθμίσεις, που σας επιτρέπει να θέσετε την εφαρμογή να εκκινείται όποτε ανοίγει το κινητό. Εάν το επιλέξετε, τότε κάθε φορά που ανοίγει το κινήτο θα θυμάται τις ρυθμίσεις σας και θα τρέχει αυτόματα.\nΗ λειτουργία \"Chuck Norris mode\" ενεργοποιεί μία αόρατη μόνιμη ειδοποιήση, η οποία εγγυάται ότι η διεραγσία δεν θα σκοτωθεί από το Λειτουργικό Σύστημα. Ενεργοποιήστε την αν έχετε προβλήματα χαμηλής RAM και η διεργασία σταματάει.</string>
+    <string name="how_to_inst5">Επίσης, υπάρχει μια η επιλογή στις \"Ρυθμίσεις\" να ξεκινά η εφαρμογή κατά την εκκίνηση του κινητού. Έτσι, κάθε φορά που θα εκκινήται το κινητό θα θυμάται τις ρυθμήσεις σας.\n\nΜέσω της επιλογής \"Chuck Norris mode\" από τις μία αόρατη μόνιμη ειδοποίηση ξεκινάει και εξασφαλίζει ότι η υπηρεσία δεν θα διακοπεί από το λειτουργικό σύστημα. Ενεργοποιήσετε την εάν έχετε χαμηλή RAM και ο προσανατολισμός των εφαρμογών αλλάζει πρόοπτα.</string>
     <string name="logo">rotation logo</string>
     <string name="aboutText">Το Rotation Manager σας επιτρέπει να επιλέξετε ποιες εφαρμόγες θα περιστρέφονται και ποιες όχι. Μπορείτε ακόμη να θέσετε κάποιες εφαρμογές να είναι πάντοτε κάθετα ή οριζόντια. Δείτε τις οδηγίες για περισσότερες πληροφορίες.\n\nΟ κώδικας είναι open source από την ομάδα SpyDiKo, με στόχο την λειτουργικότητα και την απλοότητα.\nΕπικοινωνήστε μαζί μας:\nspydiko.dev@gmail.com\n\nΣχόλια και Ενημερώσεις\nhttp://forum.xda-developers.com/showthread.php?t=2405849</string>
-    <string name="aboutFooter">Rotation Manager \u00a9 SpyDiKo. All Rights Reserved.</string>
+  <string name="aboutFooter">Rotation Manager \u00a9 SpyDiKo. All Rights Reserved.\nVersion:
+    </string>
     <string name="AboutTitle">Σχετικά με μας</string>
     <string name="about">Σχετικά με μας</string>
     <string name="donate">Δωρήστε!</string>
@@ -49,4 +53,9 @@
     <string name="please_rate">Παρακαλούμε, βαθμολογήστε την εφαρμογή</string>
     <string name="rate_message">Βοηθήστε μας να βελτιώσουμε την εφαρμογή. Βαθμολογήστε και σχολιάστε!</string>
     <string name="rate_button">Βαθμολόγηση</string>
+    <string name="notification_text">Ο Rotation Manager εκκινήθηκε</string>
+    <string name="notification_title">Ο Rotation Manager είναι ενεργός</string>
+    <string name="notification_context_text">Κάντε κλικ για να ανοίξετε την εφαρμογή</string>
+    <string name="permNotification">Chuck Norris mode</string>
+    <string name="landing_msg">Check out our awesome apps!</string>
 </resources>
