@@ -3,6 +3,7 @@ package com.spydiko.rotationmanager;
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -15,6 +16,7 @@ import android.graphics.PixelFormat;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -47,6 +49,30 @@ public class NewOrieService extends Service {
 	public void onLowMemory() {
 		super.onLowMemory();
 		if (AppSpecificOrientation.LOG) Log.d(TAG, "onLowMemory");
+	}
+
+	private boolean isLocked() {
+		KeyguardManager myKM = (KeyguardManager) this.getSystemService(Context.KEYGUARD_SERVICE);
+		if (myKM.inKeyguardRestrictedInputMode()) {
+			if (AppSpecificOrientation.LOG) Log.d(TAG, "screen is locked");
+			return true;
+		} else {
+			if (AppSpecificOrientation.LOG) Log.d(TAG, "screen is NOT locked");
+			return false;
+		}
+	}
+
+	private boolean isScreenOff(boolean enabled) {
+		PowerManager powermanager;
+		powermanager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
+		if (powermanager.isScreenOn()) {
+			if (AppSpecificOrientation.LOG) Log.d(TAG, "screen is ON");
+			enabled = false;
+		} else {
+			if (AppSpecificOrientation.LOG) Log.d(TAG, "screen is OFF");
+		}
+		return enabled;
+
 	}
 
 	@Override
@@ -135,6 +161,16 @@ public class NewOrieService extends Service {
 			while (AppSpecificOrientation.isServiceRunning()) {
 				ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 				// get the info from the currently running task
+				if (isLocked()) {
+					publishProgress(5);
+					beforeApp = "**LOCKED**";
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					continue;
+				}
 				try {
 
 					ActivityManager.RunningTaskInfo runningTaskInfo = activityManager.getRunningTasks(1).get(0);
@@ -161,7 +197,7 @@ public class NewOrieService extends Service {
 							publishProgress(4);
 						}
 					}
-					Thread.sleep(300);
+					Thread.sleep(250);
 				} catch (NullPointerException e) {
 					if (AppSpecificOrientation.LOG) Log.d(TAG, "No foreground app??? Da Fuck???");
 					e.printStackTrace();
@@ -190,6 +226,7 @@ public class NewOrieService extends Service {
 		@Override
 		protected void onProgressUpdate(Integer... values) {
 			super.onProgressUpdate(values);
+			if (AppSpecificOrientation.LOG) Log.d(TAG, "categ: " + values[0]);
 			if (values[0] == 1) {
 				if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
 					orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
@@ -230,6 +267,13 @@ public class NewOrieService extends Service {
 						wm.updateViewLayout(orientationChanger, orientationLayout);
 						orientationChanger.setVisibility(View.GONE);
 					}
+				}
+			}
+			if (values[0] == 5) {
+				if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_USER) {
+					orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
+					wm.updateViewLayout(orientationChanger, orientationLayout);
+					orientationChanger.setVisibility(View.GONE);
 				}
 			}
 		}

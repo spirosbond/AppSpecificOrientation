@@ -30,10 +30,10 @@
     </string>
     <string name="AboutTitle">About</string>
     <string name="about">About</string>
-    <string name="donate">Donate!</string>
+    <string name="donate">Support us!</string>
     <string name="donate1">AppFlood</string>
     <string name="summaryDonate1">Enable AppFlood Ads</string>
-    <string name="titleDonate">Donate</string>
+    <string name="titleDonate">Support us</string>
     <string name="donateTitle">Donate using Ads</string>
     <string name="donate_dialog_title">Thank you for donating!</string>
     <string name="donate_dialog_ok">Got it!</string>
