@@ -128,6 +128,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.forced_landscape));
 				autoRotate.setTextColor(Color.CYAN);
 				autoRotate.setText(getResources().getText(R.string.forced_landscape));
+			} else if (AppSpecificOrientation.getCheck_button() == 4){
+				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.forced_auto));
+				autoRotate.setTextColor(Color.parseColor("#FFFFFF"));
+				autoRotate.setText(getResources().getText(R.string.forced_auto));
 			}
 		}
 		// Register Content Observer
@@ -420,7 +424,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				//******************
 				//-----4state-------
 				int state = AppSpecificOrientation.getCheck_button();
-				state = (state+1)%4;
+				state = (state+1)%5;
 				switch (state){
 					case 0:
 						tmp.setImageDrawable(getResources().getDrawable(R.drawable.auto_rotate_on));
@@ -447,6 +451,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 						autoRotate.setTextColor(Color.CYAN);
 						autoRotate.setText(getResources().getText(R.string.forced_landscape));
 						AppSpecificOrientation.setCheck_button(3);
+						break;
+					case 4:
+						tmp.setImageDrawable(getResources().getDrawable(R.drawable.forced_auto));
+						autoRotate.setTextColor(Color.parseColor("#FFFFFF"));
+						autoRotate.setText(getResources().getText(R.string.forced_auto));
+						AppSpecificOrientation.setCheck_button(4);
 						break;
 					default:
 						break;

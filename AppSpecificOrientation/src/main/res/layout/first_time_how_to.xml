@@ -28,14 +28,56 @@
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"/>
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/orientationButton"
-            android:src="@drawable/auto_rotate_on"
-            android:layout_marginBottom="3dp"
-            android:background="@drawable/title_logo"
-            android:layout_gravity="center"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image1"
+                android:src="@drawable/auto_rotate_on"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/title_logo"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image2"
+                android:layout_toRightOf="@id/image1"
+                android:src="@drawable/auto_rotate_off"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/title_logo"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image3"
+                android:layout_toRightOf="@id/image2"
+                android:src="@drawable/forced_auto"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/title_logo"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image4"
+                android:layout_toRightOf="@id/image3"
+                android:src="@drawable/forced_landscape"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/title_logo"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image5"
+                android:layout_toRightOf="@id/image4"
+                android:src="@drawable/forced_portrait"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/title_logo"
+                android:layout_gravity="center"/>
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"

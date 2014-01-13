@@ -18,7 +18,7 @@ import com.winsontan520.wversionmanager.library.WVersionManager;
  */
 public class AppSpecificOrientation extends Application {
 
-	public static final boolean LOG = true;
+	public static final boolean LOG = false;
 	private static final String TAG = AppSpecificOrientation.class.getSimpleName();
 	public static boolean ALREADY_SHOWED;
 	public static boolean RETURN_FROM_ABOUT;
@@ -43,28 +43,28 @@ public class AppSpecificOrientation extends Application {
 		editor.putBoolean("boot", state);
 		editor.commit();
 	}
-
 	/**
 	 * 0: Auto-rotate On
 	 * 1: Auto-rotate Off
 	 * 2: Force Portrait
 	 * 3: Force Landscape
+	 * 4: Forced Auto
 	 */
 	public static int getCheck_button() {
 		return check_button;
 	}
 
 	public static void setCheck_button(int check_button) {
-		AppSpecificOrientation.check_button = check_button % 4;
+		AppSpecificOrientation.check_button = check_button%5;
 	}
 
-	public static void saveState() {
-		editor.putInt("4state", check_button);
+	public static void saveState(){
+		editor.putInt("4state",check_button);
 		editor.commit();
 	}
 
-	public static void loadState() {
-		check_button = prefs.getInt("4state", 0);
+	public static void loadState(){
+		check_button = prefs.getInt("4state",0);
 	}
 
 	public static Intent getOpenFacebookIntent(Context context) {
@@ -144,7 +144,7 @@ public class AppSpecificOrientation extends Application {
 	public void configureAdColony(Activity act) {
 		try {
 			if (AppSpecificOrientation.LOG) Log.d(TAG, "version Code: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionCode);
-			AdColony.configure(act, "version=" + getPackageManager().getPackageInfo(getPackageName(), 0).versionCode + ",store:google", "app1c15be97b56b4999a0b229", "vzc6c1a8b3be7b49dbb94a03"/*, "vz81c21390fa4e4b25aaa8ed", "vzf738e644f1394a9abcf4cf", "vz6494ace59eb4446db403f4"*/);
+			AdColony.configure(act, "version=" + getPackageManager().getPackageInfo(getPackageName(), 0).versionCode + ",store:google", "appc0bebfc9f4a3489fb82153", "vz9bf8a5eb30ef477798b82b"/*, "vz81c21390fa4e4b25aaa8ed", "vzf738e644f1394a9abcf4cf", "vz6494ace59eb4446db403f4"*/);
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}

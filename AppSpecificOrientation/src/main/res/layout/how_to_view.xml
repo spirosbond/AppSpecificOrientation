@@ -1,87 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context=".HowTo">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".HowTo">
 
 
     <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:paddingLeft="7dp"
-            android:paddingRight="7dp"
-            android:layout_height="fill_parent">
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:layout_height="fill_parent">
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/how_to_main"
-                android:textStyle="bold"
-                android:id="@+id/howToMain"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/how_to_main"
+            android:textStyle="bold"
+            android:id="@+id/howToMain"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"/>
 
-        <ImageView
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/orientationButton"
+                android:id="@+id/image1"
                 android:src="@drawable/auto_rotate_on"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/title_logo"
                 android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image2"
+                android:layout_toRightOf="@id/image1"
+                android:src="@drawable/auto_rotate_off"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/title_logo"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image3"
+                android:layout_toRightOf="@id/image2"
+                android:src="@drawable/forced_auto"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/title_logo"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image4"
+                android:layout_toRightOf="@id/image3"
+                android:src="@drawable/forced_landscape"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/title_logo"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image5"
+                android:layout_toRightOf="@id/image4"
+                android:src="@drawable/forced_portrait"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/title_logo"
+                android:layout_gravity="center"/>
+        </RelativeLayout>
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|left"
-                android:text="@string/how_to_inst1"
-                android:id="@+id/howToInst1"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:text="@string/how_to_inst1"
+            android:id="@+id/howToInst1"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"/>
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/how_to_inst2"
-                android:id="@+id/howToInst2"
-                android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="bottom"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_to_inst2"
+            android:id="@+id/howToInst2"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="bottom"/>
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/how_to_inst3"
-                android:id="@+id/howToInst3"
-                android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="bottom"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_to_inst3"
+            android:id="@+id/howToInst3"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="bottom"/>
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/how_to_inst4"
-                android:id="@+id/howToInst4"
-                android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="bottom"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_to_inst4"
+            android:id="@+id/howToInst4"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="bottom"/>
 
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/how_to_inst5"
-                android:id="@+id/howToInst5"
-                android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="bottom"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_to_inst5"
+            android:id="@+id/howToInst5"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="bottom"/>
 
     </LinearLayout>
 </ScrollView>

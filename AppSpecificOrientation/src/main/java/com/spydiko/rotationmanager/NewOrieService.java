@@ -1,13 +1,9 @@
 package com.spydiko.rotationmanager;
 
-import android.annotation.TargetApi;
 import android.app.ActivityManager;
-import android.app.AlarmManager;
-import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -16,8 +12,6 @@ import android.graphics.PixelFormat;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
-import android.os.PowerManager;
-import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
@@ -42,37 +36,7 @@ public class NewOrieService extends Service {
 		super.onDestroy();
 		AppSpecificOrientation.setServiceRunning(false);
 		orientationChanger.setVisibility(View.GONE);
-		if (AppSpecificOrientation.LOG) Log.d(TAG, "onDestroy");
-	}
-
-	@Override
-	public void onLowMemory() {
-		super.onLowMemory();
-		if (AppSpecificOrientation.LOG) Log.d(TAG, "onLowMemory");
-	}
-
-	private boolean isLocked() {
-		KeyguardManager myKM = (KeyguardManager) this.getSystemService(Context.KEYGUARD_SERVICE);
-		if (myKM.inKeyguardRestrictedInputMode()) {
-			if (AppSpecificOrientation.LOG) Log.d(TAG, "screen is locked");
-			return true;
-		} else {
-			if (AppSpecificOrientation.LOG) Log.d(TAG, "screen is NOT locked");
-			return false;
-		}
-	}
-
-	private boolean isScreenOff(boolean enabled) {
-		PowerManager powermanager;
-		powermanager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
-		if (powermanager.isScreenOn()) {
-			if (AppSpecificOrientation.LOG) Log.d(TAG, "screen is ON");
-			enabled = false;
-		} else {
-			if (AppSpecificOrientation.LOG) Log.d(TAG, "screen is OFF");
-		}
-		return enabled;
-
+		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "stopped");
 	}
 
 	@Override
@@ -80,23 +44,10 @@ public class NewOrieService extends Service {
 		return null;
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
-	@Override
-	public void onTaskRemoved(Intent rootIntent) {
-		super.onTaskRemoved(rootIntent);
-		if (AppSpecificOrientation.LOG) Log.d(TAG, "onTaskRemoved");
-		Intent restartService = new Intent(getApplicationContext(),
-				this.getClass());
-		restartService.setPackage(getPackageName());
-		PendingIntent restartServicePI = PendingIntent.getService(getApplicationContext(), 1, restartService, PendingIntent.FLAG_ONE_SHOT);
-		AlarmManager alarmService = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-		alarmService.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 2000, restartServicePI);
-	}
-
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		if (AppSpecificOrientation.LOG) Log.d(TAG, "Created");
+		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "Created");
 		appSpecificOrientation = (AppSpecificOrientation) getApplication();
 		AppSpecificOrientation.setServiceRunning(true);
 		wm = (WindowManager) this.getSystemService(Service.WINDOW_SERVICE);
@@ -121,12 +72,11 @@ public class NewOrieService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		super.onStartCommand(intent, flags, startId);
-		if (AppSpecificOrientation.LOG) Log.d(TAG, "onStartCommand");
+		//        if(AppSpecificOrientation.LOG) Log.d(TAG, "MPIKA");
 		// Use whatever constant you need for your desired rotation
 
 		if (isNotification != AppSpecificOrientation.isPermNotification()) {
-			if (AppSpecificOrientation.LOG) Log.d(TAG, "Notification Changed");
+			Log.d(TAG, "Notification Changed");
 			if (AppSpecificOrientation.isPermNotification()) {
 				createAndStartNotification();
 			} else {
@@ -161,16 +111,6 @@ public class NewOrieService extends Service {
 			while (AppSpecificOrientation.isServiceRunning()) {
 				ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 				// get the info from the currently running task
-				if (isLocked()) {
-					publishProgress(5);
-					beforeApp = "**LOCKED**";
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					continue;
-				}
 				try {
 
 					ActivityManager.RunningTaskInfo runningTaskInfo = activityManager.getRunningTasks(1).get(0);
@@ -179,7 +119,7 @@ public class NewOrieService extends Service {
 					} else {
 						foregroundApp = beforeApp;
 					}
-					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
+//					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
 					if (!foregroundApp.equals(beforeApp)) {
 						beforeApp = foregroundApp;
 
@@ -226,7 +166,6 @@ public class NewOrieService extends Service {
 		@Override
 		protected void onProgressUpdate(Integer... values) {
 			super.onProgressUpdate(values);
-			if (AppSpecificOrientation.LOG) Log.d(TAG, "categ: " + values[0]);
 			if (values[0] == 1) {
 				if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
 					orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
@@ -261,19 +200,18 @@ public class NewOrieService extends Service {
 						wm.updateViewLayout(orientationChanger, orientationLayout);
 						if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
 					}
+				} else if (AppSpecificOrientation.getCheck_button() == 4) {
+					if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_SENSOR) {
+						orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
+						wm.updateViewLayout(orientationChanger, orientationLayout);
+						if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
+					}
 				} else {
 					if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_USER) {
 						orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
 						wm.updateViewLayout(orientationChanger, orientationLayout);
 						orientationChanger.setVisibility(View.GONE);
 					}
-				}
-			}
-			if (values[0] == 5) {
-				if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_USER) {
-					orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
-					wm.updateViewLayout(orientationChanger, orientationLayout);
-					orientationChanger.setVisibility(View.GONE);
 				}
 			}
 		}

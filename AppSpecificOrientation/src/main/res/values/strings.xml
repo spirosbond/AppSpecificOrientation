@@ -16,7 +16,7 @@
     <string name="howTo">Instructions</string>
     <string name="howToTitle">Instructions</string>
     <string name="how_to_main">How To Make It Work</string>
-    <string name="how_to_inst1">The main button on top of the screen is the global orientation for all the apps. It is a 4-state button and gives you all the orientation possibilities.
+    <string name="how_to_inst1">The main button on top of the screen is the global orientation for all the apps. It is a 5-state button and gives you all the orientation possibilities.
     </string>
     <string name="how_to_inst2">Then you can select from the list for every app your desired orientation. Your selection will override the default global orientation.
     </string>
@@ -60,6 +60,7 @@
     <string name="notification_context_text">Click to open</string>
     <string name="permNotification">Chuck Norris mode</string>
     <string name="landing_msg">Check out our awesome apps!</string>
+    <string name="forced_auto">Forced Auto</string>
 
 
 </resources>
