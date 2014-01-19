@@ -1,9 +1,10 @@
 AppSpecificOrientation
 ======================
+<dl>
+<dt>Android app controlling the orientation of each app</dt>
+</dl>
 
-Android app controlling the orientation of each app
-
-Version 2.0_070114
+*Version 2.0_070114*
 <dl>
 <dt>ABOUT</dt>
 </dl>
