@@ -15,27 +15,17 @@ import android.widget.TextView;
  */
 public class AboutActivity extends Activity {
 
-	Intent openFacebook;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);
 		TextView version = (TextView) findViewById(R.id.aboutFooterTextView);
 		try {
-			version.setText(version.getText()+" "+getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+			version.setText(version.getText() + " " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) getActionBar().setDisplayHomeAsUpEnabled(true);
-		//		ImageView facebook = (ImageView) findViewById(R.id.facebook_click);
-		//		openFacebook = AppSpecificOrientation.getOpenFacebookIntent(this);
-		//		facebook.setOnClickListener(new View.OnClickListener() {
-		//			@Override
-		//			public void onClick(View v) {
-		//				startActivity(openFacebook);
-		//			}
-		//		});
 		AppSpecificOrientation.RETURN_FROM_ABOUT = true;
 	}
 
