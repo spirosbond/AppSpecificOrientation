@@ -4,11 +4,14 @@ AppSpecificOrientation
 Android app controlling the orientation of each app
 
 Version 2.0_070114
-
-ABOUT
+<dl>
+<dt>ABOUT</dt>
+</dl>
 Rotation manager is a tool that lets you choose which application you want to rotate or which one you don't want to rotate. It is a really simple app designed for the least possible power and RAM consumption.
 
-HOW TO USE
+<dl>
+<dt>HOW TO USE</dt>
+</dl>
 The main button on top of the screen is the global orientation for all the apps. It is a 4-state button and gives you all the orientation possibilities. Then you can select from the list for every app your desired orientation.
 Your selection will override the default global orientation. If you want only two apps to rotate and all the others to stay at their default, just disable global orientation and then select both Portrait and Landscape for the specific app in the list.
 After you have selected your desired apps, just click on play and your preferences will be in effect.
@@ -19,7 +22,9 @@ Check out a review about our app at techcookies.net!!
 Help with the translation of the app.
 
 
-PERMISSIONS
+<dl>
+<dt>PERMISSIONS</dt>
+</dl>
 These are the permissions are needed by the app to work:
 android.permission.GET_TASKS : In order to retrieve the currently running app.
 android.permission.CHANGE_CONFIGURATION : In order to change the orientation.
@@ -35,12 +40,16 @@ android.permission.ACCESS_NETWORK_STATE
 android.permission.ACCESS_WIFI_STATE
 android.permission.READ_PHONE_STATE
 
-BUGS
+<dl>
+<dt>BUGS</dt>
+</dl>
 Please write your phone model and Android version when reporting a bug.
 - Upon update you need to stop and restart the service
 - ...waiting for you...
 
-CHANGELOG
+<dl>
+<dt>CHANGELOG</dt>
+</dl>
 
 v2.0_070114
 + Added Forced Landscape and Forced Portrait
@@ -54,11 +63,14 @@ v2.0_070114
 + Fixed donation codes
 
 
-SITE FOR TRANSLATION UPLOADS
+<dl>
+<dt>SITE FOR TRANSLATION UPLOADS</dt>
+</dl>
 Help with the translation of the app.
 
 Thank you for the 1000 downloads here at xda!!
 
-
-DOWNLOAD FROM GOOGLE PLAY
+<dl>
+<dt>DOWNLOAD FROM GOOGLE PLAY</dt>
+</dl>
 https://play.google.com/store/apps/details?id=com.spydiko.rotationmanager
