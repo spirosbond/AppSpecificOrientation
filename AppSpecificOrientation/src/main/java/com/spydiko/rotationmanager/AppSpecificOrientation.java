@@ -17,8 +17,8 @@ public class AppSpecificOrientation extends Application {
 
 	public static final boolean LOG = false;
 	private static final String TAG = AppSpecificOrientation.class.getSimpleName();
-	public static boolean ALREADY_SHOWED;
-	public static boolean RETURN_FROM_ABOUT;
+	//	public static boolean ALREADY_SHOWED;
+	//	public static boolean RETURN_FROM_ABOUT;
 	private static SharedPreferences prefs;
 	private static SharedPreferences.Editor editor;
 	private static int check_button;
@@ -91,8 +91,8 @@ public class AppSpecificOrientation extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		ALREADY_SHOWED = false;
-		RETURN_FROM_ABOUT = false;
+		//		ALREADY_SHOWED = false;
+		//		RETURN_FROM_ABOUT = false;
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		editor = prefs.edit();
 		loadState();

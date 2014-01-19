@@ -26,7 +26,7 @@ public class AboutActivity extends Activity {
 			e.printStackTrace();
 		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) getActionBar().setDisplayHomeAsUpEnabled(true);
-		AppSpecificOrientation.RETURN_FROM_ABOUT = true;
+		//		AppSpecificOrientation.RETURN_FROM_ABOUT = true;
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {

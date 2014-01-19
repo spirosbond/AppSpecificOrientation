@@ -379,7 +379,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		//		if (myapp.loadDonate("appflood")) {
 		////			AppFlood.showPanel(this, AppFlood.PANEL_TOP);
 		//		}
-		if (AppSpecificOrientation.RETURN_FROM_ABOUT && !AppSpecificOrientation.ALREADY_SHOWED) {
+		/*if (AppSpecificOrientation.RETURN_FROM_ABOUT && !AppSpecificOrientation.ALREADY_SHOWED) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			// Add the buttons
 			builder.setTitle("Spydiko");
@@ -405,7 +405,35 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			AppSpecificOrientation.ALREADY_SHOWED = true;
 			AppSpecificOrientation.RETURN_FROM_ABOUT = false;
 			dialog.show();
-		}
+		}*/
+	}
+
+	public void showPlayStoreDialog(View view) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		// Add the buttons
+		builder.setTitle("Spydiko");
+		builder.setMessage(R.string.landing_msg);
+		builder.setIcon(R.drawable.icon);
+		builder.setPositiveButton(R.string.playStore, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// User clicked OK button
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse("market://search?q=pub:Spydiko"));
+				startActivity(intent);
+			}
+		});
+		builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// User cancelled the dialog
+			}
+		});
+		// Set other dialog properties
+
+		// Create the AlertDialog
+		AlertDialog dialog = builder.create();
+		//		AppSpecificOrientation.ALREADY_SHOWED = true;
+		//		AppSpecificOrientation.RETURN_FROM_ABOUT = false;
+		dialog.show();
 	}
 
 	@Override
