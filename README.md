@@ -20,7 +20,8 @@ Also, there is an option in the settings tab where you can set the app to start 
 "Chuck Norris mode" enables an Invisible permanent notification which ensures that the service will not be killed by the OS. Enable it if you have low RAM problems and the orientation service stops.
 
 Check out a review about our app at techcookies.net!!
-Help with the translation of the app.
+http://techcookies.net/rotation-manager-control-which-apps-rotate/
+
 
 
 <dl>
@@ -68,6 +69,7 @@ v2.0_070114
 <dt>SITE FOR TRANSLATION UPLOADS</dt>
 </dl>
 *Help with the translation of the app.*
+
 http://crowdin.net/project/rotation-manager/invite
 
 <dl>
