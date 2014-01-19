@@ -1,10 +1,10 @@
 AppSpecificOrientation
 ======================
-<dl>
-<dt>Android app controlling the orientation of each app</dt>
-</dl>
 
-*Version 2.0_070114*
+*Android app controlling the orientation of each app*
+
+
+
 <dl>
 <dt>ABOUT</dt>
 </dl>
@@ -67,9 +67,8 @@ v2.0_070114
 <dl>
 <dt>SITE FOR TRANSLATION UPLOADS</dt>
 </dl>
-Help with the translation of the app.
-
-Thank you for the 1000 downloads here at xda!!
+*Help with the translation of the app.*
+http://crowdin.net/project/rotation-manager/invite
 
 <dl>
 <dt>DOWNLOAD FROM GOOGLE PLAY</dt>
