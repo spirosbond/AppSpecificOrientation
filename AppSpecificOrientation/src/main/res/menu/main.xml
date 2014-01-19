@@ -1,30 +1,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-            android:id="@+id/action_settings"
-            android:title="@string/action_settings"
-            android:orderInCategory="100"
-            android:icon="@android:drawable/ic_popup_sync"
-            android:showAsAction="ifRoom"/>
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:icon="@android:drawable/ic_popup_sync"
+        android:showAsAction="ifRoom"/>
     <item
-            android:id="@+id/itemToggleService"
-            android:title="@string/titleServiceStop"
-            android:icon="@android:drawable/ic_media_play"
-            android:showAsAction="ifRoom"/>
+        android:id="@+id/itemToggleService"
+        android:title="@string/titleServiceStop"
+
+        android:showAsAction="always"/>
+    <!--android:icon="@android:drawable/ic_media_play"-->
     <item
-            android:id="@+id/setOnBoot"
-            android:title="@string/setOnBoot"
-            android:checkable="true"/>
+        android:id="@+id/setOnBoot"
+        android:title="@string/setOnBoot"
+        android:checkable="true"/>
 
     <item
         android:id="@+id/permNotification"
         android:title="@string/permNotification"
         android:checkable="true"/>
     <item
-            android:id="@+id/howTo"
-            android:title="@string/howTo"/>
+        android:id="@+id/howTo"
+        android:title="@string/howTo"/>
     <item
-            android:id="@+id/about"
-            android:title="@string/about"/>
+        android:id="@+id/about"
+        android:title="@string/about"/>
     <item
         android:id="@+id/donate"
         android:title="@string/donate"/>

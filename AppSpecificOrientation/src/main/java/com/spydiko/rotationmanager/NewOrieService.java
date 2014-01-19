@@ -238,6 +238,12 @@ public class NewOrieService extends Service {
 						wm.updateViewLayout(orientationChanger, orientationLayout);
 						if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
 					}
+				} else if (AppSpecificOrientation.getCheck_button() == 4) {
+					if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_SENSOR) {
+						orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
+						wm.updateViewLayout(orientationChanger, orientationLayout);
+						if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
+					}
 				} else {
 					if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_USER) {
 						orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;

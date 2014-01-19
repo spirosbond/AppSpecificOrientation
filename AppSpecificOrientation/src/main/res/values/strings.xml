@@ -3,8 +3,8 @@
 
     <string name="app_name">Rotation Manager</string>
     <string name="action_settings">Refresh</string>
-    <string name="titleServiceStart">Stop Service</string>
-    <string name="titleServiceStop">Start Service</string>
+    <string name="titleServiceStart">Enabled</string>
+    <string name="titleServiceStop">Disabled</string>
     <string name="buttonClearAll">Clear All</string>
     <string name="loadingApps">Loading Apps…</string>
     <string name="setOnBoot">Enable on boot</string>

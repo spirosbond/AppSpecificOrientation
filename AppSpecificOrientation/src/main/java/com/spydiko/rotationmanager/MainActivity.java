@@ -265,10 +265,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		//		if(AppSpecificOrientation.LOG) Log.d(TAG, "createOptions");
 		if (AppSpecificOrientation.isServiceRunning()) {
 			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
-			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
+			//			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
 		} else {
 			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
-			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
+			//			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
 		}
 		if (AppSpecificOrientation.getBoot()) {
 			menu.findItem(R.id.setOnBoot).setChecked(true);
@@ -310,13 +310,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				//                if(AppSpecificOrientation.LOG) Log.d(TAG, "entered");
 				if (AppSpecificOrientation.isServiceRunning()) {
 					item.setTitle(R.string.titleServiceStop);
-					item.setIcon(android.R.drawable.ic_media_play);
+					//					item.setIcon(android.R.drawable.ic_media_play);
 					stopService(new Intent(this, NewOrieService.class));
 					AppSpecificOrientation.setServiceRunning(false);
 					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "if");
 				} else {
 					item.setTitle(R.string.titleServiceStart);
-					item.setIcon(android.R.drawable.ic_media_pause);
+					//					item.setIcon(android.R.drawable.ic_media_pause);
 					startService(new Intent(this, NewOrieService.class));
 					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "else");
 				}
