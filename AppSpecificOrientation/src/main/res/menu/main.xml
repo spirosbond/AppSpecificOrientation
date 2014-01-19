@@ -28,5 +28,11 @@
     <item
         android:id="@+id/donate"
         android:title="@string/donate"/>
+    <item
+        android:id="@+id/license"
+        android:title="@string/titleLicense"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:visible="true"/>
 
 </menu>

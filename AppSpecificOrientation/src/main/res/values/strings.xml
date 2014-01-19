@@ -61,6 +61,7 @@
     <string name="permNotification">Chuck Norris mode</string>
     <string name="landing_msg">Check out our awesome apps!</string>
     <string name="forced_auto">Forced Auto</string>
+    <string name="titleLicense">License</string>
 
 
 </resources>

@@ -27,7 +27,7 @@
         android:theme="@style/AppTheme"
         android:name=".AppSpecificOrientation"
         android:debuggable="true">
-    <activity
+        <activity
             android:name=".HelperActivity"
             android:noHistory="true"
             android:label="@string/app_name"
@@ -103,6 +103,18 @@
             android:name="com.spydiko.rotationmanager.DonateActivity"
             android:label="@string/titleDonate"
             android:parentActivityName="com.spydiko.rotationmanager.MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.spydiko.rotationmanager.MainActivity"/>
+
+        </activity>
+
+        <activity
+            android:name="com.spydiko.rotationmanager.License"
+            android:label="@string/titleLicense"
+            android:parentActivityName="com.spydiko.rotationmanager.MainActivity"
+            android:theme="@android:style/Theme.Dialog">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

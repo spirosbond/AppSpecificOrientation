@@ -364,6 +364,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					if (AppSpecificOrientation.isServiceRunning()) startService(new Intent(this, NewOrieService.class));
 				}
 
+
+				break;
+			case R.id.license:
+				startActivity(new Intent(this, License.class));
 				break;
 		}
 		return true;
@@ -438,7 +442,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 						autoRotate.setTextColor(Color.RED);
 						autoRotate.setText(getResources().getText(R.string.orientationOff));
 						AppSpecificOrientation.setCheck_button(1);
-						Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION,0);
+						Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0);
 						break;
 					case 2:
 						tmp.setImageDrawable(getResources().getDrawable(R.drawable.forced_portrait));
