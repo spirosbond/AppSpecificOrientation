@@ -111,6 +111,16 @@ public class NewOrieService extends Service {
 			while (AppSpecificOrientation.isServiceRunning()) {
 				ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 				// get the info from the currently running task
+				if (isLocked()) {
+					publishProgress(5);
+					beforeApp = "**LOCKED**";
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					continue;
+				}
 				try {
 
 					ActivityManager.RunningTaskInfo runningTaskInfo = activityManager.getRunningTasks(1).get(0);
@@ -119,7 +129,7 @@ public class NewOrieService extends Service {
 					} else {
 						foregroundApp = beforeApp;
 					}
-//					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
+					//					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
 					if (!foregroundApp.equals(beforeApp)) {
 						beforeApp = foregroundApp;
 
@@ -166,6 +176,7 @@ public class NewOrieService extends Service {
 		@Override
 		protected void onProgressUpdate(Integer... values) {
 			super.onProgressUpdate(values);
+			if (AppSpecificOrientation.LOG) Log.d(TAG, "categ: " + values[0]);
 			if (values[0] == 1) {
 				if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
 					orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
@@ -200,12 +211,6 @@ public class NewOrieService extends Service {
 						wm.updateViewLayout(orientationChanger, orientationLayout);
 						if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
 					}
-				} else if (AppSpecificOrientation.getCheck_button() == 4) {
-					if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_SENSOR) {
-						orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
-						wm.updateViewLayout(orientationChanger, orientationLayout);
-						if (orientationChanger.getVisibility() == View.GONE) orientationChanger.setVisibility(View.VISIBLE);
-					}
 				} else {
 					if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_USER) {
 						orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
@@ -214,7 +219,13 @@ public class NewOrieService extends Service {
 					}
 				}
 			}
+			if (values[0] == 5) {
+				if (orientationLayout.screenOrientation != ActivityInfo.SCREEN_ORIENTATION_USER) {
+					orientationLayout.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_USER;
+					wm.updateViewLayout(orientationChanger, orientationLayout);
+					orientationChanger.setVisibility(View.GONE);
+				}
+			}
 		}
 	}
-
 }
