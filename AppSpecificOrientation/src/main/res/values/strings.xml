@@ -25,7 +25,7 @@
     <string name="how_to_inst4">After you have selected your desired apps, just click on play and your settings will be in effect.</string>
     <string name="how_to_inst5">Also, there is an option in the settings tab where you can set the app to start on boot. If you select it, then every time your phone boots it will remember your configurations and the app will run automatically.\n\nΒy enabling "Chuck Norris mode" from "Preferences" an invisible permanent notification starts which ensures that the service will not be killed by the OS. Enable it if you have low RAM problems and the orientation service stops.</string>
     <string name="logo">rotation logo</string>
-    <string name="aboutText">Rotation Manager lets you decide which app rotates and which one doesn\'t. You can even set it so that an app is forced to portrait or landscape view. See instructions for more information.\n\nIt is an open source project created by SpyDiKo team, aiming to keep things simple and functional.\nContact us:\nspydiko.dev@gmail.com\n\nComments and Updates\nhttp://forum.xda-developers.com/showthread.php?t=2405849</string>
+    <string name="aboutText">Rotation Manager lets you decide which app rotates and which one doesn\'t. You can even set it so that an app is forced to portrait or landscape view. See instructions for more information.\n\nIt is an open source project created by SpyDiKo team, aiming to keep things simple and functional.\nContact us:\nspydiko.dev@gmail.com</string>
     <string name="aboutFooter">Rotation Manager \u00a9 SpyDiKo. All Rights Reserved.\nVersion:
     </string>
     <string name="AboutTitle">About</string>

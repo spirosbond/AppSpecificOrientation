@@ -2,11 +2,8 @@ package com.spydiko.rotationmanager;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -43,6 +40,7 @@ public class AppSpecificOrientation extends Application {
 		editor.putBoolean("boot", state);
 		editor.commit();
 	}
+
 	/**
 	 * 0: Auto-rotate On
 	 * 1: Auto-rotate Off
@@ -55,25 +53,16 @@ public class AppSpecificOrientation extends Application {
 	}
 
 	public static void setCheck_button(int check_button) {
-		AppSpecificOrientation.check_button = check_button%5;
+		AppSpecificOrientation.check_button = check_button % 5;
 	}
 
-	public static void saveState(){
-		editor.putInt("4state",check_button);
+	public static void saveState() {
+		editor.putInt("4state", check_button);
 		editor.commit();
 	}
 
-	public static void loadState(){
-		check_button = prefs.getInt("4state",0);
-	}
-
-	public static Intent getOpenFacebookIntent(Context context) {
-		try {
-			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/657088267656391"));
-		} catch (Exception e) {
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/rotationmanager"));
-		}
+	public static void loadState() {
+		check_button = prefs.getInt("4state", 0);
 	}
 
 	public static boolean isPermNotification() {
