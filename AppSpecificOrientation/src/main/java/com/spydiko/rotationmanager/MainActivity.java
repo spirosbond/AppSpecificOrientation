@@ -267,30 +267,30 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
 			//			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
 			//			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.button_onoff_indicator_on);
+			menu.findItem(R.id.itemToggleService).setIcon(R.drawable.ic_on_button_rotation_manager);
 		} else {
 			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
 			//			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
 			//			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.button_onoff_indicator_off);
+			menu.findItem(R.id.itemToggleService).setIcon(R.drawable.ic_off_button_rotation_manager);
 		}
 		if (AppSpecificOrientation.getBoot()) {
 			menu.findItem(R.id.setOnBoot).setChecked(true);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-				menu.findItem(R.id.setOnBoot).setIcon(android.R.drawable.button_onoff_indicator_on);
+				menu.findItem(R.id.setOnBoot).setIcon(R.drawable.ic_on_button_rotation_manager);
 		} else {
 			menu.findItem(R.id.setOnBoot).setChecked(false);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-				menu.findItem(R.id.setOnBoot).setIcon(android.R.drawable.button_onoff_indicator_off);
+				menu.findItem(R.id.setOnBoot).setIcon(R.drawable.ic_off_button_rotation_manager);
 		}
 		if (AppSpecificOrientation.isPermNotification()) {
 			menu.findItem(R.id.permNotification).setChecked(true);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-				menu.findItem(R.id.permNotification).setIcon(android.R.drawable.button_onoff_indicator_on);
+				menu.findItem(R.id.permNotification).setIcon(R.drawable.ic_on_button_rotation_manager);
 		} else {
 			menu.findItem(R.id.permNotification).setChecked(false);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-				menu.findItem(R.id.permNotification).setIcon(android.R.drawable.button_onoff_indicator_off);
+				menu.findItem(R.id.permNotification).setIcon(R.drawable.ic_off_button_rotation_manager);
 		}
 
 		return true;
@@ -319,13 +319,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					AppSpecificOrientation.setServiceRunning(false);
 					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "if");
 					//					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-					item.setIcon(android.R.drawable.button_onoff_indicator_off);
+					item.setIcon(R.drawable.ic_off_button_rotation_manager);
 				} else {
 					item.setTitle(R.string.titleServiceStart);
 					//					item.setIcon(android.R.drawable.ic_media_pause);
 					startService(new Intent(this, NewOrieService.class));
 					//					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-					item.setIcon(android.R.drawable.button_onoff_indicator_on);
+					item.setIcon(R.drawable.ic_on_button_rotation_manager);
 					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "else");
 				}
 				break;

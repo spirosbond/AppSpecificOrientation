@@ -1,15 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/itemToggleService"
+        android:icon="@drawable/ic_off_button_rotation_manager"
+        android:title="@string/titleServiceStop"
+        android:showAsAction="always"/>
+    <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:icon="@android:drawable/ic_popup_sync"
         android:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/itemToggleService"
-        android:title="@string/titleServiceStop"
-
-        android:showAsAction="always"/>
     <!--android:icon="@android:drawable/ic_media_play"-->
     <item
         android:id="@+id/setOnBoot"
