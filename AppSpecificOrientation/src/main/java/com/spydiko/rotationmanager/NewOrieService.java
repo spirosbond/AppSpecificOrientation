@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 public class NewOrieService extends Service {
 
 	private static final String TAG = "New Service";
+	private static final String PACKAGE_INSTALLER = "com.android.packageinstaller";
 	private AppSpecificOrientation appSpecificOrientation;
 	private LinearLayout orientationChanger;
 	private WindowManager.LayoutParams orientationLayout;
@@ -156,11 +157,14 @@ public class NewOrieService extends Service {
 					} else {
 						foregroundApp = beforeApp;
 					}
-					//					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
+					if (AppSpecificOrientation.LOG) Log.d(TAG, "Foreground app: " + foregroundApp);
 					if (!foregroundApp.equals(beforeApp)) {
 						beforeApp = foregroundApp;
 
-						if (appSpecificOrientation.isCheckedPortrait(foregroundApp) && appSpecificOrientation.isCheckedLandscape
+						if (foregroundApp.equals(PACKAGE_INSTALLER)) {
+							publishProgress(5);
+
+						} else if (appSpecificOrientation.isCheckedPortrait(foregroundApp) && appSpecificOrientation.isCheckedLandscape
 								(foregroundApp)) {
 							publishProgress(2);
 							//                        if(AppSpecificOrientation.LOG) Log.d(TAG,"1st IF");

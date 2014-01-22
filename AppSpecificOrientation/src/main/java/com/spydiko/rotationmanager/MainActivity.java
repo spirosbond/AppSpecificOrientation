@@ -266,9 +266,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		if (AppSpecificOrientation.isServiceRunning()) {
 			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStart);
 			//			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_pause);
+			//			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.button_onoff_indicator_on);
 		} else {
 			menu.findItem(R.id.itemToggleService).setTitle(R.string.titleServiceStop);
 			//			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.ic_media_play);
+			//			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+			menu.findItem(R.id.itemToggleService).setIcon(android.R.drawable.button_onoff_indicator_off);
 		}
 		if (AppSpecificOrientation.getBoot()) {
 			menu.findItem(R.id.setOnBoot).setChecked(true);
@@ -314,10 +318,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					stopService(new Intent(this, NewOrieService.class));
 					AppSpecificOrientation.setServiceRunning(false);
 					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "if");
+					//					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+					item.setIcon(android.R.drawable.button_onoff_indicator_off);
 				} else {
 					item.setTitle(R.string.titleServiceStart);
 					//					item.setIcon(android.R.drawable.ic_media_pause);
 					startService(new Intent(this, NewOrieService.class));
+					//					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+					item.setIcon(android.R.drawable.button_onoff_indicator_on);
 					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "else");
 				}
 				break;
