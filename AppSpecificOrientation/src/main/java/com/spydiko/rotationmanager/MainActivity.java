@@ -279,20 +279,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		if (AppSpecificOrientation.getBoot()) {
 			menu.findItem(R.id.setOnBoot).setChecked(true);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-				menu.findItem(R.id.setOnBoot).setIcon(R.drawable.ic_on_button_rotation_manager);
+				menu.findItem(R.id.setOnBoot).setIcon(android.R.drawable.button_onoff_indicator_on);
 		} else {
 			menu.findItem(R.id.setOnBoot).setChecked(false);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-				menu.findItem(R.id.setOnBoot).setIcon(R.drawable.ic_off_button_rotation_manager);
+				menu.findItem(R.id.setOnBoot).setIcon(android.R.drawable.button_onoff_indicator_off);
 		}
 		if (AppSpecificOrientation.isPermNotification()) {
 			menu.findItem(R.id.permNotification).setChecked(true);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-				menu.findItem(R.id.permNotification).setIcon(R.drawable.ic_on_button_rotation_manager);
+				menu.findItem(R.id.permNotification).setIcon(android.R.drawable.button_onoff_indicator_on);
 		} else {
 			menu.findItem(R.id.permNotification).setChecked(false);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-				menu.findItem(R.id.permNotification).setIcon(R.drawable.ic_off_button_rotation_manager);
+				menu.findItem(R.id.permNotification).setIcon(android.R.drawable.button_onoff_indicator_off);
 		}
 
 		return true;
