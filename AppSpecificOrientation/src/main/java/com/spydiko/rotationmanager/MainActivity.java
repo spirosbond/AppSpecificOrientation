@@ -30,6 +30,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appflood.AFBannerView;
+import com.appflood.AppFlood;
+import com.appflood.AppFlood.AFRequestDelegate;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -87,6 +93,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		myapp = (AppSpecificOrientation) getApplication();
 		setContentView(R.layout.activity_main);
 		myapp.chechForUpdate(this);
+		if (AppSpecificOrientation.appflood) {
+			AppFlood.initialize(this, "4oxXbIyVm6xNiizl", "TbcZgeJj2facL52e003c9", AppFlood
+					.AD_ALL);
+			//		AppFlood.showBanner(this,AppFlood.BANNER_POSITION_BOTTOM,AppFlood.BANNER_SMALL);
+			AppFlood.preload(AppFlood.AD_ALL, new AFRequestDelegate() {
+				@Override
+				public void onFinish(JSONObject arg0) {
+					runOnUiThread(new Runnable() {
+						public void run() {
+							//						Toast.makeText(MainActivity.this, "preload finish", Toast.LENGTH_SHORT).show();
+							AFBannerView afBannerView = (AFBannerView) findViewById(R.id.banner);
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							afBannerView.setVisibility(View.VISIBLE);
+						}
+					});
+				}
+			});
+		}
 		// Initialize everything
 		   /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 		        ActionBar actionBar = getActionBar();
@@ -122,15 +150,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				AppSpecificOrientation.setCheck_button(1);
 			}
 		} else {
-			if (AppSpecificOrientation.getCheck_button() == 2){
+			if (AppSpecificOrientation.getCheck_button() == 2) {
 				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.forced_portrait));
 				autoRotate.setTextColor(Color.CYAN);
 				autoRotate.setText(getResources().getText(R.string.forced_portrait));
-			} else if (AppSpecificOrientation.getCheck_button() == 3){
+			} else if (AppSpecificOrientation.getCheck_button() == 3) {
 				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.forced_landscape));
 				autoRotate.setTextColor(Color.CYAN);
 				autoRotate.setText(getResources().getText(R.string.forced_landscape));
-			} else if (AppSpecificOrientation.getCheck_button() == 4){
+			} else if (AppSpecificOrientation.getCheck_button() == 4) {
 				orientationButton.setImageDrawable(getResources().getDrawable(R.drawable.forced_auto));
 				autoRotate.setTextColor(Color.parseColor("#FFFFFF"));
 				autoRotate.setText(getResources().getText(R.string.forced_auto));
@@ -469,14 +497,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				//******************
 				//-----4state-------
 				int state = AppSpecificOrientation.getCheck_button();
-				state = (state+1)%5;
-				switch (state){
+				state = (state + 1) % 5;
+				switch (state) {
 					case 0:
 						tmp.setImageDrawable(getResources().getDrawable(R.drawable.auto_rotate_on));
 						autoRotate.setTextColor(Color.GREEN);
 						autoRotate.setText(getResources().getText(R.string.orientationOn));
 						AppSpecificOrientation.setCheck_button(0);
-						Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION,1);
+						Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 1);
 						break;
 					case 1:
 						tmp.setImageDrawable(getResources().getDrawable(R.drawable.auto_rotate_off));
@@ -546,4 +574,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 	}
 
+	@Override
+	public void onBackPressed() {
+		//		AppFlood.showInterstitial(this);
+		//		AppFlood.showFullScreen(this);
+		super.onBackPressed();
+	}
 }

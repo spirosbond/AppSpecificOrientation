@@ -62,6 +62,7 @@
     <string name="landing_msg">Check out our awesome apps!</string>
     <string name="forced_auto">Forced Auto</string>
     <string name="titleLicense">License</string>
+    <string name="appflood">Show AppFlood banners</string>
 
 
 </resources>

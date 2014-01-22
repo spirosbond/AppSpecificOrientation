@@ -20,6 +20,7 @@ public class AppSpecificOrientation extends Application {
 	//	public static boolean ALREADY_SHOWED;
 	//	public static boolean RETURN_FROM_ABOUT;
 	private static SharedPreferences prefs;
+	public static boolean appflood;
 	private static SharedPreferences.Editor editor;
 	private static int check_button;
 
@@ -63,6 +64,7 @@ public class AppSpecificOrientation extends Application {
 
 	public static void loadState() {
 		check_button = prefs.getInt("4state", 0);
+		appflood = prefs.getBoolean("appflood", true);
 	}
 
 	public static boolean isPermNotification() {

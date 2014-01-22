@@ -39,6 +39,7 @@ public class DonateActivity extends PreferenceActivity implements Preference.OnP
 	private Preference adcolony;
 	private Preference adMob;
 	private Preference paypal;
+	private Preference appflood;
 	private InterstitialAd interstitialAdMob;
 	private DonateActivity donate = this;
 
@@ -73,6 +74,7 @@ public class DonateActivity extends PreferenceActivity implements Preference.OnP
 		//                appoftheday = findPreference("appoftheday");
 		//                startapp = findPreference("startapp");
 		adcolony = findPreference("adcolony");
+		appflood = findPreference("appflood");
 		adMob = findPreference("adMob");
 		paypal = findPreference("paypal");
 		//                startapp.setOnPreferenceClickListener(this);
@@ -101,6 +103,8 @@ public class DonateActivity extends PreferenceActivity implements Preference.OnP
 		alert11.show();
 
 	}
+
+
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {

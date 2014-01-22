@@ -11,12 +11,11 @@
         android:scaleType="centerCrop"
         android:layout_height="fill_parent"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
+        android:id="@+id/aflinear"
         tools:context=".MainActivity">
 
         <LinearLayout
@@ -126,6 +125,10 @@
                 android:layout_gravity="right|center_vertical"/>
         </LinearLayout>
 
-
+        <com.appflood.AFBannerView
+            android:id="@+id/banner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
     </LinearLayout>
 </RelativeLayout>

@@ -22,6 +22,11 @@
             android:title="@string/adMob"
             android:summary="@string/adMobsum"
             android:key="adMob"/>
+        <CheckBoxPreference
+            android:title="AppFlood"
+            android:summary="@string/appflood"
+            android:defaultValue="true"
+            android:key="appflood"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/donateTitleCard">
         <Preference
