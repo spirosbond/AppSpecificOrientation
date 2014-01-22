@@ -12,7 +12,7 @@
     <string name="orientationOff">Auto-Rotate Off</string>
     <string name="forced_portrait">Forced Portrait</string>
     <string name="forced_landscape">Forced Landscape</string>
-    <string name="createdby">Created by SpyDiKo\n2013 \u00a9 S.D.K.</string>
+    <!--<string name="createdby">SpyDiKo\n2014 \u00a9 S.D.K.</string>-->
     <string name="howTo">Instructions</string>
     <string name="howToTitle">Instructions</string>
     <string name="how_to_main">How To Make It Work</string>
@@ -35,7 +35,7 @@
     <string name="summaryDonate1">Enable AppFlood Ads</string>
     <string name="titleDonate">Support us</string>
     <string name="donateTitle">Donate using Ads</string>
-    <string name="donate_dialog_title">Thank you for donating!</string>
+    <string name="donate_dialog_title">Thank you for the support!</string>
     <string name="donate_dialog_ok">Got it!</string>
     <string name="donateDialog">"1. Choose to see the apps of the day\n2. Download any app you like\n3. You donated!\n…without spending a dime!"</string>
     <string name="no_internet_connection">No internet connection!</string>

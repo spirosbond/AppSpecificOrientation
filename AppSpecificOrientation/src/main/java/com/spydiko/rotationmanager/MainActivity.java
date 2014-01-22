@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -324,6 +326,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					item.setTitle(R.string.titleServiceStart);
 					//					item.setIcon(android.R.drawable.ic_media_pause);
 					startService(new Intent(this, NewOrieService.class));
+					Toast toast = Toast.makeText(this, getString(R.string.notification_text), Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+					toast.show();
 					//					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
 					item.setIcon(R.drawable.ic_on_button_rotation_manager);
 					//                    if(AppSpecificOrientation.LOG) Log.d(TAG, "else");

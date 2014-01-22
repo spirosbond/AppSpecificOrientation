@@ -94,7 +94,7 @@
             android:layout_weight="1"
             android:textStyle="italic"
             android:paddingLeft="10dp"
-            android:text="@string/createdby"
+            android:text="Spydiko\n2014 \u00a9 S.D.K."
             android:layout_gravity="center_vertical"
             android:gravity="left"
             android:id="@+id/textView"
