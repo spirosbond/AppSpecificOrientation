@@ -64,7 +64,7 @@ public class AppSpecificOrientation extends Application {
 
 	public static void loadState() {
 		check_button = prefs.getInt("4state", 0);
-		appflood = prefs.getBoolean("appflood", true);
+		appflood = prefs.getBoolean("appflood", false);
 	}
 
 	public static boolean isPermNotification() {

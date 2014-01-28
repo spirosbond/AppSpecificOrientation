@@ -25,7 +25,7 @@
         <CheckBoxPreference
             android:title="AppFlood"
             android:summary="@string/appflood"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="appflood"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/donateTitleCard">
