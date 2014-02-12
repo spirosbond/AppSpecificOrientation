@@ -1,1 +1,1 @@
-include ':AppSpecificOrientation'
+include ':AppSpecificOrientation', ':slidingbar'

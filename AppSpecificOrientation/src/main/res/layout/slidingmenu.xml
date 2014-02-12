@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setOnBoot"
+        android:textSize="16sp"
+        android:id="@+id/sliding_menu_1"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/permNotification"
+        android:textSize="16sp"
+        android:id="@+id/sliding_menu_2"
+        android:layout_below="@id/sliding_menu_1"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/howTo"
+        android:textSize="16sp"
+        android:id="@+id/sliding_menu_3"
+        android:layout_below="@+id/sliding_menu_2"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about"
+        android:textSize="16sp"
+        android:id="@+id/sliding_menu_4"
+        android:layout_below="@+id/sliding_menu_3"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/donate"
+        android:textSize="16sp"
+        android:id="@+id/sliding_menu_5"
+        android:layout_below="@+id/sliding_menu_4"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titleLicense"
+        android:textSize="16sp"
+        android:id="@+id/sliding_menu_6"
+        android:layout_below="@+id/sliding_menu_5"
+        android:layout_marginLeft="15dp"/>
+
+</RelativeLayout>

@@ -33,6 +33,8 @@ import android.widget.Toast;
 import com.appflood.AFBannerView;
 import com.appflood.AppFlood;
 import com.appflood.AppFlood.AFRequestDelegate;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivity;
 
 import org.json.JSONObject;
 
@@ -54,6 +56,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private AppSpecificOrientation myapp;
 	private Vibrator vibe;
 	private ListView lv;
+	private SlidingMenu menu;
 	private Button buttonClearAll;
 	private ImageView orientationButton;
 	private ContentObserver rotationObserver = new ContentObserver(new Handler()) {
@@ -88,7 +91,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		myapp = (AppSpecificOrientation) getApplication();
 		setContentView(R.layout.activity_main);
@@ -126,6 +129,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		names = new ArrayList<String>();
 		//		if (myapp.loadDonate("appflood2")) AppFlood.showFullScreen(this);
 		myapp.configureAdColony(this);
+		menu = new SlidingMenu(this);
+		menu.setMode(SlidingMenu.LEFT);
+		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		menu.setShadowWidthRes(R.dimen.shadow_width);
+		menu.setShadowDrawable(R.drawable.shadow);
+		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		menu.setFadeDegree(0.35f);
+		menu.attachToActivity(this,SlidingMenu.SLIDING_WINDOW);
+		menu.setMenu(R.layout.slidingmenu);
 		buttonClearAll = (Button) findViewById(R.id.button2);
 		vibe = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
 		orientationButton = (ImageView) findViewById(R.id.orientationButton);
@@ -410,6 +422,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			case R.id.license:
 				startActivity(new Intent(this, License.class));
 				break;
+			case android.R.id.home:
+				menu.toggle();
+				return true;
 		}
 		return true;
 	}
